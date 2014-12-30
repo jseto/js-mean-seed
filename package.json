@@ -35,7 +35,8 @@
     "postinstall": "bower install",
 
     "prestart": "npm install && npm run less",
-    "start": "node server/server.js",
+    "start": "forever start -m 1 server/server.js",
+    "stop": "forever stop server/server.js",
 
     "pretest": "npm install",
     "test": "karma start karma.conf.js",
@@ -44,7 +45,7 @@
     "preupdate-webdriver": "npm install",
     "update-webdriver": "webdriver-manager update",
 
-    "preprotractor": "npm run update-webdriver",
+    "preprotractor": "npm run update-webdriver && npm start",
     "protractor": "protractor protractor.conf.js",
 
     "less": "lessc less/app.less>client/bower_components/bootstrap/dist/css/bootstrap-custom.css",
