@@ -1,11 +1,10 @@
 describe('HeaderCtrl', function(){
 
 	beforeEach(function(){
-		browser().navigateTo('app/index.html');
+		browser.get('index.html');
 	});
 
 	it('Test array key', function () {
-		pause();
-		expect( binding('{{header.home | loc}}') ).toBe('Inici');
+		expect( browser.getTitle() ).toBe('Home - MyApp');
 	});
 });

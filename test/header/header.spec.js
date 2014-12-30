@@ -2,17 +2,17 @@
 
 describe('HeaderCtrl', function(){
 	var ctrl;
-  var scope = {};
+	var scope = {};
 
-  beforeEach(module('myApp.header'));
+	beforeEach(module('myApp.header'));
 
-  beforeEach(inject( function( $rootScope, $controller ){
-    scope = $rootScope.$new();
-  	ctrl = $controller('HeaderCtrl', {$scope:scope});
-  }));
+	beforeEach(inject( function( $rootScope, $controller ){
+		scope = $rootScope.$new();
+		ctrl = $controller('HeaderCtrl', {$scope:scope});
+	}));
 
-  it('should report proper active tab', function() {
-    expect(scope.activeTab).toBeDefined();
-  });
+	it('should report proper active tab', function() {
+		expect(scope.activeTab).toBeDefined();
+	});
 
 });
