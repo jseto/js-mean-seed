@@ -1,0 +1,48 @@
+{
+	"pageTitle": {
+		"home": "Home",
+		"contact": "Contact",
+		"login": "Login"
+	},
+	"validationErrors": {
+		"matchPassword": "Password mismatch",
+		"unique": "Already exists",
+		"email": "Incorrect email address",
+		"required": "Field is required",
+		"date": "Incorrect date",
+		"file": "Upload failed. (max size: 1,5Mb, type: jpg, png, gif)",
+		"minlength": "Minimum length is {{0}} chars",
+		"unknown": "Unknown error",
+		"only1word": "One word only",
+		"mismatch": "Mismatch"
+	},
+	"header": {
+		"home": "Home",
+		"contact": "Contact",
+		"login": "Login/Register",
+		"logout": "Logout"
+	},
+	"copyRightNotice": "MyApp 2014",
+	"login": {
+		"rememberMe": "Remember me",
+		"userLabel" : "User name or email",
+		"passwordLabel": "Password",
+		"enter": "Enter ",
+		"signInWith": "Sign up with...",
+		"notMemberYet": "Not a member? ",
+		"doSignUp": "Sing up!",
+		"forgotPassword": "Forgot my password"
+	},
+	"signup": {
+		"panelHeaderLabel": "Member sign up",	
+		"userLabel" : "User name",
+		"email": "email",
+		"passwordLabel": "Password",
+		"confirmPassword": "Confirm password",
+		"doSignup": "Sing up",
+		"name": "Name",
+		"surname": "Surname",
+		"createError": "User already exists"
+	}
+}
+

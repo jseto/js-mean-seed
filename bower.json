@@ -1,0 +1,22 @@
+{
+  "name": "babel-hub",
+  "description": "The meeting place for open language eLearning",
+  "version": "0.0.0",
+  "homepage": "http://babel-hub.com",
+  "license": "Propietary",
+  "dependencies": {
+    "angular": "1.3.x",
+    "angular-loader": "1.3.x",
+    "angular-mocks": "~1.3.x",
+    "bootstrap": "~3.2.0",
+    "fontawesome": "~4.2.0",
+    "angular-ui-router": "~0.2.11",
+    "jsLib": "https://github.com/jseto/jsLib.git"
+  },
+  "authors": [
+    "jseto <jseto@jasvisio.com>"
+  ],
+  "resolutions": {
+    "angular": "1.3.0-rc.3"
+  }
+}

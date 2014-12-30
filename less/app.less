@@ -1,0 +1,92 @@
+@import "../app/bower_components/bootstrap/less/bootstrap.less";
+@import "bootswatch.less";
+@import "variables.less";
+
+.center {
+	margin: 0 auto;
+	float: none;
+}
+
+.btn-center {
+    display: block;
+    text-align: center;
+    .center;
+}
+
+.padding-vertical-10 {
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+.footer {
+	padding-left: 40px;
+	padding-right: 40px;
+}
+
+.margin-vertical-10 {
+	margin-top: 10px; 
+	margin-bottom: 10px; 
+}
+
+.margin-vertical-20 {
+    margin-top: 20px; 
+    margin-bottom: 20px; 
+}
+
+.margin-vertical-30 {
+    margin-top: 30px; 
+    margin-bottom: 30px; 
+}
+
+.margin-top-10 {
+    margin-top: 10px;
+}
+
+.margin-top-20 {
+    margin-top: 20px;
+}
+
+.margin-top-30 {
+    margin-top: 30px;
+}
+
+.list-group-item-xs {
+    padding-top: 1px;
+    padding-bottom: 1px; 
+}
+
+.list-group-item-center {
+    text-align: center;
+}
+
+input.ng-invalid.ng-dirty {
+	border-color: @state-danger-border;
+	backgound-color: @state-danger-bg;
+	color: @state-danger-border;
+}
+
+.pop-up {
+    position:absolute;
+    z-index:1;
+}
+
+/***** input file button styling */
+.btn-file {
+    position: relative;
+    overflow: hidden;
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 999px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    background: red;
+    cursor: inherit;
+    display: block;
+}
+
