@@ -1,8 +1,8 @@
 {
-  "name": "babel-hub",
-  "description": "The meeting place for open language eLearning",
-  "version": "0.0.0",
-  "homepage": "http://babel-hub.com",
+  "name": "js-mean-seed",
+  "description": "A starter project for MEAN (MongoDB, Express, Angular, Node)",
+  "version": "0.1.0",
+  "homepage": "https://github.com/jseto/js-mean-seed.git",
   "license": "Propietary",
   "dependencies": {
     "angular": "1.3.x",

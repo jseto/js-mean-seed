@@ -11,5 +11,5 @@
     "inject": false,
     "require": false
   },
-  node: true
+  "node": true
 }

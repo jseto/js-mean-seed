@@ -37,13 +37,13 @@ app.use(loopback.token({
   model: app.models.accessToken
 }));
 
-app.use(loopback.cookieParser(app.get('cookieSecret')));
+/*app.use(loopback.cookieParser(app.get('cookieSecret')));
 app.use(loopback.session({
 	secret: 'kitty',
 	saveUninitialized: true,
 	resave: true
 }));
-
+*/
 passportConfigurator.init();
 
 passportConfigurator.setupModels({
@@ -59,8 +59,8 @@ for (var s in passportConfig) {
 }
 
 var path = require('path');
-var appClientPath = path.resolve(__dirname, '../app');
-app.use(loopback.static( appClientPath ));
+var clientPath = path.resolve(__dirname, '../client');
+app.use(loopback.static( clientPath ));
 
 app.start = function() {
   // start the web server
