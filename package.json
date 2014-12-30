@@ -33,7 +33,7 @@
     "loopback-explorer": "^1.1.0"
   },
   "scripts": {
-    "postinstall": "bower install",
+    "postinstall": "bower install && npm run less",
     "prestart": "npm install && npm run less",
     "start": "forever start -m 1 server/server.js",
     "stop": "forever stop server/server.js",
