@@ -11,12 +11,13 @@
     "bootstrap": "~3.2.0",
     "fontawesome": "~4.2.0",
     "angular-ui-router": "~0.2.11",
-    "jsLib": "https://github.com/jseto/jsLib.git"
+    "jsLib": "https://github.com/jseto/jsLib.git",
+    "angular-resource": "~1.3.8"
   },
   "authors": [
     "jseto <jseto@jasvisio.com>"
   ],
   "resolutions": {
-    "angular": "1.3.0-rc.3"
+    "angular": "1.3.x"
   }
 }

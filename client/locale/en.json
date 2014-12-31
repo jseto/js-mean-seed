@@ -27,13 +27,13 @@
 		"rememberMe": "Remember me",
 		"userLabel" : "User name or email",
 		"passwordLabel": "Password",
-		"enter": "Enter ",
-		"signInWith": "Sign up with...",
+		"login": "Sign in ",
+		"loginWith": "Sign in with ",
 		"notMemberYet": "Not a member? ",
 		"doSignUp": "Sing up!",
-		"forgotPassword": "Forgot my password"
+		"forgotPassword": "Forgot your password?"
 	},
-	"signup": {
+	"signup-------fail": {
 		"panelHeaderLabel": "Member sign up",	
 		"userLabel" : "User name",
 		"email": "email",

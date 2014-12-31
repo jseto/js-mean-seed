@@ -1,6 +1,7 @@
 'use strict';
 
 angular.module( 'myApp.header', [
+	'myApp.signin'
 ])
 
 .directive('header', function () {
