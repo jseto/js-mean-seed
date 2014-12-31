@@ -8,7 +8,7 @@ angular.module( 'myApp.home', [
 	$stateProvider.state( 'home', {
 		url: '/home',
 		controller: 'HomeCtrl',
-		templateUrl: 'home/home.html',
+		templateUrl: 'views/home/home.html',
 		data:{ pageTitle: 'home' }
 	});
 })

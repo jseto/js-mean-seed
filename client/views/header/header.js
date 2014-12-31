@@ -8,7 +8,7 @@ angular.module( 'myApp.header', [
 	return {
 		restrict: 'A', 
 		replace: false,
-		templateUrl: 'header/header.html',
+		templateUrl: 'views/header/header.html',
 		controller: 'HeaderCtrl'
 	};
 })

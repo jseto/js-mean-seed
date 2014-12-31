@@ -7,7 +7,7 @@ angular.module( 'myApp.contact', [
 	$stateProvider.state( 'contact', {
 		url: '/contact',
 		controller: 'ContactCtrl',
-		templateUrl: 'contact/contact.html',
+		templateUrl: 'views/contact/contact.html',
 		data:{ pageTitle: 'contact' }
 	});
 })

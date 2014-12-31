@@ -4,14 +4,16 @@ module.exports = function(config){
     basePath : './',
 
     exclude: [
-      'test/**/*e2e*',
-      'client/bower_components/*'
+      'test/**/*e2e*'
     ],
 
     files : [
       'client/bower_components/angular/angular.js',
       'client/bower_components/angular-mocks/angular-mocks.js',
-      'client/**/*.js',
+      'client/bower_components/angular-resource/angular-resource.js',
+      'client/views/**/*.js',
+      'client/auth/**/*.js',
+      'client/models/**/*.js',
       'test/**/*.js'
     ],
 
