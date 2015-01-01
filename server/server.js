@@ -37,13 +37,13 @@ app.use(loopback.token({
   model: app.models.accessToken
 }));
 
-/*app.use(loopback.cookieParser(app.get('cookieSecret')));
+app.use(loopback.cookieParser(app.get('cookieSecret')));
 app.use(loopback.session({
 	secret: 'kitty',
 	saveUninitialized: true,
 	resave: true
 }));
-*/
+
 passportConfigurator.init();
 
 passportConfigurator.setupModels({
@@ -58,13 +58,23 @@ for (var s in passportConfig) {
 	passportConfigurator.configureProvider(s, c);
 }
 
+//var ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn;
+
 var path = require('path');
 var clientPath = path.resolve(__dirname, '../client');
 
 app.use(loopback.static( clientPath ));
-app.get('/*', function (req, res) {
+/*app.get('/*', function (req, res) {
   res.sendStatus(404);
 });
+*/
+// Requests that get this far won't be handled
+// by any middleware. Convert them into a 404 error
+// that will be handled later down the chain.
+app.use(loopback.urlNotFound());
+
+// The ultimate error handler.
+app.use(loopback.errorHandler());
 
 app.start = function() {
   // start the web server
