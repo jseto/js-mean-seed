@@ -1,0 +1,108 @@
+<!-- Member Create content -->
+<div id="member" class="container">
+	<div class="row">
+		<div class="col-sm-3"></div>
+		<div class="col-sm-6">
+			<div class="panel panel-default">
+
+				<div class="panel-heading">
+					<h4>{{'signup.panelHeaderLabel'|loc}}</h4>
+				</div>
+
+				<div class="panel-body">
+					<form class="center" name="signupForm" novalidate>
+						<!-- User -->
+						<div class="input-group margin-vertical-10">
+							<span class="input-group-addon">
+								<i class="fa fa-user fa-fw"></i>
+							</span>
+							
+							<input 
+								type="text"
+								class="form-control" 
+								placeholder="{{'signup.userLabel'|loc}}" 
+								data-ng-model="user.username"
+								data-ng-minlength=3
+								data-ng-pattern="/^\s*\w*\s*$/"
+								data-ng-pattern-error-message="{{ 'validationErrors.only1word' | loc }}"
+								data-jsw-validate-tooltip="{{ 'validationErrors' | loc }}" 
+								required>
+						</div>
+
+						<!-- Email -->
+						<div class="input-group margin-vertical-10">
+							<span class="input-group-addon">
+								<i class="fa fa-envelope fa-fw"></i> 
+							</span>
+
+							<input 
+								type="email" 
+								class="form-control" 
+								placeholder="{{'signup.email'|loc}}"
+								data-ng-model="user.email"
+								data-jsw-validate-tooltip="{{ 'validationErrors' | loc }}" 
+								required>
+						</div>
+
+						<!-- Password -->
+						<div class="input-group margin-vertical-10">
+							<span class="input-group-addon">
+								<i class="fa fa-lock fa-fw"></i> 
+							</span>
+
+							<input 
+								type="password" 
+								class="form-control" 
+								placeholder="{{'signup.passwordLabel'|loc}}"
+								data-ng-model="user.password"
+								required>
+						</div>
+
+						<!-- Retpye Password -->
+						<div class="input-group margin-vertical-10">
+							<span class="input-group-addon">
+								<i class="fa fa-check fa-fw"></i> 
+							</span>
+
+							<input 
+								type="password" 
+								class="form-control" 
+								placeholder="{{'signup.confirmPassword'|loc}}"
+								data-ng-model="retypePassword"
+								data-ng-missmatch="user.password == retypePassword"
+								data-jsw-validate-tooltip="{{ 'validationErrors' | loc }}" 
+								required>
+						</div>
+
+						<!-- Remember me -->
+						<div>
+						<input 
+							type="checkbox" 
+							style="margin-right: 7px; margin-top: 15px" 
+							data-ng-model="remember">{{'login.rememberMe' | loc}}
+			
+						<button 
+							type="submit" 
+							class="btn btn-default margin-vertical-10 pull-right" 
+							data-ng-click="create()" 
+							data-ng-disabled="signupForm.$invalid">
+							{{ 'signup.doSignup' | loc }}
+							<i class="fa fa-signin"
+								data-ng-hide="loading">
+							</i>
+							<span data-loading-widget="loading"></span>
+						</button>
+						</div>
+						<br>
+						<div class="alert alert-danger margin-vertical-10"
+							data-ng-show="createError">
+							<p>{{'signup.createError'|loc}}</p>
+							<a href="#resendPassword">{{'forgotPassword' | loc}}</a>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-3"></div>
+	</div>
+</div>

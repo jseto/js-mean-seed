@@ -7,6 +7,7 @@ angular.module('myApp', [
 	'myApp.header',
 	'myApp.footer',
 	'myApp.contact',
+	'myApp.signup',
 	'jsLib.locale',
 	'ui.router'
 ])

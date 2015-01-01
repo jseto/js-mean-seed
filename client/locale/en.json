@@ -33,15 +33,13 @@
 		"doSignUp": "Sing up!",
 		"forgotPassword": "Forgot your password?"
 	},
-	"signup-------fail": {
+	"signup": {
 		"panelHeaderLabel": "Member sign up",	
 		"userLabel" : "User name",
 		"email": "email",
 		"passwordLabel": "Password",
 		"confirmPassword": "Confirm password",
-		"doSignup": "Sing up",
-		"name": "Name",
-		"surname": "Surname",
+		"doSignup": "Sign up",
 		"createError": "User already exists"
 	}
 }
