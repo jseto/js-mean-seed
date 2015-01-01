@@ -2,7 +2,8 @@
 	"pageTitle": {
 		"home": "Home",
 		"contact": "Contact",
-		"login": "Login"
+		"login": "Login",
+		"signup": "Signup"
 	},
 	"validationErrors": {
 		"matchPassword": "Password mismatch",

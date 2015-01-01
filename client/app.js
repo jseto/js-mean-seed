@@ -12,9 +12,12 @@ angular.module('myApp', [
 	'ui.router'
 ])
 
-.config( function( $urlRouterProvider, $httpProvider, LocaleProvider ) {
+.config( function( $urlRouterProvider, $locationProvider, $httpProvider, LocaleProvider ) {
 	/*** Default route setup */
 	$urlRouterProvider.otherwise( '/home' );
+	
+	/*** Remove # from url */
+	$locationProvider.html5Mode(true);
 
 	/*** Locale setup */
 	LocaleProvider.setLocale('en');

@@ -6,6 +6,9 @@
   <link rel="shortcut icon" href="images/favicon.ico">
   <title data-ng-bind="pageTitle"></title>
 
+  <!-- needed to remove # from url. see https://docs.angularjs.org/error/$location/nobase -->
+  <base href="/">
+
   <!-- Bootstrap core CSS -->
   <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-custom.css"> 
   <link rel="stylesheet" href="bower_components/fontawesome/css/font-awesome.min.css"/>

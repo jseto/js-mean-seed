@@ -63,11 +63,22 @@ for (var s in passportConfig) {
 var path = require('path');
 var clientPath = path.resolve(__dirname, '../client');
 
-app.use(loopback.static( clientPath ));
+app.use( loopback.static( clientPath));
 /*app.get('/*', function (req, res) {
   res.sendStatus(404);
 });
 */
+
+app.all('/*', function(req, res) {
+	console.log( req.path, ' ', req.path.indexOf('.') );
+	if ( req.path.indexOf('.') < 0 ) {
+  	res.sendFile('index.html',{ root: clientPath });
+ 	}
+ 	else {
+	  res.sendStatus(404);
+ 	}
+});
+
 // Requests that get this far won't be handled
 // by any middleware. Convert them into a 404 error
 // that will be handled later down the chain.

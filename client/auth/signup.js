@@ -10,7 +10,7 @@ angular.module( 'myApp.signup', [
 		url: '/signup',
 		controller: 'SignupCtrl',
 		templateUrl: 'auth/signup.html',
-		data:{ pageTitle: 'Signup' }
+		data:{ pageTitle: 'signup' }
 	});
 })
 
