@@ -13,6 +13,7 @@
     "parallelshell": "latest",
     "protractor": "^1.1.1",
     "rimraf": "^2.2.8",
+    "nodemon": "^1.2.1",
     "shelljs": "^0.2.6"
   },
   "dependencies": {
@@ -52,7 +53,7 @@
     "preclean": "npm install rimraf",
     "clean": "rimraf client/bower_components && rimraf node_modules && git clean -d -fx",
     "build-ng-models": "lb-ng server/server.js client/models/lbServices.js",
-    "watch:server": "watch \"node server/server.js\" server",
+    "watch:server": "nodemon --watch server -e js,json server/server.js",
     "watch:less": "watch \"npm run less\" less",
     "start:dev": "parallelshell \"npm run watch:server\" \"npm test\" \"npm run watch:less\""
   }

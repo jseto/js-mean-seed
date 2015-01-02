@@ -59,12 +59,6 @@ var clientPath = path.resolve(__dirname, '../client');
 var instant = require('instant');
 app.use( instant( clientPath));
 
-//app.use( loopback.static( clientPath));
-/*app.get('/*', function (req, res) {
-  res.sendStatus(404);
-});
-*/
-
 app.all('/*', function(req, res) {
 	if ( req.path.indexOf('.') < 0 ) {
   	res.sendFile('index.html',{ root: clientPath });
