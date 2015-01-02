@@ -70,7 +70,6 @@ app.use( loopback.static( clientPath));
 */
 
 app.all('/*', function(req, res) {
-	console.log( req.path, ' ', req.path.indexOf('.') );
 	if ( req.path.indexOf('.') < 0 ) {
   	res.sendFile('index.html',{ root: clientPath });
  	}

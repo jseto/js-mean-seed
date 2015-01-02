@@ -27,8 +27,15 @@ module.exports = function(config){
             'karma-chrome-launcher',
             'karma-firefox-launcher',
             'karma-jasmine',
-            'karma-junit-reporter'
-            ],
+            'karma-junit-reporter',
+            'karma-beep-reporter'
+    ],
+
+    reporters: [
+      'progress',
+//      'beep',
+//      'junit'
+    ],
 
     junitReporter : {
       outputFile: 'test_out/unit.xml',
