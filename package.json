@@ -9,7 +9,6 @@
     "karma": "~0.10",
     "karma-beep-reporter": "^0.1.4",
     "karma-junit-reporter": "^0.2.2",
-    "live-reload": "^0.2.0",
     "watch": "latest",
     "parallelshell": "latest",
     "protractor": "^1.1.1",
@@ -23,6 +22,7 @@
     "errorhandler": "^1.1.1",
     "express-session": "^1.9.3",
     "forever": "^0.13.0",
+    "instant": "^1.6.0",
     "less": "^1.7.5",
     "loopback": "^2.8.0",
     "loopback-boot": "^2.4.0",
@@ -52,9 +52,8 @@
     "preclean": "npm install rimraf",
     "clean": "rimraf client/bower_components && rimraf node_modules && git clean -d -fx",
     "build-ng-models": "lb-ng server/server.js client/models/lbServices.js",
-    "watch:server": "watch \"npm start\" server",
+    "watch:server": "watch \"node server/server.js\" server",
     "watch:less": "watch \"npm run less\" less",
-    "watch:browser": "live-reload --port 9091 client/",
-    "start:dev": "parallelshell \"npm run watch:server\" \"npm run watch:browser\" \"npm test\" \"npm run watch:less\""
+    "start:dev": "parallelshell \"npm run watch:server\" \"npm test\" \"npm run watch:less\""
   }
 }

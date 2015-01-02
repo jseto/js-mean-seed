@@ -3,7 +3,9 @@
     "loopback#favicon": {}
   },
   "initial": {
-    "compression": {}
+    "compression": {
+      "enabled": false
+    }
   },
   "session": {
   },
@@ -12,9 +14,6 @@
   "parse": {
   },
   "routes": {
-    "loopback#status": {
-      "paths": "/"
-    }
   },
   "files": {
   },

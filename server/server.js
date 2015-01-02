@@ -17,13 +17,6 @@ try {
 	process.exit(1); // fatal
 }
 
-// Set up the /favicon.ico
-app.use(loopback.favicon());
-
-// request pre-processing middleware
-app.use(loopback.compress());
-
-
 // ---------------------------------------------
 // -- Add your pre-processing middleware here --
 // ---------------------------------------------
@@ -63,7 +56,10 @@ for (var s in passportConfig) {
 var path = require('path');
 var clientPath = path.resolve(__dirname, '../client');
 
-app.use( loopback.static( clientPath));
+var instant = require('instant');
+app.use( instant( clientPath));
+
+//app.use( loopback.static( clientPath));
 /*app.get('/*', function (req, res) {
   res.sendStatus(404);
 });
