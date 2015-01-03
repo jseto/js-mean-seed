@@ -4,6 +4,7 @@ module.exports = function(config){
     basePath : './',
 
     exclude: [
+      'test/server/**',
       'test/**/*e2e*'
     ],
 
