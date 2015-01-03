@@ -23,7 +23,7 @@ describe('Basic server responses', function() {
 	it('Should respond 200 OK for /', function(done) {
 		request('http://localhost:'+port+'', function(error, response){
 			expect( error ).toBeFalsy();
-			expect( response.statusCode ).toEqual(200);
+			expect( response.statusCode ).toEqual(100);
 			done();
  		});
 	});
