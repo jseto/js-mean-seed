@@ -1,11 +1,12 @@
 module.exports = function(config){
   config.set({
 
-    basePath : './',
+    basePath : '../',
 
     exclude: [
       'test/server/**',
-      'test/**/*e2e*'
+      'test/**/*e2e*',
+      '**/*.conf.js'
     ],
 
     files : [
