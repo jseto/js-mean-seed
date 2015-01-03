@@ -10,6 +10,7 @@
     "afterEach": false,
     "module": false,
     "inject": false,
+    "browser": false,
     "require": false
   },
   "node": true
