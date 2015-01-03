@@ -76,9 +76,9 @@ app.use(loopback.urlNotFound());
 // The ultimate error handler.
 app.use(loopback.errorHandler());
 
-app.start = function() {
+app.start = function(port) {
   // start the web server
-  return app.listen(function() {
+  return app.listen(port,function() {
     app.emit('started');
     console.log('Web server listening at: %s', app.get('url'));
   });
@@ -86,5 +86,5 @@ app.start = function() {
 
 // start the server if `$ node server.js`
 if (require.main === module) {
-  app.start();
+  app.start(3000);
 }

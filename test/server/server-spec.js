@@ -3,12 +3,22 @@
 console.log('Server tests running...');
 
 var request = require('request');
+var server = require('../../server/server.js');
 
-var port = 3000;
+var port = 3300;
 
 //jasmine.getEnv().defaultTimeoutInterval = 500;
 
 describe('Basic server responses', function() {
+	var serverApp;
+
+	beforeEach(function(){
+		serverApp = server.start( port );
+	});
+
+	afterEach( function(){
+		serverApp.close();
+	});
 
 	it('Should respond 200 OK for /', function(done) {
 		request('http://localhost:'+port+'', function(error, response){
@@ -59,4 +69,6 @@ describe('Basic server responses', function() {
 	});
 
 });
+
+
 
