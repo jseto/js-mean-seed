@@ -11,6 +11,8 @@
     "module": false,
     "inject": false,
     "browser": false,
+    "element": false,
+    "by": false,
     "require": false
   },
   "node": true

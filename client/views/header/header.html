@@ -14,7 +14,7 @@
 			<ul class="nav navbar-nav navbar-right">
 
 				<!-- Home -->
-				<li class="ngClass: activeTab('home')">
+				<li id="homeTab" class="ngClass: activeTab('home')">
 					<a href="home">
 						<i class="fa fa-home"></i>
 						{{'header.home' | loc}}
@@ -22,7 +22,7 @@
 				</li>
 
 				<!-- Contact -->
-				<li class="ngClass: activeTab('contact')">
+				<li id="contactTab" class="ngClass: activeTab('contact')">
 					<a href="contact">
 						<i class="fa fa-envelope"></i>
 						{{'header.contact' | loc}}
@@ -30,7 +30,7 @@
 				</li>
 
 				<!-- Singn-in sign-up Menu Item -->
-				<li class="dropdown ngClass: activeTab('login')" data-ng-hide="loggedIn">
+				<li id="loginTab" class="dropdown ngClass: activeTab('login')" data-ng-hide="loggedIn">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 						<span class="glyphicon glyphicon-log-in"></span>
 						{{'header.login' | loc}}<b class="caret"></b>
