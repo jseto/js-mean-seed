@@ -61,11 +61,13 @@
     "clean": "rimraf client/bower_components && rimraf node_modules && git clean -d -fx",
     "build-ng-models": "lb-ng server/server.js client/models/lbServices.js",
     "watch:test:client": "karma start test/karma.conf.js",
+    "watch:test:client:beep": "karma start test/karma.conf.js --reporters beep,progress",
     "watch:test:server": "jasmine-node --captureExceptions --autotest --color test/server",
     "watch:server": "nodemon --watch server -e js,json server/server.js",
     "watch:less": "watch \"npm run less\" less",
     "watch:models": "watch \"npm run build-ng-models\" common/models",
     "start:dev:client": "parallelshell \"node server/server.js\" \"npm run watch:test:client\" \"npm run watch:less\" \"npm run watch:models\"",
+    "start:dev:client:beep": "parallelshell \"node server/server.js\" \"npm run watch:test:client:beep\" \"npm run watch:less\" \"npm run watch:models\"",
     "start:dev:server": "parallelshell \"npm run watch:test:server\" \"npm run watch:server\"",
     "start:dev:all": "parallelshell \"npm run start:dev:server\" \"npm run watch:test:client\" \"npm run watch:less\""
   }
