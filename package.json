@@ -1,7 +1,7 @@
 {
   "name": "js-mean-seed",
   "private": true,
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "A starter project for MEAN (MongoDB, Express, Angular, Node)",
   "repository": "https://github.com/jseto/js-mean-seed.git",
   "license": "MIT",
