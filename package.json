@@ -5,6 +5,9 @@
   "description": "A starter project for MEAN (MongoDB, Express, Angular, Node)",
   "repository": "https://github.com/jseto/js-mean-seed.git",
   "license": "MIT",
+  "engines" : { 
+    "node": "~0.10"
+  },
   "devDependencies": {
     "jasmine-node": "^1.14.5",
     "karma": "~0.10",
