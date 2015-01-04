@@ -1,37 +1,34 @@
 <!DOCTYPE html>
 <html>
-
   <head>
     <meta charset='utf-8'>
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <meta name="description" content="js-mean-seed : A starter project for MEAN (MongoDB, Express, Angular, Node)">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/pygment_trac.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
 
-    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
 
-    <title>js-mean-seed</title>
+    <title>js-mean-seed by jseto</title>
   </head>
 
   <body>
+    <header>
+      <div class="inner">
+        <h1>js-mean-seed</h1>
+        <h2>A starter project for MEAN (MongoDB, Express, Angular, Node)</h2>
+        <a href="https://github.com/jseto/js-mean-seed" class="button"><small>View project on</small> GitHub</a>
+      </div>
+    </header>
 
-    <!-- HEADER -->
-    <div id="header_wrap" class="outer">
-        <header class="inner">
-          <a id="forkme_banner" href="https://github.com/jseto/js-mean-seed">View on GitHub</a>
-
-          <h1 id="project_title">js-mean-seed</h1>
-          <h2 id="project_tagline">A starter project for MEAN (MongoDB, Express, Angular, Node)</h2>
-
-            <section id="downloads">
-              <a class="zip_download_link" href="https://github.com/jseto/js-mean-seed/zipball/master">Download this project as a .zip file</a>
-              <a class="tar_download_link" href="https://github.com/jseto/js-mean-seed/tarball/master">Download this project as a tar.gz file</a>
-            </section>
-        </header>
-    </div>
-
-    <!-- MAIN CONTENT -->
-    <div id="main_content_wrap" class="outer">
-      <section id="main_content" class="inner">
-        <h1>
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <h1>
 <a id="js-mean-seed-" class="anchor" href="#js-mean-seed-" aria-hidden="true"><span class="octicon octicon-link"></span></a>js-mean-seed <a href="https://travis-ci.org/jseto/js-mean-seed"><img src="https://travis-ci.org/jseto/js-mean-seed.svg?branch=master" alt="Build Status"></a>
 </h1>
 
@@ -176,6 +173,50 @@ package.json        --&gt; node modules to install an scripts
 Procfile            --&gt; Heroku conf file
 README.md           --&gt; Documentation
 </code></pre>
+
+<h2>
+<a id="a-mean-seed-without-the-m" class="anchor" href="#a-mean-seed-without-the-m" aria-hidden="true"><span class="octicon octicon-link"></span></a>A MEAN seed without the M</h2>
+
+<p>As you know, MEAN stands for MongoDB, Express, AngularJS and NodeJS. We haven't talk about MongoDB and we will not talk because js-mean-seed is database agnostic. This is because we use the database abstraction provided by <a href="http://loopback.io/">Loopback</a>. Being database agnostic fully decouples the application logic from the database engine. Today you may think MongoDB is cool. Tomorrow? You never know.</p>
+
+<h2>
+<a id="database" class="anchor" href="#database" aria-hidden="true"><span class="octicon octicon-link"></span></a>Database</h2>
+
+<p>As said above, js-mean-seed is database agnostic. You can choose any of the available <a href="http://docs.strongloop.com/display/public/LB/Database+connectors">Looback connectors</a>. </p>
+
+<p>By default, js-mean-seed, uses the Memory connector. Be aware that you will loose your data when working with the memory connector. If you want your data to persist, change the database connector or make <a href="http://docs.strongloop.com/display/public/LB/Memory+connector#Memoryconnector-Datapersistence">Memory connector persistent</a></p>
+
+<h3>
+<a id="connecting-to-a-database" class="anchor" href="#connecting-to-a-database" aria-hidden="true"><span class="octicon octicon-link"></span></a>Connecting to a database</h3>
+
+<p>The easy way. Use <a href="http://docs.strongloop.com/display/ARC/StrongLoop+Arc">StrongLoop Arc</a>. To invoke Arc</p>
+
+<pre><code>slc arc
+</code></pre>
+
+<p>After invoking Arc, a local web page will be opened. Select <code>Composer</code> and define your database.</p>
+
+<h3>
+<a id="creating-a-new-model" class="anchor" href="#creating-a-new-model" aria-hidden="true"><span class="octicon octicon-link"></span></a>Creating a new model</h3>
+
+<p>The easy way. Use <a href="http://docs.strongloop.com/display/ARC/StrongLoop+Arc">StrongLoop Arc</a>. To invoke Arc</p>
+
+<pre><code>slc arc
+</code></pre>
+
+<p>After invoking Arc, again a local web page will be opened. Select <code>Composer</code> and define your new model.</p>
+
+<p>Once you have defined your model, you have to let AngularJS to know about the new model. To do that, invoke </p>
+
+<pre><code>npm run build-ng-models
+</code></pre>
+
+<p>if you are using the client development tool, build-ng-models will be invoked automatically.</p>
+
+<h3>
+<a id="use-the-models-from-angularjs" class="anchor" href="#use-the-models-from-angularjs" aria-hidden="true"><span class="octicon octicon-link"></span></a>Use the models from AngularJS</h3>
+
+<p>The models are exposed to angular by running the <code>build-ng-models</code> tool. You can access the models in a similar way as you do with Angular's $resource service. For more information see <a href="http://docs.strongloop.com/display/public/LB/AngularJS+JavaScript+SDK#AngularJSJavaScriptSDK-UsingtheSDK">Loopback's Angular SDK</a></p>
 
 <h2>
 <a id="testing" class="anchor" href="#testing" aria-hidden="true"><span class="octicon octicon-link"></span></a>Testing</h2>
@@ -335,18 +376,25 @@ If you want to contribute, just make a pull request with your new code.</p>
 <a id="license" class="anchor" href="#license" aria-hidden="true"><span class="octicon octicon-link"></span></a>License</h1>
 
 <p><strong>js-mean-seed</strong> is distributed under the <a href="http://opensource.org/licenses/MIT">MIT license</a></p>
-      </section>
+        </section>
+
+        <aside id="sidebar">
+          <a href="https://github.com/jseto/js-mean-seed/zipball/master" class="button">
+            <small>Download</small>
+            .zip file
+          </a>
+          <a href="https://github.com/jseto/js-mean-seed/tarball/master" class="button">
+            <small>Download</small>
+            .tar.gz file
+          </a>
+
+          <p class="repo-owner"><a href="https://github.com/jseto/js-mean-seed"></a> is maintained by <a href="https://github.com/jseto">jseto</a>.</p>
+
+          <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
+        </aside>
+      </div>
     </div>
 
-    <!-- FOOTER  -->
-    <div id="footer_wrap" class="outer">
-      <footer class="inner">
-        <p class="copyright">js-mean-seed maintained by <a href="https://github.com/jseto">jseto</a></p>
-        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
-      </footer>
-    </div>
-
-    
-
+  
   </body>
 </html>
