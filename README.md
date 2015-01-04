@@ -138,6 +138,47 @@ Procfile            --> Heroku conf file
 README.md           --> Documentation
 ```
 
+## A MEAN seed without the M
+
+As you know, MEAN stands for MongoDB, Express, AngularJS and NodeJS. We haven't talk about MongoDB and we will not talk because js-mean-seed is database agnostic. This is because we use the database abstraction provided by [Loopback][loopback]. Being database agnostic fully decouples the application logic from the database engine. Today you may think MongoDB is cool. Tomorrow? You never know.
+
+## Database
+
+As said above, js-mean-seed is database agnostic. You can choose any of the available [Looback connectors](http://docs.strongloop.com/display/public/LB/Database+connectors). 
+
+By default, js-mean-seed, uses the Memory connector. Be aware that you will loose your data when working with the memory connector. If you want your data to persist, change the database connector or make [Memory connector persistent](http://docs.strongloop.com/display/public/LB/Memory+connector#Memoryconnector-Datapersistence)
+
+### Connecting to a database
+
+The easy way. Use [StrongLoop Arc](http://docs.strongloop.com/display/ARC/StrongLoop+Arc). To invoke Arc
+
+```
+slc arc
+```
+After invoking Arc, a local web page will be opened. Select `Composer` and define your database.
+
+### Creating a new model
+
+The easy way. Use [StrongLoop Arc](http://docs.strongloop.com/display/ARC/StrongLoop+Arc). To invoke Arc
+
+```
+slc arc
+```
+
+After invoking Arc, again a local web page will be opened. Select `Composer` and define your new model.
+
+Once you have defined your model, you have to let AngularJS to know about the new model. To do that, invoke 
+
+```
+npm run build-ng-models
+```
+
+if you are using the client development tool, build-ng-models will be invoked automatically.
+
+### Use the models from AngularJS
+
+The models are exposed to angular by running the `build-ng-models` tool. You can access the models in a similar way as you do with Angular's $resource service. For more information see [Loopback's Angular SDK](http://docs.strongloop.com/display/public/LB/AngularJS+JavaScript+SDK#AngularJSJavaScriptSDK-UsingtheSDK)
+
 ## Testing
 
 There are 3 kinds of tests in the js-mean-seed application: server Unit tests, client Unit tests and End to End tests.
