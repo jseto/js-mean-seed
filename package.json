@@ -61,8 +61,8 @@
     "watch:test:server": "jasmine-node --captureExceptions --autotest --color test/server",
     "watch:server": "nodemon --watch server -e js,json server/server.js",
     "watch:less": "watch \"npm run less\" less",
-    "start:dev:client": "parallelshell \"npm run watch:test:client\" \"npm run watch:less\"",
+    "start:dev:client": "parallelshell \"node server/server.js\" \"npm run watch:test:client\" \"npm run watch:less\"",
     "start:dev:server": "parallelshell \"npm run watch:test:server\" \"npm run watch:server\"",
-    "start:dev:all": "parallelshell \"npm run start:dev:client\" \"npm run start:dev:server\""
+    "start:dev:all": "parallelshell \"npm run start:dev:server\" \"npm run watch:test:client\" \"npm run watch:less\""
   }
 }

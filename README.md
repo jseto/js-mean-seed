@@ -4,9 +4,9 @@ js-mean-seed [![Build Status](https://travis-ci.org/jseto/js-mean-seed.svg?branc
 [![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
 
 A starter project for MEAN (MongoDB, Express, Angular, Node).
-Based on [Angular](http://angularjs.org)'s [angular-seed](http://github.com/angular/angular-seed) for the front-end and [Loopback](http://loopback.io/) for the back-end.
+Based on [Angular][angular]'s [angular-seed](http://github.com/angular/angular-seed) for the front-end and [Loopback][loopback] for the back-end.
     
-This project is an application skeleton for a typical [AngularJS](http://angularjs.org/) web app, a [Loopback](http://loopback.io/) server set-up and tools, a [Passport](http://passportjs.org/) login set-up and a test framework for all the components. Additionally it takes benefit form [Bootstrap](http://getbootstrap.com/) responsive framework, [Font Awesome](http://fortawesome.github.io/Font-Awesome/) font icons and [Less](http://lesscss.org) CSS preprocessor and bundles [jsLib](http://github.com/jseto/jsLib), an AngularJS widget library with a localization tool. Finally it is ready for [Travis CI](http://travis-ci.org/) continuous integration platform and deployment in [Heroku](http://heroku.com) cloud application platform.
+This project is an application skeleton for a typical [AngularJS](http://angularjs.org/) web app, a [Loopback][loopback] server set-up and tools, a [Passport][passport] login set-up and a test framework for all the components. Additionally it takes benefit form [Bootstrap][bootstrap] responsive framework, [Font Awesome][fontawesome] font icons and [Less][less] CSS preprocessor and bundles [jsLib][jslib], an AngularJS widget library with a localization tool. Finally it is ready for [Travis CI][travis] continuous integration platform and deployment in [Heroku][heroku] cloud application platform.
 
 ## Getting Started
 
@@ -15,10 +15,10 @@ To get you started you can simply [clone](http://github.com/jseto/js-mean-seed) 
 ### Prerequisites
 
 You need git to clone the js-mean-seed repository. You can get git from
-[http://git-scm.com/](http://git-scm.com/).
+[http://git-scm.com/][git].
 
 We also use a number of node.js tools to initialize and test js-mean-seed. You must have node.js and
-its package manager (npm) installed.  You can get them from [http://nodejs.org/](http://nodejs.org/).
+its package manager (npm) installed.  You can get them from [http://nodejs.org/][node].
 
 ### Clone js-mean-seed
 
@@ -39,7 +39,7 @@ The `depth=1` tells git to only pull down one commit worth of historical data.
 
 ### Install StrongLoop 
 
-StrongLoop provides a set of tools to make Loopback things easier. It particularly installs the `slc loopback` tool which helps in setting up new models and expose them in the REST API.
+StrongLoop provides a set of tools to make [Loopback][loopback] things easier. It particularly installs the `slc loopback` tool which helps in setting up new models and expose them in the REST API.
 
 You should install StrongLoop as a generic node module in order to get access to 'slc' from the command line. To install StrongLoop:
 
@@ -84,7 +84,11 @@ npm start
 
 Now browse to the app at `http://localhost:3000`.
 
+This will start the webserver and leave it running in the background. To stop the server just
 
+```
+npm stop
+```
 
 ## Directory Layout
 
@@ -136,16 +140,10 @@ README.md           --> Documentation
 
 ## Testing
 
-There are two kinds of tests in the js-mean-seed application: Unit tests and End to End tests.
+There are 3 kinds of tests in the js-mean-seed application: server Unit tests, client Unit tests and End to End tests.
+All of them are written in [Jasmine][jasmine]
 
 ### Running Unit Tests
-
-The js-mean-seed app comes preconfigured with unit tests. These are written in
-[Jasmine][jasmine], which we run with the [Karma Test Runner][karma]. We provide a Karma
-configuration file to run them.
-
-* the configuration is found at `karma.conf.js`
-* the unit tests are found next to the code they are testing and are named as `..._test.js`.
 
 The easiest way to run the unit tests is to use the supplied npm script:
 
@@ -153,19 +151,28 @@ The easiest way to run the unit tests is to use the supplied npm script:
 npm test
 ```
 
-This script will start the Karma test runner to execute the unit tests. Moreover, Karma will sit and
-watch the source and test files for changes and then re-run the tests whenever any of them change.
-This is the recommended strategy; if your unit tests are being run every time you save a file then
-you receive instant feedback on any changes that break the expected code functionality.
+###Client Unit tests
 
-You can also ask Karma to do a single run of the tests and then exit.  This is useful if you want to
-check that a particular version of the code is operating as expected.  The project contains a
-predefined script to do this:
+The js-mean-seed app comes preconfigured with unit tests. These are written in
+[Jasmine][jasmine], which we run with the [Karma Test Runner][karma]. We provide a Karma
+configuration file to run them.
+
+* the configuration is found at `test/karma.conf.js`
+* the unit tests are found in the `test/client` folder with a similar structure as the code they are testing and are named as `*.spec.js`.
+
+to run this test alone just type
 
 ```
-npm run test-single-run
+npm run test:client
 ```
 
+This script will start the Karma test runner to execute the unit tests.
+
+If you want to watch the source and test files for changes and then re-run the tests whenever any of them change, run 
+
+```
+npm run watch:test:client
+```
 
 ### End to end testing
 
@@ -173,59 +180,41 @@ The js-mean-seed app comes with end-to-end tests, again written in [Jasmine][jas
 are run with the [Protractor][protractor] End-to-End test runner.  It uses native events and has
 special features for Angular applications.
 
-* the configuration is found at `e2e-tests/protractor-conf.js`
-* the end-to-end tests are found in `e2e-tests/scenarios.js`
+* the configuration is found at `test/protractor-conf.js`
+* the e2e tests are found in the `test/client` folder with a similar structure as the code they are testing and are named as `*.e2e-spec.js`.
 
 Protractor simulates interaction with our web app and verifies that the application responds
 correctly. Therefore, our web server needs to be serving up the application, so that Protractor
-can interact with it.
+can interact with it. If you run the provided nmp tasks you do not need to worry about that becase they automatically start the server
+
+You can run the end-to-end tests alone using the supplied npm script:
 
 ```
-npm start
-```
-
-In addition, since Protractor is built upon WebDriver we need to install this.  The js-mean-seed
-project comes with a predefined script to do this:
-
-```
-npm run update-webdriver
-```
-
-This will download and install the latest version of the stand-alone WebDriver tool.
-
-Once you have ensured that the development web server hosting our application is up and running
-and WebDriver is updated, you can run the end-to-end tests using the supplied npm script:
-
-```
-npm run protractor
+npm run test:e2e
 ```
 
 This script will execute the end-to-end tests against the application being hosted on the
 development server.
 
+### Server testing
 
-## Updating Angular
+Server tests are run with the [jasmine-node][jasmine-node] test runner.
 
-Previously we recommended that you merge in changes to js-mean-seed into your own fork of the project.
-Now that the angular framework library code and tools are acquired through package managers (npm and
-bower) you can use these tools instead to update the dependencies.
+*the server tests are found in the `test/server` folder and any javascript file there will be used as test file.
 
-You can update the tool dependencies by running:
-
-```
-npm update
-```
-
-This will find the latest versions that match the version ranges specified in the `package.json` file.
-
-You can update the Angular dependencies by running:
+to run this test alone just type
 
 ```
-bower update
+npm run test:server
 ```
 
-This will find the latest versions that match the version ranges specified in the `bower.json` file.
+This script will start the jasmine-node test runner to execute the unit tests.
 
+If you want to watch the source and test files for changes and then re-run the tests whenever any of them change, run 
+
+```
+npm run watch:test:server
+```
 
 ## Loading Angular Asynchronously
 
@@ -242,50 +231,37 @@ This will copy the contents of the `angular-loader.js` library file into the `in
 You can run this every time you update the version of Angular that you are using.
 
 
-## Serving the Application Files
+## Developing
 
-While angular is client-side-only technology and it's possible to create angular webapps that
-don't require a backend server at all, we recommend serving the project files using a local
-webserver during development to avoid issues with security restrictions (sandbox) in browsers. The
-sandbox implementation varies between browsers, but quite often prevents things like cookies, xhr,
-etc to function properly when an html page is opened via `file://` scheme instead of `http://`.
-
-
-### Running the App during Development
-
-The js-mean-seed project comes preconfigured with a local development webserver.  It is a node.js
-tool called [http-server][http-server].  You can start this webserver with `npm start` but you may choose to
-install the tool globally:
+We provide several tools to help in the app development phase. Basically are watchers, a browser re-loader and the server itself.
+Although you can change the behaviour of the server, the proposed configuration covers all the need you can have and we will focus on client side development. Anyway, if you want a server side development, just invoke the npm task
 
 ```
-sudo npm install -g http-server
+npm run start:dev:server
 ```
 
-Then you can start your own development web server to serve static files from a folder by
-running:
+this task will star the test server watcher, the server test watcher and will keep an eye to the files located in the `server` folder. If a file change is detected the server will be restarted.
+
+When developing client side, which is the main effort you have to do in this environment, we provide a handy npm task
 
 ```
-http-server -a localhost -p 8000
+npm run start:dev:client
 ```
 
-Alternatively, you can choose to configure your own webserver, such as apache or nginx. Just
-configure your server to serve the files under the `app/` directory.
+this task will start the server, the client unit test watcher and the less watcher.
 
+To start both server and client development tools run the following task
+
+```
+npm run start:dev:all
+```
+
+The provided server uses [Instant][instant] to watch for the files it serves. Instant automatically injects a script-tag right before the closing body tag of any HTML page (including dynamic ones) in order to load the client code.
+Whenever a served page changes, Instant instruct to the browser to reload the page. This is a clever reloader solution. If `{ watch: false }` is passed as option or `$NODE_ENV` is set to `production` Instant will behave just like `connect.static()` with no additional overhead.
 
 ### Running the App in Production
 
-This really depends on how complex your app is and the overall infrastructure of your system, but
-the general rule is that all you need in production are all the files under the `app/` directory.
-Everything else should be omitted.
-
-Angular apps are really just a bunch of static html, css and js files that just need to be hosted
-somewhere they can be accessed by browsers.
-
-If your Angular app is talking to the backend server via xhr or other means, you need to figure
-out what is the best way to host the static files to comply with the same origin policy if
-applicable. Usually this is done by hosting the files by the backend server or through
-reverse-proxying the backend server(s) and webserver(s).
-
+Set the `$NODE_ENV` environment variable with the value `production`
 
 ## Continuous Integration
 
@@ -299,6 +275,20 @@ tests when you push to GitHub.
 You will need to enable the integration between Travis and GitHub. See the Travis website for more
 instruction on how to do this.
 
+## Deploy to Heroku
+
+[Heroku][heroku] is a cloud application platform. If you want to see this seed running in your Heroku account, just click the **Deploy to Heroku** button at the beginning of this document.
+The js-mean-seed provides the `app.json` and `Procfile` files required by Heroku.
+
+### Contact, Contribute
+
+If you want support, a new feature or find a bug open a [new issue](https://github.com/jseto/js-mean-seed/issues) in github.
+If you want to contribute, just make a pull request with your new code.
+
+# License
+
+__js-mean-seed__ is distributed under the [MIT license](http://opensource.org/licenses/MIT)
+
 
 [git]: http://git-scm.com/
 [bower]: http://bower.io
@@ -307,4 +297,14 @@ instruction on how to do this.
 [protractor]: https://github.com/angular/protractor
 [jasmine]: http://jasmine.github.io
 [karma]: http://karma-runner.github.io
-[travis]: https://travis-ci.org/
+[travis]: http://travis-ci.org/
+[loopback]: http://loopback.io/
+[angular]: http://angularjs.org
+[passport]: http://passportjs.org/
+[bootstrap]: http://getbootstrap.com/
+[fontawesome]: http://fortawesome.github.io/Font-Awesome/
+[heroku]: http://heroku.com
+[less]: http://lesscss.org
+[jslib]: http://github.com/jseto/jsLib
+[jasmine-node]: http://github.com/mhevery/jasmine-node
+[instant]: http://github.com/fgnass/instant
