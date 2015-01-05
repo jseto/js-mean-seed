@@ -9,6 +9,7 @@ angular.module('myApp', [
 	'myApp.contact',
 	'myApp.signup',
 	'jsLib.locale',
+	'jsWidgets',
 	'ui.router'
 ])
 

@@ -12,7 +12,19 @@ describe('HeaderCtrl', function(){
 	}));
 
 	it('should report proper active tab', function() {
-		expect(scope.activeTab).toBeDefined();
+		expect(
+			scope.activeTab
+		).toBeDefined();
+		
+		scope.$emit( '$stateChangeSuccess', { name: 'test' } );
+
+		expect(
+			scope.activeTab('test')
+		).toBeTruthy();
+
+		expect(
+			scope.activeTab('fail')
+		).toBe('');
 	});
 
 });

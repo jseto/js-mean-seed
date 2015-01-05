@@ -2,7 +2,8 @@
 
 var homePage = require('../home/home-pageObject.js');
 var headerPage = require('./header-pageObject.js');
-var contactPage = require('../contact/contactPageObject.js');
+var contactPage = require('../contact/contact-pageObject.js');
+
 
 describe('Header Navigation', function(){
 
