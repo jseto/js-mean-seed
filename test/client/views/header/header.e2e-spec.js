@@ -42,7 +42,7 @@ describe('Header Navigation', function(){
 	});
 
 	it('Should navigate to Contact by clicking', function() {
-		headerPage.contactTab.click();
+		headerPage.click( headerPage.contactTab );
 		
 		expect(
 			browser.getTitle() 
@@ -70,7 +70,7 @@ describe('Header Navigation', function(){
 	});
 
 	it('Should show Signup panel', function() {
-		headerPage.loginTab.click();
+		headerPage.click( headerPage.loginTab );
 		
 		expect( 
 			headerPage.loginPanel.isDisplayed() 

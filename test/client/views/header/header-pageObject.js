@@ -8,6 +8,10 @@ var HeaderPageObject = function() {
 
 	this.tabActive = /\bactive\b/;
 	this.loginPanel = element( by.id('login') );
+
+	this.click = function( elem ) {
+		elem.element( by.partialLinkText('') ).click();
+	};
 };
 
 module.exports = new HeaderPageObject();
