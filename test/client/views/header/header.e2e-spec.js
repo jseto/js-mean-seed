@@ -1,45 +1,106 @@
 'use strict';
 
-describe('Header Navigation', function(){
+var homePage = require('../home/home-pageObject.js');
+var headerPage = require('./header-pageObject.js');
+var contactPage = require('../contact/contactPageObject.js');
 
-	// beforeAll(function(){
-	// });
+describe('Header Navigation', function(){
 
 	it('Should navigate to Home page', function () {
 		browser.get('/');
-		expect( browser.getTitle() ).toBe('Home - MyApp');
-		expect( browser.getLocationAbsUrl() ).toBe('/home');
-		expect( element( by.id('homeTab') ).getAttribute('class') ).toMatch(/\bactive\b/);
-		expect( element( by.id('contactTab') ).getAttribute('class') ).not.toMatch(/\bactive\b/);
-		expect( element( by.id('loginTab') ).getAttribute('class') ).not.toMatch(/\bactive\b/);
-		console.log(element( by.id('contactTab') ).getAttribute('class'));
+		
+		expect(
+			browser.getTitle() 
+		).toBe( homePage.title );
+		
+		expect(
+			browser.getLocationAbsUrl() 
+		).toBe( homePage.state );
+
+		homePage.navigate();
+		
+		expect(
+			browser.getLocationAbsUrl() 
+		).toBe( homePage.state );
+		
+		expect(
+			headerPage.homeTab.getAttribute('class') 
+		).toMatch( headerPage.tabActive );
+
+		expect(
+			headerPage.contactTab.getAttribute('class') 
+		).not.toMatch( headerPage.tabActive );
+
+		expect(
+			headerPage.loginTab.getAttribute('class') 
+		).not.toMatch( headerPage.tabActive );
+		
+		expect( 
+			headerPage.loginPanel.isDisplayed() 
+		).not.toBeTruthy();
 	});
 
 	it('Should navigate to Contact by clicking', function() {
-		element( by.id('contactTab') ).click();
-		expect( browser.getTitle() ).toBe('Contact - MyApp');
-		expect( browser.getLocationAbsUrl() ).toBe('/contact');
-		expect( element( by.id('homeTab') ).getAttribute('class') ).not.toMatch(/\bactive\b/);
-		expect( element( by.id('contactTab') ).getAttribute('class') ).toMatch(/\bactive\b/);
-		expect( element( by.id('loginTab') ).getAttribute('class') ).not.toMatch(/\bactive\b/);
+		headerPage.contactTab.click();
+		
+		expect(
+			browser.getTitle() 
+		).toBe( contactPage.title );
+		
+		expect(
+			browser.getLocationAbsUrl() 
+		).toBe( contactPage.state );
+		
+		expect(
+			headerPage.homeTab.getAttribute('class') 
+		).not.toMatch( headerPage.tabActive );
+		
+		expect(
+			headerPage.contactTab.getAttribute('class') 
+		).toMatch( headerPage.tabActive );
+		
+		expect(
+			headerPage.loginTab.getAttribute('class') 
+		).not.toMatch( headerPage.tabActive );
+		
+		expect( 
+			headerPage.loginPanel.isDisplayed() 
+		).not.toBeTruthy();
 	});
 
-	it('Should navigate to Home by clicking', function() {
-		element( by.id('homeTab') ).click();
-		expect( browser.getTitle() ).toBe('Home - MyApp');
-		expect( browser.getLocationAbsUrl() ).toBe('/home');
-		expect( element( by.id('homeTab') ).getAttribute('class') ).toMatch(/\bactive\b/);
-		expect( element( by.id('contactTab') ).getAttribute('class') ).not.toMatch(/\bactive\b/);
-		expect( element( by.id('loginTab') ).getAttribute('class') ).not.toMatch(/\bactive\b/);
+	it('Should show Signup panel', function() {
+		headerPage.loginTab.click();
+		
+		expect( 
+			headerPage.loginPanel.isDisplayed() 
+		).toBeTruthy();
 	});
 
-	it('Should navigate to Signup by clicking on popup panel', function() {
-		element( by.id('loginTab') ).click();
-		element( by.id('goSignup') ).click();
-		expect( browser.getTitle() ).toBe('Signup - MyApp');
-		expect( browser.getLocationAbsUrl() ).toBe('/signup');
-		expect( element( by.id('homeTab') ).getAttribute('class') ).not.toMatch(/\bactive\b/);
-		expect( element( by.id('contactTab') ).getAttribute('class') ).not.toMatch(/\bactive\b/);
-		expect( element( by.id('loginTab') ).getAttribute('class') ).not.toMatch(/\bactive\b/);
+	it('Should navigate to home clicking the logo', function(){
+		headerPage.logoTab.click();
+		
+		expect(
+			browser.getTitle() 
+		).toBe( homePage.title );
+		
+		expect(
+			browser.getLocationAbsUrl() 
+		).toBe( homePage.state );
+		
+		expect(
+			headerPage.homeTab.getAttribute('class') 
+		).toMatch( headerPage.tabActive );
+		
+		expect(
+			headerPage.contactTab.getAttribute('class') 
+		).not.toMatch( headerPage.tabActive );
+		
+		expect(
+			headerPage.loginTab.getAttribute('class') 
+		).not.toMatch( headerPage.tabActive );
+
+		expect( 
+			headerPage.loginPanel.isDisplayed() 
+		).not.toBeTruthy();
 	});
 });

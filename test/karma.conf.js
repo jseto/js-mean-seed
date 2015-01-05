@@ -6,6 +6,7 @@ module.exports = function(config){
     exclude: [
       'test/server/**',
       'test/**/*e2e*',
+      'test/**/*pageObject.js',
       '**/*.conf.js'
     ],
 
