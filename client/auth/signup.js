@@ -12,6 +12,13 @@ angular.module( 'myApp.signup', [
 		templateUrl: 'auth/signup.html',
 		data:{ pageTitle: 'signup' }
 	});
+
+	$stateProvider.state( 'loginsuccess', {
+		url: '/login-success',
+		controller: 'SignupCtrl',
+		templateUrl: 'auth/login-success.html',
+		data:{ pageTitle: 'loginsuccess' }
+	});
 })
 
 .controller( 'SignupCtrl', function ( $scope, $state, User ) {
@@ -21,7 +28,7 @@ angular.module( 'myApp.signup', [
 	$scope.create = function(){
 		$scope.createError = false;
 		User.create( $scope.user, function success( value ){
-//				$state.go( 'member', { user: $scope.user.user } );
+				$state.go( 'loginsuccess' );
 				console.log( value );
 			}, function error(){
 				$scope.createError = true;

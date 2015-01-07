@@ -61,7 +61,7 @@ app.use( instant( clientPath));
 
 app.all('/*', function(req, res) {
 	if ( req.path.indexOf('.') < 0 ) {
-  	res.sendFile('index.html',{ root: clientPath });
+  		res.sendFile('index.html',{ root: clientPath });
  	}
  	else {
 	  res.sendStatus(404);

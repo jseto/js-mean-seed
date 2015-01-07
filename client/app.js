@@ -8,6 +8,7 @@ angular.module('myApp', [
 	'myApp.footer',
 	'myApp.contact',
 	'myApp.signup',
+	'myApp.responsiveBody',
 	'jsLib.locale',
 	'jsWidgets',
 	'ui.router'

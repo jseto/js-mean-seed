@@ -3,7 +3,8 @@
 		"home": "Home",
 		"contact": "Contact",
 		"login": "Login",
-		"signup": "Signup"
+		"signup": "Sign Up",
+		"loginsucess": "Login Sucessful"
 	},
 	"validationErrors": {
 		"matchPassword": "Password mismatch",
