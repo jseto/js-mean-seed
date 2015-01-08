@@ -24,6 +24,7 @@ angular.module( 'myApp.signin', [
 		})
 
 		$scope.requestLogin = function( identity ) {
+			User.login()
 /*			Auth.login( identity, function( user ){
 				if ( user ) {
 					$state.go( 'member', { user: user } );

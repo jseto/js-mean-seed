@@ -1,6 +1,7 @@
 'use strict';
 var loopback = require('loopback');
 var boot = require('loopback-boot');
+var path = require('path');
 var app = module.exports = loopback();
 
 // Passport configurators..
@@ -21,6 +22,9 @@ try {
 // -- Add your pre-processing middleware here --
 // ---------------------------------------------
 
+// configure view handler
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
 
 // boot scripts mount components like REST API
 boot(app, __dirname);
@@ -53,7 +57,6 @@ for (var s in passportConfig) {
 
 //var ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn;
 
-var path = require('path');
 var clientPath = path.resolve(__dirname, '../client');
 
 var instant = require('instant');

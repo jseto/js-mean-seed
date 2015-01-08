@@ -4,7 +4,7 @@
 		"contact": "Contact",
 		"login": "Login",
 		"signup": "Sign Up",
-		"loginsucess": "Login Sucessful"
+		"signupsucess": "Sign up successful"
 	},
 	"validationErrors": {
 		"matchPassword": "Password mismatch",
@@ -42,7 +42,8 @@
 		"passwordLabel": "Password",
 		"confirmPassword": "Confirm password",
 		"doSignup": "Sign up",
-		"createError": "User already exists"
+		"createError": "User already exists",
+		"verifiedOk": "Your account has been verified. Please, log in to continue"
 	}
 }
 

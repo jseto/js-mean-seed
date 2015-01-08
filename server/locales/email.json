@@ -1,0 +1,7 @@
+{
+	"en": {
+		"subject": "Thanks for registering.",
+		"plainText": "Please verify your email by opening this link in a web browser:\n\t{href}",
+		"template": "locales/verify-en.ejs"
+	}
+}

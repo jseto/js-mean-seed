@@ -8,7 +8,18 @@
     ]
   },
   "User": {
-    "dataSource": "db"
+    "dataSource": "db",
+    "public": false
+  },
+  "user": {
+    "dataSource": "db",
+    "public": true,
+    "options": {
+      "emailVerificationRequired": true
+    }
+  },
+  "Email": {
+    "dataSource": "emailer"
   },
   "AccessToken": {
     "dataSource": "db",

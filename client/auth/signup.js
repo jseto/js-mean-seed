@@ -13,11 +13,18 @@ angular.module( 'myApp.signup', [
 		data:{ pageTitle: 'signup' }
 	});
 
-	$stateProvider.state( 'loginsuccess', {
-		url: '/login-success',
+	$stateProvider.state( 'signupsuccess', {
+		url: '/signup-success',
 		controller: 'SignupCtrl',
-		templateUrl: 'auth/login-success.html',
-		data:{ pageTitle: 'loginsuccess' }
+		templateUrl: 'auth/signup-success.html',
+		data:{ pageTitle: 'signupsuccess' }
+	});
+
+	$stateProvider.state( 'verified', {
+		url: '/verified',
+		controller: 'SignupCtrl',
+		templateUrl: 'auth/verified.html',
+		data:{ pageTitle: 'login' }
 	});
 })
 
@@ -28,8 +35,7 @@ angular.module( 'myApp.signup', [
 	$scope.create = function(){
 		$scope.createError = false;
 		User.create( $scope.user, function success( value ){
-				$state.go( 'loginsuccess' );
-				console.log( value );
+				$state.go( 'signupsuccess' );
 			}, function error(){
 				$scope.createError = true;
 			}
