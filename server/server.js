@@ -26,6 +26,12 @@ try {
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
+var clientPath = path.resolve(__dirname, '../client');
+
+var instant = require('instant');
+app.use( instant( clientPath));
+
+
 // boot scripts mount components like REST API
 boot(app, __dirname);
 

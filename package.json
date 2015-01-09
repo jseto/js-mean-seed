@@ -62,9 +62,9 @@
     "watch:server": "nodemon --watch server --watch common/models -e js,json,ejs,jade server/server.js",
     "watch:less": "watch \"npm run less\" less",
     "watch:models": "watch \"npm run build-ng-models\" common/models",
-    "start:dev:client": "parallelshell \"node server/server.js\" \"npm run watch:test:client\" \"npm run watch:less\" \"npm run watch:models\"",
-    "start:dev:client:beep": "parallelshell \"node server/server.js\" \"npm run watch:test:client:beep\" \"npm run watch:less\" \"npm run watch:models\"",
-    "start:dev:server": "parallelshell \"npm run watch:test:server\" \"npm run watch:server\"",
-    "start:dev:all": "parallelshell \"npm run start:dev:server\" \"npm run watch:test:client\" \"npm run watch:less\""
+    "dev:client": "parallelshell \"node server/server.js\" \"npm run watch:test:client\" \"npm run watch:less\" \"npm run watch:models\"",
+    "dev:client:beep": "parallelshell \"node server/server.js\" \"npm run watch:test:client:beep\" \"npm run watch:less\" \"npm run watch:models\"",
+    "dev:server": "parallelshell \"npm run watch:test:server\" \"npm run watch:server\"",
+    "dev:all": "parallelshell \"npm run start:dev:server\" \"npm run watch:test:client\" \"npm run watch:less\""
   }
 }

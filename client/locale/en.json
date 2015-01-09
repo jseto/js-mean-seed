@@ -16,7 +16,7 @@
 		"minlength": "Minimum length is {{0}} chars",
 		"unknown": "Unknown error",
 		"only1word": "One word only",
-		"mismatch": "Mismatch"
+		"missmatch": "Password mismatch"
 	},
 	"header": {
 		"home": "Home",

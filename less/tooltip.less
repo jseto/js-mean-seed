@@ -1,0 +1,47 @@
+/***** tooltip colors according to bootstrap theme */
+.tooltip-border-styles(@borderColor) {
+    & + .tooltip {
+        &.top .tooltip-arrow,
+        &.top-left .tooltip-arrow,
+        &.top-right .tooltip-arrow {
+            border-top-color: @borderColor;
+        }
+        &.bottom .tooltip-arrow,
+        &.bottom-left .tooltip-arrow,
+        &.bottom-right .tooltip-arrow {
+            border-bottom-color: @borderColor;
+        }
+        &.right .tooltip-arrow {
+            border-right-color: @borderColor;
+        }
+        &.left .tooltip-arrow {
+            border-left-color: @borderColor;
+        }
+    }
+}
+
+.tooltip-info {
+  & + .tooltip .tooltip-inner {
+    .alert-info;
+  }
+  .tooltip-border-styles(@alert-info-border);
+}
+.tooltip-danger {
+  & + .tooltip .tooltip-inner {
+    .alert-danger;
+  }
+  .tooltip-border-styles(@alert-danger-border);
+}
+.tooltip-warning {
+  & + .tooltip .tooltip-inner {
+    .alert-warning;
+  }
+  .tooltip-border-styles(@alert-warning-border);
+}
+.tooltip-success {
+  & + .tooltip .tooltip-inner {
+    .alert-success;
+  }
+  .tooltip-border-styles(@alert-success-border);
+}
+

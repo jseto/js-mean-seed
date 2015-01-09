@@ -1,6 +1,6 @@
 'use strict';
 
-/* App Module */
+//* App Module 
 
 angular.module('myApp', [
 	'myApp.home',
@@ -15,13 +15,13 @@ angular.module('myApp', [
 ])
 
 .config( function( $urlRouterProvider, $locationProvider, $httpProvider, LocaleProvider ) {
-	/*** Default route setup */
+	//*** Default route setup 
 	$urlRouterProvider.otherwise( '/home' );
 	
-	/*** Remove # from url */
+	//*** Remove # from url 
 	$locationProvider.html5Mode(true);
 
-	/*** Locale setup */
+	//*** Locale setup 
 	LocaleProvider.setLocale('en');
 	LocaleProvider.setLocalePath('locale/');
 })
@@ -32,8 +32,9 @@ angular.module('myApp', [
 })
 
 .controller( 'AppCtrl', [ '$scope', 'locFilter', function ( $scope, locFilter ) {
+	//*** Sets page title 
 	$scope.$on('$stateChangeSuccess', function( event, toState, toParams, fromState, fromParams){
-		/** Appends ' - MyApp' to page title */
+		//** Appends ' - MyApp' to page title 
 		if ( angular.isDefined( toState.data.pageTitle ) ) {
 			$scope.pageTitle = locFilter( 'pageTitle.' + toState.data.pageTitle ) + ' - MyApp';
 		}

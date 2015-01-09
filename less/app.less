@@ -18,6 +18,16 @@
 //@import "bootswatch.less";
 //@import "variables.less";
 
+//------------------------------------------------------------------
+// Application imports
+//------------------------------------------------------------------
+@import "tooltip.less";
+
+
+
+//------------------------------------------------------------------
+// Custom styles
+//------------------------------------------------------------------
 .center {
 	margin: 0 auto;
 	float: none;
@@ -75,6 +85,7 @@
     text-align: center;
 }
 
+// ***** Form validation
 input.ng-invalid.ng-dirty {
 	border-color: @state-danger-border;
 	backgound-color: @state-danger-bg;
@@ -86,7 +97,7 @@ input.ng-invalid.ng-dirty {
     z-index:1;
 }
 
-/***** input file button styling */
+//  ***** input file button styling 
 .btn-file {
     position: relative;
     overflow: hidden;
