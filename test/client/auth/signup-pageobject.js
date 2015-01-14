@@ -12,10 +12,10 @@ var SignupPageObject = function() {
 	this.invalid = /\bng-invalid(\s|$)/;
 
 	this.username = element( by.css('input[ng-model="user.username"]') );
-	this.email = element( by.model('user.email') );
-	this.password = element( by.model('user.password') );
-	this.retypePassword = element( by.model('retypePassword') );
-	this.rememberMe = element( by.model('rememberMe') );
+	this.email = element( by.css('input[ng-model="user.email"]') );
+	this.password = element( by.css('input[ng-model="user.password"]') );
+	this.retypePassword = element( by.css('input[ng-model="retypePassword"]') );
+	this.rememberMe = element( by.css('rememberMe') );
 	this.submitButton = element( by.css('button[type=submit]') );
 	this.form = element( by.css('form[name=signupForm]') );
 };

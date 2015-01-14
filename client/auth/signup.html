@@ -28,7 +28,7 @@
 					type="email" 
 					icon="fa fa-envelope fa-fw"
 					placeholder="{{'signup.email'|loc}}"
-					data-ng-model="user.email"
+					ng-model="user.email"
 					tooltip-placement="bottom"
 					validation-errors="{{ 'validationErrors' | loc }}" 
 					required>
@@ -59,7 +59,7 @@
 					<input 
 						type="checkbox" 
 						style="margin-right: 7px; margin-top: 15px" 
-						data-ng-model="rememberMe">
+						ng-model="rememberMe">
 						{{'login.rememberMe' | loc}}
 		
 					<button
