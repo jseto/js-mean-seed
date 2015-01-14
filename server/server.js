@@ -63,11 +63,6 @@ for (var s in passportConfig) {
 
 //var ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn;
 
-var clientPath = path.resolve(__dirname, '../client');
-
-var instant = require('instant');
-app.use( instant( clientPath));
-
 app.all('/*', function(req, res) {
 	if ( req.path.indexOf('.') < 0 ) {
   		res.sendFile('index.html',{ root: clientPath });

@@ -8,12 +8,12 @@
     "angular": "1.3.x",
     "angular-loader": "1.3.x",
     "angular-mocks": "~1.3.x",
-    "bootstrap": "~3.2.0",
-    "font-awesome": "~4.2.0",
-    "angular-ui-router": "~0.2.11",
-    "jsLib": "https://github.com/jseto/jsLib.git",
-    "angular-resource": "~1.3.8",
-    "bootstrap-social": "~4.8.0"
+    "bootstrap": "~3.x.x",
+    "font-awesome": "~4.x.x",
+    "angular-ui-router": "~0.2.x",
+    "js-lib": "https://github.com/jseto/js-lib.git",
+    "angular-resource": "~1.3.x",
+    "bootstrap-social": "~4.x.x"
   },
   "authors": [
     "jseto <jseto@jasvisio.com>"

@@ -5,7 +5,7 @@ var headerPage = require('./header-pageObject.js');
 var contactPage = require('../contact/contact-pageObject.js');
 
 
-describe('Header Navigation', function(){
+xdescribe('Header Navigation', function(){
 
 	it('Should navigate to Home page', function () {
 		browser.get('/');
@@ -43,7 +43,7 @@ describe('Header Navigation', function(){
 
 	it('Should navigate to Contact by clicking', function() {
 		headerPage.click( headerPage.contactTab );
-		
+
 		expect(
 			browser.getTitle() 
 		).toBe( contactPage.title );

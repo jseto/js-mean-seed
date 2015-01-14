@@ -34,16 +34,12 @@ angular.module( 'myApp.signup', [
 
 	$scope.create = function(){
 		$scope.createError = false;
-		User.create( $scope.user, function success( value ){
+		User.create( $scope.user, function success( value ) {
 				$state.go( 'signupsuccess' );
 			}, function error(){
 				$scope.createError = true;
 			}
 		);
-	}
-
-	// $scope.checkPassw = function(){
-	// 	return $scope.model.password == $scope.retypePassword;
-	// }
+	};
 });
 

@@ -3,20 +3,19 @@
 		"home": "Home",
 		"contact": "Contact",
 		"login": "Login",
-		"signup": "Sign Up",
+		"signup": "Sign up",
 		"signupsucess": "Sign up successful"
 	},
 	"validationErrors": {
-		"matchPassword": "Password mismatch",
 		"unique": "Already exists",
 		"email": "Incorrect email address",
 		"required": "Field is required",
 		"date": "Incorrect date",
 		"file": "Upload failed. (max size: 1,5Mb, type: jpg, png, gif)",
-		"minlength": "Minimum length is {{0}} chars",
+		"minlength": "Minimum length is {0} chars",
 		"unknown": "Unknown error",
 		"only1word": "One word only",
-		"missmatch": "Password mismatch"
+		"jswMissmatch": "Password mismatch"
 	},
 	"header": {
 		"home": "Home",

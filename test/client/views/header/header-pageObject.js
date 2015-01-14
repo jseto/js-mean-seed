@@ -10,7 +10,7 @@ var HeaderPageObject = function() {
 	this.loginPanel = element( by.id('login') );
 
 	this.click = function( elem ) {
-		elem.element( by.partialLinkText('') ).click();
+		elem.all( by.css('a') ).first().click();
 	};
 };
 

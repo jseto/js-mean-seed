@@ -1,4 +1,9 @@
 @import "../client/bower_components/bootstrap/less/bootstrap.less";
+
+
+//------------------------------------------------------------------
+// Social buttons (Facebook, Twiter, Goggle+)
+//------------------------------------------------------------------
 @import "../client/bower_components/bootstrap-social/bootstrap-social.less";
 
 //------------------------------------------------------------------
@@ -19,10 +24,9 @@
 //@import "variables.less";
 
 //------------------------------------------------------------------
-// Application imports
+// Tooltip styling for validation error. Does not work at the moment.
 //------------------------------------------------------------------
-@import "tooltip.less";
-
+@import "../client/bower_components/js-lib/lib/styles/less/tooltip.less";
 
 
 //------------------------------------------------------------------
@@ -85,11 +89,18 @@
     text-align: center;
 }
 
-// ***** Form validation
+//------------------------------------------------------------------
+// Angular form validation
+//------------------------------------------------------------------
 input.ng-invalid.ng-dirty {
-	border-color: @state-danger-border;
-	backgound-color: @state-danger-bg;
-	color: @state-danger-border;
+    border-color: @state-danger-border;
+    backgound-color: @state-danger-bg;
+    color: @state-danger-text;
+//    .form-control-validation(@state-danger-text; @state-danger-border; @state-danger-bg);
+}
+
+input.ng-invalid.ng-dirty:focus {
+    .form-control-focus(@state-danger-text);
 }
 
 .pop-up {
@@ -97,7 +108,9 @@ input.ng-invalid.ng-dirty {
     z-index:1;
 }
 
-//  ***** input file button styling 
+//------------------------------------------------------------------
+// input file button styling 
+//------------------------------------------------------------------
 .btn-file {
     position: relative;
     overflow: hidden;
