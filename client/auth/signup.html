@@ -54,19 +54,24 @@
 					ng-model="retypePassword"
 					required>
 
-				<!-- Remember me -->
 				<div>
+					<!-- Terms agreement -->
 					<input 
 						type="checkbox" 
 						style="margin-right: 7px; margin-top: 15px" 
-						ng-model="rememberMe">
-						{{'login.rememberMe' | loc}}
+						ng-model="user.agreedTerms"
+						required>
+						{{'signup.terms' | loc}}
+						<a href="terms">{{'signup.termsLink' | loc}}</a>
 		
+					<!-- Submit button -->
 					<button
 						type="submit" 
-						class="btn btn-default margin-vertical-10 pull-right" 
-						data-ng-click="create()" 
-						data-ng-disabled="signupForm.$invalid">
+						class="btn margin-vertical-10 pull-right" 
+						data-ng-click="create(signupForm)" 
+						ng-class="{ 'btn-default': signupForm.$invalid, 'btn-success': signupForm.$valid }"
+						ng-mouseover="onMouseOver(signupForm)"
+						>
 						{{ 'signup.doSignup' | loc }}
 						<i class="fa fa-signin"
 							data-ng-hide="loading">
@@ -77,12 +82,17 @@
 
 				<br>
 
-				<div class="alert alert-danger margin-vertical-10"
-					data-ng-show="createError">
-					<p>{{'signup.createError'|loc}}</p>
-					<a href="#resendPassword">{{'forgotPassword' | loc}}</a>
-				</div>
-
+					<div class="zoom alert alert-danger margin-vertical-10 "
+						ng-show="alertMessage && signupForm.$invalid">
+						<p>{{alertMessage}}</p>
+					</div>
+<!-- 
+					<div class="zoom alert alert-danger margin-vertical-10 "
+						ng-show="user.agreedTerms">
+						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+						tempor incididunt ut labore et dolore magna aliqua.</p>
+					</div>
+ -->
 			</form>
 		</div>
 	</div>

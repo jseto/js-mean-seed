@@ -1,0 +1,74 @@
+//*********************************************************
+// ng-show ng-hide transitions
+//*********************************************************
+.bounce-down.ng-hide-remove.ng-hide-remove-active {
+	-webkit-animation: bounceInDown 1s;
+	-moz-animation: bounceInDown 1s;
+	-o-animation: bounceInDown 1s;
+	animation: bounceInDown 1s;
+}
+
+.bounce-down.ng-hide {
+	-webkit-animation: bounceOutUp 1s;
+	-moz-animation: bounceOutUp 1s;
+	-o-animation: bounceOutUp 1s;
+	animation: bounceOutUp 1s;
+}
+
+.zoom.ng-hide-remove.ng-hide-remove-active {
+	-webkit-animation: zoomIn 0.3s;
+	-moz-animation: zoomIn 0.3s;
+	-o-animation: zoomIn 0.3s;
+	animation: zoomIn 0.3s;
+}
+
+.zoom.ng-hide {
+	-webkit-animation: zoomOut 0.3s;
+	-moz-animation: zoomOut 0.3s;
+	-o-animation: zoomOut 0.3s;
+	animation: zoomOut 0.3s;
+}
+
+//*********************************************************
+// Dropdown menu
+//*********************************************************
+.open > .dropdown-menu {
+  -webkit-transform: scale(1, 1);
+  transform: scale(1, 1);  
+  opacity:1;
+}
+  
+.dropdown-menu {
+  opacity:.3;
+  -webkit-transform-origin: top;
+  transform-origin: top;
+  -webkit-animation-fill-mode: forwards;  
+  animation-fill-mode: forwards; 
+  -webkit-transform: scale(1, 0);
+  display: block; 
+  transition: all 0.2s linear;
+  -webkit-transition: all 0.2s linear;
+}
+
+//**********************************************************
+// Page transitions
+//**********************************************************
+[ui-view].ng-enter, [ui-view].ng-leave {
+  position: absolute;
+  left: 0;
+  right: 0;
+}
+
+[ui-view].ng-enter {
+	-webkit-animation: zoomIn 1s;
+	-moz-animation: zoomIn 1s;
+	-o-animation: zoomIn 1s;
+	animation: zoomIn 1s;
+}
+
+[ui-view].ng-leave {
+	-webkit-animation: zoomOut 1s;
+	-moz-animation: zoomOut 1s;
+	-o-animation: zoomOut 1s;
+	animation: zoomOut 1s;
+}

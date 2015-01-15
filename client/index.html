@@ -12,7 +12,7 @@
 	<!-- Bootstrap core CSS -->
 	<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-custom.css"> 
 	<link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
-
+	<link rel="stylesheet" href="bower_components/animate.css/animate.min.css">
 	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 	<!--[if lt IE 9]>
@@ -25,6 +25,7 @@
 	<script src="bower_components/angular/angular.js"></script>
 	<script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
 	<script src="bower_components/angular-resource/angular-resource.js"></script>  
+  	<script src="bower_components/angular-animate/angular-animate.js"></script>
 
 	<script src="bower_components/js-lib/lib/utils/sprintf.js"></script>
 	<script src="bower_components/js-lib/lib/utils/email-validator.js"></script>
@@ -56,8 +57,8 @@
 </head>
 
 <body>
-	<div data-header></div>
-	<div data-ui-view></div>
-	<div data-footer></div>
+	<div header></div>
+	<div ui-view></div>
+	<div footer="1000"></div>
 </body>
 </html>

@@ -28,18 +28,32 @@ angular.module( 'myApp.signup', [
 	});
 })
 
-.controller( 'SignupCtrl', function ( $scope, $state, User ) {
+.controller( 'SignupCtrl', function ( $scope, $state, User, locFilter ) {
 	
 	$scope.user = {};
+	$scope.alertMessage = '';
 
-	$scope.create = function(){
-		$scope.createError = false;
-		User.create( $scope.user, function success( value ) {
-				$state.go( 'signupsuccess' );
-			}, function error(){
-				$scope.createError = true;
+	$scope.onMouseOver = function( form ){
+		if ( form.$invalid ){
+			if ( $scope.user.agreedTerms ) {
+				$scope.alertMessage = locFilter('validationErrors.any');
 			}
-		);
+			else {
+				$scope.alertMessage = locFilter('validationErrors.terms');	
+			}
+		}
+	};
+
+	$scope.create = function( form ){
+		if ( form.$valid ) {
+			$scope.createError = false;
+			User.create( $scope.user, function success( value ) {
+					$state.go( 'signupsuccess' );
+				}, function error(){
+					$scope.alertMessage = locFilter('signup.createError');
+				}
+			);
+		}
 	};
 });
 
