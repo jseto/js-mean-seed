@@ -1,8 +1,8 @@
 'use strict';
 
-var homePage = require('../home/home-pageObject.js');
-var headerPage = require('./header-pageObject.js');
-var contactPage = require('../contact/contact-pageObject.js');
+var homePage = require('../home/home-pageobject.js');
+var headerPage = require('./header-pageobject.js');
+var contactPage = require('../contact/contact-pageobject.js');
 
 
 describe('Header Navigation', function(){
