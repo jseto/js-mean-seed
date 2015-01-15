@@ -48,7 +48,13 @@ describe('Signup page', function(){
 				signupPage.username.getAttribute( 'class' )
 			).toMatch( signupPage.invalid );
 
-			signupPage.username.sendKeys( 'e Bar' );
+			signupPage.username.sendKeys( 'e' );
+
+			expect(  // user name is valid now
+				signupPage.username.getAttribute( 'class' )
+			).toMatch( signupPage.valid );
+
+			signupPage.username.sendKeys( ' Bar' );
 
 			expect(  // user name is not valid because pattern
 				signupPage.username.getAttribute( 'class' )

@@ -7,7 +7,7 @@ var HeaderPageObject = function() {
 	this.logoTab = element( by.id('logoTab') );
 
 	this.tabActive = /\bactive\b/;
-	this.loginPanel = element( by.id('login') );
+	this.loginPanel = element( by.id( 'login' ) );
 
 	this.click = function( elem ) {
 		elem.all( by.css('a') ).first().click();
