@@ -5,7 +5,7 @@ var headerPage = require('./header-pageObject.js');
 var contactPage = require('../contact/contact-pageObject.js');
 
 
-xdescribe('Header Navigation', function(){
+describe('Header Navigation', function(){
 
 	it('Should navigate to Home page', function () {
 		browser.get('/');
@@ -16,13 +16,13 @@ xdescribe('Header Navigation', function(){
 		
 		expect(
 			browser.getLocationAbsUrl() 
-		).toBe( homePage.state );
+		).toBe( homePage.url );
 
 		homePage.navigate();
 		
 		expect(
 			browser.getLocationAbsUrl() 
-		).toBe( homePage.state );
+		).toBe( homePage.url );
 		
 		expect(
 			headerPage.homeTab.getAttribute('class') 
@@ -50,7 +50,7 @@ xdescribe('Header Navigation', function(){
 		
 		expect(
 			browser.getLocationAbsUrl() 
-		).toBe( contactPage.state );
+		).toBe( contactPage.url );
 		
 		expect(
 			headerPage.homeTab.getAttribute('class') 
@@ -86,7 +86,7 @@ xdescribe('Header Navigation', function(){
 		
 		expect(
 			browser.getLocationAbsUrl() 
-		).toBe( homePage.state );
+		).toBe( homePage.url );
 		
 		expect(
 			headerPage.homeTab.getAttribute('class') 

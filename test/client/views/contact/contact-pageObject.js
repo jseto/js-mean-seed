@@ -2,11 +2,11 @@
 
 var ContactPageObject = function() {
 	this.navigate = function(){
-		browser.get( this.state );
+		browser.get( this.url );
 	};
 
 	this.title = 'Contact - MyApp';
-	this.state = '/contact';
+	this.url = '/contact';
 };
 
 module.exports = new ContactPageObject();

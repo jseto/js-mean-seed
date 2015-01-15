@@ -2,11 +2,11 @@
 
 var HomePageObject = function() {
 	this.navigate = function(){
-		browser.get( this.state );
+		browser.get( this.url );
 	};
 
 	this.title = 'Home - MyApp';
-	this.state = '/home';
+	this.url = '/home';
 };
 
 module.exports = new HomePageObject();

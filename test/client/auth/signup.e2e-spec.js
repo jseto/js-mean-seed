@@ -1,7 +1,7 @@
 'use strict';
 
 var signupPage = require('./signup-pageobject.js');
-
+var signupSuccessPage = require('./signup-success-pageobject.js');
 
 describe('Signup page', function(){
 
@@ -15,7 +15,7 @@ describe('Signup page', function(){
 		
 		expect(	// proper page state
 			browser.getLocationAbsUrl() 
-		).toBe( signupPage.state );
+		).toBe( signupPage.url );
 	});
 
 	describe('(user name field)', function(){
@@ -23,10 +23,10 @@ describe('Signup page', function(){
 			expect(	//	form is invalid
 				signupPage.form.getAttribute( 'class' )
 			).toMatch( signupPage.invalid );
-
-			expect(	// submit button disabled
-				signupPage.submitButton.isEnabled()
-			).toBe(false);
+			
+			expect( 
+				signupPage.submitButton.getAttribute( 'class' )
+			).toMatch( signupPage.disabled );
 		});
 
 		it('should accept a proper user name',function(){
@@ -39,10 +39,6 @@ describe('Signup page', function(){
 			expect(  // user name is valid
 				signupPage.username.getAttribute( 'class' )
 			).toMatch( signupPage.valid );
-
-			expect(	// submit button still disabled because form not still valid
-				signupPage.submitButton.isEnabled()
-			).toBe(false);
 		});
 
 		it('should reject a bad user name',function(){
@@ -68,10 +64,6 @@ describe('Signup page', function(){
 			expect(  // email is valid
 				signupPage.email.getAttribute( 'class' )
 			).toMatch( signupPage.valid );
-
-			expect(	// submit button still disabled because form not still valid
-				signupPage.submitButton.isEnabled()
-			).toBe(false);
 		});
 
 		it('should reject a bad email', function(){
@@ -80,10 +72,6 @@ describe('Signup page', function(){
 			expect(  // email is invalid
 				signupPage.email.getAttribute( 'class' )
 			).toMatch( signupPage.invalid );
-
-			expect(	// submit button still disabled because form not still valid
-				signupPage.submitButton.isEnabled()
-			).toBe(false);
 		});
 	});
 
@@ -96,14 +84,6 @@ describe('Signup page', function(){
 			expect(  // email is valid
 				signupPage.retypePassword.getAttribute( 'class' )
 			).toMatch( signupPage.valid );
-
-			signupPage.retypePassword.getAttribute( 'class' ).then(function(result){
-				console.log(result);
-			});
-
-			expect(	// submit button still disabled because form not still valid
-				signupPage.submitButton.isEnabled()
-			).toBe(false);
 		});
 
 		it('should reject a password missmatch', function(){
@@ -112,11 +92,55 @@ describe('Signup page', function(){
 			expect(  // email is invalid
 				signupPage.email.getAttribute( 'class' )
 			).toMatch( signupPage.invalid );
-
-			expect(	// submit button still disabled because form not still valid
-				signupPage.submitButton.isEnabled()
-			).toBe(false);
 		});
 	});
 
+	it('form should have a valid state', function(){
+		// fill fields with fresh data
+		signupPage.username.clear().then(function(){
+			signupPage.username.sendKeys( 'Joe' );
+		});
+		signupPage.email.clear().then( function() {
+			signupPage.email.sendKeys( 'me@example.com' );
+		});
+		signupPage.password.clear().then( function() {
+			signupPage.password.sendKeys( 'secret' );
+		});
+		signupPage.retypePassword.clear().then( function() {
+			signupPage.retypePassword.sendKeys( 'secret' );
+		});
+
+		signupPage.agreedTerms.isSelected().then( function( value ) {
+			if ( !value ) {
+				signupPage.agreedTerms.click();
+			}
+		});
+		
+		expect(	//	form is valid
+			signupPage.form.getAttribute( 'class' )
+		).toMatch( signupPage.valid );
+
+		expect( 
+			signupPage.submitButton.getAttribute( 'class' )
+		).toMatch( signupPage.enabled );
+
+		expect(
+			signupPage.alertMessage.isDisplayed()
+		).toBeFalsy();
+	});
+
+	it('should register user and show register success page', function(){
+		var systime = (new Date() ).getTime();
+		signupPage.username.clear().then(function(){
+			signupPage.username.sendKeys( 'Joe' + systime );
+		});
+		signupPage.email.clear().then( function() {
+			signupPage.email.sendKeys( 'me' + systime + '@example.com' );
+		});
+		signupPage.submitButton.click();
+
+		expect(	// success page state
+			browser.getLocationAbsUrl() 
+		).toBe( signupSuccessPage.url );
+	});
 });

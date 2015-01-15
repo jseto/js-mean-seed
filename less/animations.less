@@ -33,30 +33,32 @@
 // Dropdown menu
 //*********************************************************
 .open > .dropdown-menu {
-  -webkit-transform: scale(1, 1);
-  transform: scale(1, 1);  
-  opacity:1;
+	visibility: visible;
+	-webkit-transform: scale(1, 1);
+	transform: scale(1, 1);  
+	opacity:1;
 }
-  
+	
 .dropdown-menu {
-  opacity:.3;
-  -webkit-transform-origin: top;
-  transform-origin: top;
-  -webkit-animation-fill-mode: forwards;  
-  animation-fill-mode: forwards; 
-  -webkit-transform: scale(1, 0);
-  display: block; 
-  transition: all 0.2s linear;
-  -webkit-transition: all 0.2s linear;
+	opacity:.3;
+	-webkit-transform-origin: top;
+	transform-origin: top;
+	-webkit-animation-fill-mode: forwards;  
+	animation-fill-mode: forwards; 
+	-webkit-transform: scale(1, 0);
+	display: block; 
+	visibility: hidden;
+	transition: all 0.2s linear;
+	-webkit-transition: all 0.2s linear;
 }
 
 //**********************************************************
 // Page transitions
 //**********************************************************
 [ui-view].ng-enter, [ui-view].ng-leave {
-  position: absolute;
-  left: 0;
-  right: 0;
+	position: absolute;
+	left: 0;
+	right: 0;
 }
 
 [ui-view].ng-enter {
