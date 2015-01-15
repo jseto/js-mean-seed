@@ -60,6 +60,7 @@
 						type="checkbox" 
 						style="margin-right: 7px; margin-top: 15px" 
 						ng-model="user.agreedTerms"
+						ng-click="checkValidity( signupForm )"
 						required>
 						{{'signup.terms' | loc}}
 						<a href="terms">{{'signup.termsLink' | loc}}</a>
@@ -70,7 +71,7 @@
 						class="btn margin-vertical-10 pull-right" 
 						data-ng-click="create(signupForm)" 
 						ng-class="{ 'btn-default': signupForm.$invalid, 'btn-success': signupForm.$valid }"
-						ng-mouseover="onMouseOver(signupForm)"
+						ng-mouseover="checkValidity( signupForm )"
 						>
 						{{ 'signup.doSignup' | loc }}
 						<i class="fa fa-signin"

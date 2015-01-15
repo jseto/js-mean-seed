@@ -33,7 +33,7 @@ angular.module( 'myApp.signup', [
 	$scope.user = {};
 	$scope.alertMessage = '';
 
-	$scope.onMouseOver = function( form ){
+	$scope.checkValidity = function( form ){
 		if ( form.$invalid ){
 			if ( $scope.user.agreedTerms ) {
 				$scope.alertMessage = locFilter('validationErrors.any');
