@@ -59,7 +59,7 @@
     "posttest:e2e": "npm stop",
     "test:server": "jasmine-node --captureExceptions --forceexit test/server",
     "less": "lessc less/app.less>client/bower_components/bootstrap/dist/css/bootstrap-custom.css",
-    "update-index-async": "node -e \"require('shelljs/global'); sed('-i', /\\/\\/@@NG_LOADER_START@@[\\s\\S]*\\/\\/@@NG_LOADER_END@@/, '//@@NG_LOADER_START@@\\n' + sed(/sourceMappingURL=angular-loader.min.js.map/,'sourceMappingURL=bower_components/angular-loader/angular-loader.min.js.map','app/bower_components/angular-loader/angular-loader.min.js') + '\\n//@@NG_LOADER_END@@', 'app/index-async.html');\"",
+    "update-index-async": "node -e \"require('shelljs/global'); sed('-i', /\\/\\/@@NG_LOADER_START@@[\\s\\S]*\\/\\/@@NG_LOADER_END@@/, '//@@NG_LOADER_START@@\\n' + sed(/sourceMappingURL=angular-loader.min.js.map/,'sourceMappingURL=client/bower_components/angular-loader/angular-loader.min.js.map','client/bower_components/angular-loader/angular-loader.min.js') + '\\n//@@NG_LOADER_END@@', 'client/index-async.html');\"",
     "clean": "rimraf client/bower_components && rimraf node_modules && git clean -d -fx -e *.local.json",
     "build-ng-models": "lb-ng server/server.js client/models/lbServices.js",
     "watch:test:client": "karma start test/karma.conf.js",
@@ -68,8 +68,8 @@
     "watch:server": "nodemon --watch server --watch common/models -e js,json,ejs,jade server/server.js",
     "watch:less": "watch \"npm run less\" less",
     "watch:models": "watch \"npm run build-ng-models\" common/models",
-    "dev:client": "parallelshell \"node server/server.js\" \"npm run watch:test:client\" \"npm run watch:less\" \"npm run watch:models\"",
-    "dev:client:beep": "parallelshell \"node server/server.js\" \"npm run watch:test:client:beep\" \"npm run watch:less\" \"npm run watch:models\"",
+    "dev": "parallelshell \"node server/server.js\" \"npm run watch:test:client\" \"npm run watch:less\" \"npm run watch:models\"",
+    "dev:beep": "parallelshell \"node server/server.js\" \"npm run watch:test:client:beep\" \"npm run watch:less\" \"npm run watch:models\"",
     "dev:server": "parallelshell \"npm run watch:test:server\" \"npm run watch:server\"",
     "dev:all": "parallelshell \"npm run start:dev:server\" \"npm run watch:test:client\" \"npm run watch:less\""
   }

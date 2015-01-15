@@ -4,7 +4,7 @@
 		"contact": "Contact",
 		"login": "Login",
 		"signup": "Sign up",
-		"signupsucess": "Sign up successful"
+		"signupsucess": "Thank you for registering"
 	},
 	"validationErrors": {
 		"unique": "Already exists",
@@ -15,7 +15,9 @@
 		"minlength": "Minimum length is {0} chars",
 		"unknown": "Unknown error",
 		"only1word": "One word only",
-		"jswMissmatch": "Password mismatch"
+		"jswMissmatch": "Password mismatch",
+		"terms": "You should agree with the terms of service",
+		"any": "One or more fields are incorrect and require you attention"
 	},
 	"header": {
 		"home": "Home",
@@ -42,7 +44,11 @@
 		"confirmPassword": "Confirm password",
 		"doSignup": "Sign up",
 		"createError": "User already exists",
-		"verifiedOk": "Your account has been verified. Please, log in to continue"
+		"verifiedOk": "Your account has been verified. Please, log in to continue",
+		"signupSuccess": "You have been successfully registered",
+		"signupSuccessNotice": "Your registration has been accepted. The system has sent you a confirmation email. Please, review your email to complete the registration process",
+		"termsLink": "terms of service",
+		"terms": "By registering I accept the following"
 	}
 }
 

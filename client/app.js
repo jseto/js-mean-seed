@@ -11,7 +11,8 @@ angular.module('myApp', [
 	'myApp.responsiveBody',
 	'jsLib.locale',
 	'jsWidgets',
-	'ui.router'
+	'ui.router',
+	'ngAnimate'
 ])
 
 .config( function( $urlRouterProvider, $locationProvider, $httpProvider, LocaleProvider ) {
