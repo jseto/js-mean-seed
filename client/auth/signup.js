@@ -49,8 +49,11 @@ angular.module( 'myApp.signup', [
 			$scope.createError = false;
 			User.create( $scope.user, function success( value ) {
 					$state.go( 'signupsuccess' );
-				}, function error(){
+				}, function error( perror ){
+					console.error( perror );
 					$scope.alertMessage = locFilter('signup.createError');
+					$scope.retypePassword='';
+					$scope.user.password='';
 				}
 			);
 		}
