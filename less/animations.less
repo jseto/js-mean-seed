@@ -1,41 +1,54 @@
-@import "prefixer/prefixer.less";
-
-//--------------------------------------------------------------
-// ng-show ng-hide transitions
-//--------------------------------------------------------------
-.bounce-down.ng-hide-remove.ng-hide-remove-active {
-	.animation( bounceInDown 1s );
-}
-
-.bounce-down.ng-hide {
-	.animation( bounceOutUp 1s );
-}
-
-.zoom.ng-hide-remove.ng-hide-remove-active {
-	.animation( zoomIn 0.3s );
-}
-
-.zoom.ng-hide {
-	.animation( zoomOut 0.5s );
-}
-
 //--------------------------------------------------------------
 // Dropdown menu
 //--------------------------------------------------------------
 .open > .dropdown-menu {
 	visibility: visible;
-	.transform( scale(1, 1) );  
+	transform: scale(1, 1);
 	opacity:1;
 }
 	
 .dropdown-menu {
 	opacity:.3;
-	.transform-origin( top );
-	.animation-fill-mode( forwards ); 
-	.transform( scale(1, 0) );
+	transform-origin: top;
+	animation-fill-mode: forwards; 
+	transform: scale(1, 0);
 	display: block; 
 	visibility: hidden;
-	.transition( all 0.2s linear );
+	transition: all 0.2s linear;
+}
+
+//--------------------------------------------------------------
+//--------------------------------------------------------------
+//
+//      AngularJS animation classes for animate.css
+//
+//--------------------------------------------------------------
+//--------------------------------------------------------------
+
+//--------------------------------------------------------------
+// ng-show ng-hide transitions
+//--------------------------------------------------------------
+.bounce-down.ng-hide-remove.ng-hide-remove-active {
+	animation: bounceInDown 1s;
+}
+
+.bounce-down.ng-hide {
+	animation: bounceOutUp 1s;
+}
+
+.zoom.ng-hide-remove.ng-hide-remove-active {
+	animation: zoomIn 0.3s;
+}
+
+.zoom.ng-hide {
+	animation: zoomOut 0.5s;
+}
+
+//--------------------------------------------------------------
+// ng-valid ng-invalid and form related classes
+//--------------------------------------------------------------
+.boing-on-valid.ng-valid {
+	animation: rubberBandSoft 0.3s;
 }
 
 //--------------------------------------------------------------
@@ -48,10 +61,48 @@
 }
 
 [ui-view].ng-enter {
-	.animation( fadeIn 0.5s );
+	animation: fadeIn 0.5s;
 }
 
 [ui-view].ng-leave {
-	.animation( fadeOut 0.5s );
+	animation: fadeOut 0.5s;
 }
 
+//--------------------------------------------------------------
+//--------------------------------------------------------------
+//
+//      Custom animation classes based in animate.css
+//
+//--------------------------------------------------------------
+//--------------------------------------------------------------
+
+@keyframes rubberBandSoft {
+  0% {
+    transform: scale3d(1, 1, 1);
+  }
+
+  30% {
+    transform: scale3d(1.10, 0.90, 1);
+  }
+
+  40% {
+    transform: scale3d(0.90, 1.10, 1);
+  }
+
+  50% {
+    transform: scale3d(1.05, 0.95, 1);
+  }
+
+  65% {
+    transform: scale3d(.98, 1.02, 1);
+  }
+
+  75% {
+    transform: scale3d(1.02, .98, 1);
+  }
+
+  100% {
+    transform: scale3d(1, 1, 1);
+  }
+}
+  
