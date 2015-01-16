@@ -31,6 +31,7 @@ angular.module( 'myApp.signup', [
 .controller( 'SignupCtrl', function ( $scope, $state, User, locFilter ) {
 	
 	$scope.user = {};
+	$scope.other = {};
 	$scope.alertMessage = '';
 
 	$scope.checkValidity = function( form ){
@@ -47,13 +48,14 @@ angular.module( 'myApp.signup', [
 	$scope.create = function( form ){
 		if ( form.$valid ) {
 			$scope.createError = false;
-			User.create( $scope.user, function success( value ) {
+			User.create( $scope.user, function success() {
 					$state.go( 'signupsuccess' );
 				}, function error( perror ){
 					console.error( perror );
 					$scope.alertMessage = locFilter('signup.createError');
-					$scope.retypePassword='';
 					$scope.user.password='';
+					$scope.other.retypePassword='';
+					form.$setPristine();
 				}
 			);
 		}

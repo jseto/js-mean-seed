@@ -51,7 +51,7 @@
 					jsw-missmatch="user.password"
 					validation-errors="{{ 'validationErrors' | loc }}" 
 					tooltip-placement="bottom"
-					ng-model="retypePassword"
+					ng-model="other.retypePassword"
 					required>
 
 				<div>
@@ -69,7 +69,7 @@
 					<button
 						type="submit" 
 						class="btn margin-vertical-10 pull-right" 
-						data-ng-click="create(signupForm)" 
+						ng-click="create(signupForm)" 
 						ng-class="{ 'btn-default': signupForm.$invalid, 'btn-success': signupForm.$valid }"
 						ng-mouseover="checkValidity( signupForm )"
 						>

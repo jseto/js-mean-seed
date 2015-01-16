@@ -15,7 +15,7 @@ var SignupPageObject = function() {
 	this.username = element( by.css('input[ng-model="user.username"]') );
 	this.email = element( by.css('input[ng-model="user.email"]') );
 	this.password = element( by.css('input[ng-model="user.password"]') );
-	this.retypePassword = element( by.css('input[ng-model="retypePassword"]') );
+	this.retypePassword = element( by.css('input[ng-model="other.retypePassword"]') );
 	this.agreedTerms = element( by.model('user.agreedTerms') );
 	this.submitButton = element( by.css('button[type=submit]') );
 	this.form = element( by.css('form[name=signupForm]') );
