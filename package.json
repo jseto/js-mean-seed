@@ -73,6 +73,6 @@
     "dev": "parallelshell \"node server/server.js\" \"npm run watch:test:client\" \"npm run watch:less\" \"npm run watch:models\"",
     "dev:beep": "parallelshell \"node server/server.js\" \"npm run watch:test:client:beep\" \"npm run watch:less\" \"npm run watch:models\"",
     "dev:server": "parallelshell \"npm run watch:test:server\" \"npm run watch:server\"",
-    "dev:all": "parallelshell \"npm run dev:server\" \"npm run watch:test:client\" \"npm run watch:less\""
+    "dev:all": "parallelshell \"npm run dev:server\" \"npm run watch:test:client\" \"npm run watch:less\" \"npm run watch:models\""
   }
 }

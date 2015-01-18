@@ -50,15 +50,22 @@ angular.module( 'myApp.signup', [
 			$scope.createError = false;
 			User.create( $scope.user, function success() {
 					$state.go( 'signupsuccess' );
-				}, function error( perror ){
-					console.error( perror );
-					$scope.alertMessage = locFilter('signup.createError');
+				}, function error( pError ){
+					console.error( pError );
+					var error = pError.data.error;
+					$scope.alertMessage = locFilter('signup.createError') + ' \n' + error.status + ' - ' + error.message;
 					$scope.user.password='';
 					$scope.other.retypePassword='';
-					form.$setPristine();
 				}
 			);
 		}
+	};
+
+	$scope.isUserUnique = function( value ) {
+//		var result = User.findOne( {where: {username:value}});
+		var result = User.isRegistered( {username:value} );
+console.log(result)
+		return result.$promise;
 	};
 });
 

@@ -18,6 +18,7 @@
 					ng-minlength=3
 					ng-pattern="/^\s*\w*\s*$/"
 					ng-pattern-error-message="{{ 'validationErrors.only1word' | loc }}"
+					jsw-unique-user="isUserUnique"
 					tooltip-placement="bottom"
 					validation-errors="{{ 'validationErrors' | loc }}" 
 					required>

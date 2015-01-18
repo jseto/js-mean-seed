@@ -7,7 +7,7 @@
 		"signupsucess": "Thank you for registering"
 	},
 	"validationErrors": {
-		"unique": "Already exists",
+		"jswUniqueUser": "User already exists",
 		"email": "Incorrect email address",
 		"required": "Field is required",
 		"date": "Incorrect date",

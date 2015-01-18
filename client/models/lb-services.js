@@ -634,6 +634,40 @@ module.factory(
           method: "PUT"
         },
 
+        /**
+         * @ngdoc method
+         * @name lbServices.User#isRegistered
+         * @methodOf lbServices.User
+         *
+         * @description
+         *
+         * <em>
+         * (The remote method definition does not provide any description.)
+         * </em>
+         *
+         * @param {Object=} parameters Request parameters.
+         *
+         *  - `username` – `{string=}` - 
+         *
+         *  - `email` – `{string=}` - 
+         *
+         * @param {function(Object,Object)=} successCb
+         *   Success callback with two arguments: `value`, `responseHeaders`.
+         *
+         * @param {function(Object)=} errorCb Error callback with one argument:
+         *   `httpResponse`.
+         *
+         * @returns {Object} An empty reference that will be
+         *   populated with the actual data once the response is returned
+         *   from the server.
+         *
+         * This method returns no data.
+         */
+        "isRegistered": {
+          url: urlBase + "/users/isRegistered",
+          method: "GET"
+        },
+
         // INTERNAL. Use UserCredential.user() instead.
         "::get::userCredential::user": {
           url: urlBase + "/userCredentials/:id/user",

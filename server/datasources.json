@@ -5,8 +5,6 @@
   },
   "emailer": {
     "name": "emailer",
-    "connector": "mail",
-    "transports": [
-    ]
+    "connector": "mail"
   }
 }
