@@ -75,26 +75,21 @@
 						ng-mouseover="checkValidity( signupForm )"
 						>
 						{{ 'signup.doSignup' | loc }}
-						<i class="fa fa-signin"
-							data-ng-hide="loading">
+						<i class="fa fa-sign-in"
+							data-ng-hide="creatingUser.active()">
 						</i>
-						<span data-loading-widget="loading"></span>
+						<i class="fa fa-spinner fa-spin"
+							data-ng-show="creatingUser.active()">
+						</i>
 					</button>
 				</div>
 
 				<br>
 
-					<div class="zoom alert alert-danger margin-vertical-10 "
-						ng-show="alertMessage && signupForm.$invalid">
-						<p>{{alertMessage}}</p>
-					</div>
-<!-- 
-					<div class="zoom alert alert-danger margin-vertical-10 "
-						ng-show="user.agreedTerms">
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-						tempor incididunt ut labore et dolore magna aliqua.</p>
-					</div>
- -->
+				<div class="zoom alert alert-danger margin-vertical-10 "
+					ng-show="alertMessage && signupForm.$invalid">
+					<p>{{alertMessage}}</p>
+				</div>
 			</form>
 		</div>
 	</div>

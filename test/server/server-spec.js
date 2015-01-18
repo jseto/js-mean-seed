@@ -93,13 +93,30 @@ describe('Custom RESTApi endpoint "isRegistered"', function(){
 			form: {
 				username:'foo',
 				password:'secret',
-				email:'foo@longtime.bar'
+				email:'foo@example.com'
 			}
 		}, function(error, response){
 			expect( response.statusCode ).toEqual( 200 );
-			request.get('http://localhost:'+port+'/api/users/isRegistered', {username:'foo'}, function(error, response){
+			request.get('http://localhost:'+port+'/api/users/isRegistered?username=foo', function(error, response){
 				expect( error ).toBeFalsy();
-				expect( response.statusCode ).toEqual(204);
+				expect( response.statusCode ).toEqual(200);
+				done();
+	 		});
+		});
+	});
+
+	it('should return 404 not found for non registered user with database populates', function(done) {
+		request.post('http://localhost:'+port+'/api/users', {
+			form: {
+				username:'bar',
+				password:'secret',
+				email:'bar@example.com'
+			}
+		}, function(error, response){
+			expect( response.statusCode ).toEqual( 200 );
+			request.get('http://localhost:'+port+'/api/users/isRegistered?username=xbarr', function(error, response){
+				expect( error ).toBeFalsy();
+				expect( response.statusCode ).toEqual(404);
 				done();
 	 		});
 		});

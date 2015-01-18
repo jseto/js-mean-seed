@@ -641,15 +641,13 @@ module.factory(
          *
          * @description
          *
-         * <em>
-         * (The remote method definition does not provide any description.)
-         * </em>
+         * Checks for a registered user by credentials
          *
          * @param {Object=} parameters Request parameters.
          *
-         *  - `username` – `{string=}` - 
+         *  - `username` – `{string=}` - model's username
          *
-         *  - `email` – `{string=}` - 
+         *  - `email` – `{string=}` - model's email
          *
          * @param {function(Object,Object)=} successCb
          *   Success callback with two arguments: `value`, `responseHeaders`.
@@ -661,7 +659,9 @@ module.factory(
          *   populated with the actual data once the response is returned
          *   from the server.
          *
-         * This method returns no data.
+         * Data properties:
+         *
+         *  - `result` – `{string=}` - 
          */
         "isRegistered": {
           url: urlBase + "/users/isRegistered",

@@ -26,7 +26,6 @@ module.exports = function(user) {
 				console.log(err);
 				return;
 			}
-			console.log('> verification email sent');
 			next();
 		});
 	});
@@ -48,11 +47,14 @@ module.exports = function(user) {
 	});
 
 	//user exists custom api call fet per mi
-	user.isRegistered = function( username, email, callback ){
+	user.isRegistered = function( name, email, callback ){
+		email = email || '';
+		name = name || '';
+
 		user.findOne( {
 			where: { 
 				or: [
-					{ username: username },
+					{ username: name },
 					{ email: email }
 			]}},
 			function( _err, user ){
@@ -61,7 +63,7 @@ module.exports = function(user) {
 					err = new Error('not registered');
 					err.statusCode = 404;
 				}
-				callback( err );
+				callback( err, user? user.username : '' );
 			});
 	};
 
@@ -71,6 +73,7 @@ module.exports = function(user) {
 				{ arg: 'username', type: 'string', description: 'model\'s username' },
 				{ arg: 'email', type: 'string', description: 'model\'s email' }
 			],
+			returns: { arg: 'result', type: 'string' },
 			http: { verb: 'get' },
 			description: 'Checks for a registered user by credentials'
 		}

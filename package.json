@@ -66,7 +66,7 @@
     "build-ng-models": "lb-ng server/server.js client/models/lb-services.js",
     "watch:test:client": "karma start test/karma.conf.js",
     "watch:test:client:beep": "karma start test/karma.conf.js --reporters beep,progress",
-    "watch:test:server": "jasmine-node --captureExceptions --autotest --color test/server",
+    "watch:test:server": "jasmine-node --captureExceptions --autotest --color test/server common/models",
     "watch:server": "nodemon --watch server --watch common/models -e js,json,ejs,jade server/server.js",
     "watch:less": "watch \"npm run less\" less",
     "watch:models": "watch \"npm run build-ng-models\" common/models",

@@ -2,6 +2,7 @@
 
 angular.module( 'myApp.signup', [
 	'lbServices',
+	'ajoslin.promise-tracker',
 	'ui.router'
 ])
 
@@ -28,11 +29,14 @@ angular.module( 'myApp.signup', [
 	});
 })
 
-.controller( 'SignupCtrl', function ( $scope, $state, User, locFilter ) {
+.controller( 'SignupCtrl', function ( $scope, $state, User, locFilter, promiseTracker ) {
 	
 	$scope.user = {};
 	$scope.other = {};
+
 	$scope.alertMessage = '';
+	$scope.creatingUser = new promiseTracker();
+	$scope.lookingForUser = new promiseTracker();
 
 	$scope.checkValidity = function( form ){
 		if ( form.$invalid ){
@@ -48,7 +52,7 @@ angular.module( 'myApp.signup', [
 	$scope.create = function( form ){
 		if ( form.$valid ) {
 			$scope.createError = false;
-			User.create( $scope.user, function success() {
+			var newUser = User.create( $scope.user, function success() {
 					$state.go( 'signupsuccess' );
 				}, function error( pError ){
 					console.error( pError );
@@ -58,13 +62,13 @@ angular.module( 'myApp.signup', [
 					$scope.other.retypePassword='';
 				}
 			);
+			$scope.creatingUser.addPromise( newUser.$promise );
 		}
 	};
 
 	$scope.isUserUnique = function( value ) {
-//		var result = User.findOne( {where: {username:value}});
 		var result = User.isRegistered( {username:value} );
-console.log(result)
+		$scope.lookingForUser.addPromise( result.$promise );
 		return result.$promise;
 	};
 });
