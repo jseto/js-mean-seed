@@ -12,7 +12,7 @@ angular.module( 'myApp.responsiveBody', [
 		restrict: 'EA', // E = Element, A = Attribute, C = Class, M = Comment
 		template: function( element, attrs ) {
 			var html = [
-				'<div class=\"container\">',
+//				'<div class=\"container\">',
 				'	<div class=\"row\">',
 				'		<div id="__responsiveBody_1_" class=\"col-sm-{0}\"></div>',
 				'		<div id="__responsiveBody_2_" class=\"col-sm-{1}\">',
@@ -20,7 +20,7 @@ angular.module( 'myApp.responsiveBody', [
 				'		</div>',
 				'		<div id="__responsiveBody_3_" class=\"col-sm-{2}\"></div>',
 				'	</div>',
-				'</div>' 
+//				'</div>' 
 			].join('\n'); 
 
 			var responsiveBody = $rootScope.$eval( attrs.responsiveBody );

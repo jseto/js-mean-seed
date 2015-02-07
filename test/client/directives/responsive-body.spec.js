@@ -31,7 +31,7 @@ describe('responsive-body directive', function() {
 			'</div>'
 		].join('\n');
 		var element = compile( scope, elementHtml );
-		var children = element.children().children().children();
+		var children = element.children().children();
 
 		expect( children.eq(0).hasClass( 'col-sm-1' ) ).toBe(true);
 		expect( children.eq(1).hasClass( 'col-sm-10' ) ).toBe(true);
@@ -45,7 +45,7 @@ describe('responsive-body directive', function() {
 			'</div>'
 		].join('\n');
 		var element = compile( scope, elementHtml );
-		var children = element.children().children().children();
+		var children = element.children().children();
 
 		expect( children.eq(0).hasClass( 'col-sm-2' ) ).toBe(true);
 		expect( children.eq(1).hasClass( 'col-sm-8' ) ).toBe(true);
@@ -59,7 +59,7 @@ describe('responsive-body directive', function() {
 			'</div>'
 		].join('\n');
 		var element = compile( scope, elementHtml );
-		var children = element.children().children().children();
+		var children = element.children().children();
 
 		expect( children.eq(0).hasClass( 'col-sm-3' ) ).toBe(true);
 		expect( children.eq(1).hasClass( 'col-sm-6' ) ).toBe(true);
@@ -73,7 +73,7 @@ describe('responsive-body directive', function() {
 			'</div>'
 		].join('\n');
 		var element = compile( scope, elementHtml );
-		var children = element.children().children().children();
+		var children = element.children().children();
 
 		expect( children.eq(0).hasClass( 'col-sm-4' ) ).toBe(true);
 		expect( children.eq(1).hasClass( 'col-sm-4' ) ).toBe(true);

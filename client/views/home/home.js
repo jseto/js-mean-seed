@@ -1,7 +1,6 @@
 'use strict';
 
 angular.module( 'myApp.home', [
-	'ui.router'
 ])
 
 .config( function ( $stateProvider ) {
@@ -13,6 +12,6 @@ angular.module( 'myApp.home', [
 	});
 })
 
-.controller( 'HomeCtrl', function HomeControler( $scope ) {
+.controller( 'HomeCtrl', function HomeControler() {
 });
 

@@ -1,9 +1,6 @@
 'use strict';
 
 angular.module( 'myApp.signup', [
-	'lbServices',
-	'ajoslin.promise-tracker',
-	'ui.router'
 ])
 
 .config( function ( $stateProvider ) {
@@ -35,11 +32,11 @@ angular.module( 'myApp.signup', [
 	$scope.other = {};
 
 	$scope.alertMessage = '';
-	$scope.creatingUser = new promiseTracker();
-	$scope.lookingForUser = new promiseTracker();
+	$scope.creatingUser = promiseTracker();
+	$scope.lookingForUser = promiseTracker();
 
 	$scope.checkValidity = function( form ){
-		if ( form.$invalid ){
+		if ( form.$invalid && form.$touched ){
 			if ( $scope.user.agreedTerms ) {
 				$scope.alertMessage = locFilter('validationErrors.any');
 			}
@@ -56,8 +53,8 @@ angular.module( 'myApp.signup', [
 					$state.go( 'signupsuccess' );
 				}, function error( pError ){
 					console.error( pError );
-					var error = pError.data.error;
-					$scope.alertMessage = locFilter('signup.createError') + ' \n' + error.status + ' - ' + error.message;
+					var err = pError.data.error;
+					$scope.alertMessage = locFilter('signup.createError') + ' \n' + err.status + ' - ' + err.message;
 					$scope.user.password='';
 					$scope.other.retypePassword='';
 				}

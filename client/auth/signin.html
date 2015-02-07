@@ -1,7 +1,7 @@
 <!-- Login panel -->
 <div id="login" style="padding:30px">
 	<!-- Form -->
-	<form novalidate name="loginForm">
+	<form novalidate name="loginForm" ng-click="formClicked( $event )">
 		
 		<!-- User -->
 		<div class="input-group margin-vertical-10" style="min-width:260px;">
@@ -23,15 +23,28 @@
 		<input type="checkbox" style="margin-right: 7px; margin-vertical-10" data-ng-model="user.remember">{{'login.rememberMe' | loc}}
 		
 		<!-- Login button -->
-		<button class="btn btn-primary btn-block margin-vertical-10" ng-click="requestLogin(user)" data-ng-disabled="loginForm.$invalid">
-			<div>
-				<span >{{'login.login' | loc}}&nbsp;</span>
-				<span data-ng-show="!loading" class="glyphicon glyphicon-log-in"></span>
-				<span data-loading-widget="loading"></span>
-			</div>
+		<button
+			type="submit" 
+			class="btn btn-block margin-vertical-10" 
+			ng-click="requestLogin()" 
+			ng-class="{ 'btn-primary': loginForm.$invalid, 'btn-success': loginForm.$valid }"
+			data-ng-disabled="loginForm.$invalid"
+			>
+			{{'login.login' | loc}}
+			<i class="fa fa-sign-in"
+				data-ng-hide="loginIn.active()">
+			</i>
+			<i class="fa fa-spinner fa-spin"
+				data-ng-show="loginIn.active()">
+			</i>
 		</button>
 	
 	</form>
+
+	<div class="zoom alert alert-danger margin-vertical-10 "
+		ng-show="loginFailed">
+		<p>{{'login.loginFailed' | loc}}</p>
+	</div>
 
 	<!-- OAuth -->
 	<div align="center">or</div>

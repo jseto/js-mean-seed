@@ -17,9 +17,9 @@ var SignupPageObject = function() {
 	this.password = element( by.css('input[ng-model="user.password"]') );
 	this.retypePassword = element( by.css('input[ng-model="other.retypePassword"]') );
 	this.agreedTerms = element( by.model('user.agreedTerms') );
-	this.submitButton = element( by.css('button[type=submit]') );
+	this.submitButton = element( by.css('form[name="signupForm"]') ).element( by.css( 'button[type="submit"]' ) );
 	this.form = element( by.css('form[name=signupForm]') );
-	this.alertMessage = element( by.css( 'div.alert' ) );
+	this.alertMessage = element( by.binding( 'alertMessage' ) );
 };
 
 module.exports = new SignupPageObject(); 

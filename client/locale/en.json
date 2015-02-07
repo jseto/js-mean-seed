@@ -4,7 +4,7 @@
 		"contact": "Contact",
 		"login": "Login",
 		"signup": "Sign up",
-		"signupsucess": "Thank you for registering"
+		"signupsuccess": "Thank you for registering"
 	},
 	"validationErrors": {
 		"jswUniqueUser": "User already exists",
@@ -34,6 +34,7 @@
 		"loginWith": "Sign in with ",
 		"notMemberYet": "Not a member? ",
 		"doSignUp": "Sing up!",
+		"loginFailed":"Sign in failed. Your user name or password are incorrect",
 		"forgotPassword": "Forgot your password?"
 	},
 	"signup": {

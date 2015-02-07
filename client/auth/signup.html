@@ -1,4 +1,4 @@
-<!-- Member Create content -->
+<!-- User Create -->
 <div responsive-body="6">
 	<div class="panel panel-default">
 
@@ -13,6 +13,7 @@
 					class="jsw-input margin-vertical-10 tooltip-danger"
 					type="text"
 					placeholder="{{'signup.userLabel'|loc}}" 
+					name="username"
 					icon="fa fa-user fa-fw"
 					ng-model="user.username"
 					ng-minlength=3
@@ -27,8 +28,9 @@
 				<input 
 					class="jsw-input margin-vertical-10 tooltip-danger"
 					type="email" 
-					icon="fa fa-envelope fa-fw"
 					placeholder="{{'signup.email'|loc}}"
+					name="email"
+					icon="fa fa-envelope fa-fw"
 					ng-model="user.email"
 					tooltip-placement="bottom"
 					validation-errors="{{ 'validationErrors' | loc }}" 
@@ -68,6 +70,7 @@
 		
 					<!-- Submit button -->
 					<button
+						
 						type="submit" 
 						class="btn margin-vertical-10 pull-right" 
 						ng-click="create(signupForm)" 
