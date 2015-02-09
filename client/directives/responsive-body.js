@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module( 'myApp.responsiveBody', [
-	'jsLib.sprintf'
+	'jsLib.utils'
 ])
 
 .directive('responsiveBody', function( sprintfFilter, $rootScope ){
