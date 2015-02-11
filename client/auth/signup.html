@@ -10,7 +10,7 @@
 			<form class="center tooltip-danger boing-on-valid" name="signupForm" novalidate>
 				<!-- User -->
 				<input
-					class="jsw-input margin-vertical-10 tooltip-danger"
+					class="jsw-input margin-vertical-10 zoom"
 					type="text"
 					placeholder="{{'signup.userLabel'|loc}}" 
 					name="username"
@@ -20,8 +20,7 @@
 					ng-pattern="/^\s*\w*\s*$/"
 					ng-pattern-error-message="{{ 'validationErrors.only1word' | loc }}"
 					jsw-unique-user="isUserUnique"
-					tooltip-placement="bottom"
-					validation-errors="{{ 'validationErrors' | loc }}" 
+					jsw-messages="'validationErrors' | loc" 
 					required>
 
 				<!-- Email -->
@@ -32,8 +31,8 @@
 					name="email"
 					icon="fa fa-envelope fa-fw"
 					ng-model="user.email"
-					tooltip-placement="bottom"
-					validation-errors="{{ 'validationErrors' | loc }}" 
+					jsw-messages="'validationErrors' | loc" 
+					jsw-email
 					required>
 
 				<!-- Password -->
@@ -52,8 +51,7 @@
 					icon="fa fa-check-square-o fa-fw"
 					placeholder="{{'signup.confirmPassword'|loc}}"
 					jsw-missmatch="user.password"
-					validation-errors="{{ 'validationErrors' | loc }}" 
-					tooltip-placement="bottom"
+					jsw-messages="'validationErrors' | loc" 
 					ng-model="other.retypePassword"
 					required>
 

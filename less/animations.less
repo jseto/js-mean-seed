@@ -69,6 +69,37 @@
 }
 
 //--------------------------------------------------------------
+// Validation messages
+//--------------------------------------------------------------
+// ng-messages.ng-active {
+// 	background:maroon;
+// 	color:white;
+// 	padding:5px;
+// 	border-radius:5px;
+// 	margin-top:15px;
+// 	position:relative;
+// }
+
+// ng-messages.ng-active:after {
+// 	position:absolute;
+// 	top:-10px;
+// 	content:"";
+// 	left:20px;
+// 	border-style:solid;
+// 	border-color:transparent transparent maroon;
+// 	border-width:5px;
+// }
+
+
+.zoom.ng-active {
+	animation: zoomIn 0.5s;
+}
+
+.zoom.ng-inactive {
+	animation: zoomOut 0.5s;
+}
+
+//--------------------------------------------------------------
 //--------------------------------------------------------------
 //
 //      Custom animation classes based in animate.css
@@ -77,32 +108,32 @@
 //--------------------------------------------------------------
 
 @keyframes rubberBandSoft {
-  0% {
-    transform: scale3d(1, 1, 1);
-  }
+	0% {
+		transform: scale3d(1, 1, 1);
+	}
 
-  30% {
-    transform: scale3d(1.10, 0.90, 1);
-  }
+	30% {
+		transform: scale3d(1.10, 0.90, 1);
+	}
 
-  40% {
-    transform: scale3d(0.90, 1.10, 1);
-  }
+	40% {
+		transform: scale3d(0.90, 1.10, 1);
+	}
 
-  50% {
-    transform: scale3d(1.05, 0.95, 1);
-  }
+	50% {
+		transform: scale3d(1.05, 0.95, 1);
+	}
 
-  65% {
-    transform: scale3d(.98, 1.02, 1);
-  }
+	65% {
+		transform: scale3d(.98, 1.02, 1);
+	}
 
-  75% {
-    transform: scale3d(1.02, .98, 1);
-  }
+	75% {
+		transform: scale3d(1.02, .98, 1);
+	}
 
-  100% {
-    transform: scale3d(1, 1, 1);
-  }
+	100% {
+		transform: scale3d(1, 1, 1);
+	}
 }
-  
+	

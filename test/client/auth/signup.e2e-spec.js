@@ -29,8 +29,15 @@ describe('Signup page', function(){
 			).toMatch( signupPage.disabled );
 		});
 
+		it('should reject a short user name', function(){
+			signupPage.username.sendKeys('Jo');	
+			expect(  // user name is valid
+				signupPage.username.getAttribute( 'class' )
+			).not.toMatch( signupPage.valid );
+		});
+
 		it('should accept a proper user name',function(){
-			signupPage.username.sendKeys('Joe');
+			signupPage.username.sendKeys('e');
 
 			expect(	
 				signupPage.username.getAttribute('value') 

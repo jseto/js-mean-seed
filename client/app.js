@@ -14,7 +14,7 @@ angular.module('myApp', [
 	'myApp.responsiveBody',
 	'ui.bootstrap',
 	'jsLib.locale',
-	'jsWidgets',
+	'jsLib.widgets',
 	'ajoslin.promise-tracker',
 	'lbServices',
 	'ngAnimate',
