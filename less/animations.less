@@ -71,44 +71,47 @@
 //--------------------------------------------------------------
 // Validation messages
 //--------------------------------------------------------------
-// .jsw-messages {
-// 	background:maroon;
-// 	color:white;
-// 	padding:5px;
-// 	border-radius:5px;
-// 	margin-top:15px;
-// 	position:relative;
-// }
+.jsw-message.jsw-tooltip {
+	background:maroon;
+	color:white;
+	padding:2px;
+	border-radius:5px;
+	margin-top:7px;
+    margin-left: 50px;
+    padding-left: 5px;
+	position:relative;
+    transition: 0.1s ease-in-out all;
+}
 
-// .jsw-messages {
-// 	position:absolute;
-// 	top:-10px;
-// 	content:"";
-// 	left:20px;
-// 	border-style:solid;
-// 	border-color:transparent transparent maroon;
-// 	border-width:5px;
-// }
+.jsw-message.jsw-tooltip:after {
+	position:absolute;
+	top:-10px;
+	content:"";
+	left:20px;
+	border-style:solid;
+	border-color:transparent transparent maroon;
+	border-width:5px;
+}
 
 
-[ng-message] {
+.jsw-message {
     transition: 0.2s ease-in-out all;
     padding-left: 50px;
 }
 
-[ng-message].ng-enter.ng-enter-active {
+.jsw-message.ng-enter.ng-enter-active {
     margin-top: 0;
 }
 
-[ng-message].ng-enter {
+.jsw-message.ng-enter {
     margin-top: -20px;
 }
 
-[ng-message].ng-leave {
+.jsw-message.ng-leave {
     margin-top: 0;
 }
 
-[ng-message].ng-leave-active {
+.jsw-message.ng-leave-active {
 	margin-top: -20px;
 }
 
