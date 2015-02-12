@@ -34,9 +34,12 @@ angular.module( 'myApp.signup', [
 	$scope.alertMessage = '';
 	$scope.creatingUser = promiseTracker();
 	$scope.lookingForUser = promiseTracker();
+	$scope.overrideMessages = { 
+		pattern: locFilter( 'validationErrors.only1word' )
+	};
 
 	$scope.checkValidity = function( form ){
-		if ( form.$invalid && form.$touched ){
+		if ( form.$invalid && form.$dirty ){
 			if ( $scope.user.agreedTerms ) {
 				$scope.alertMessage = locFilter('validationErrors.any');
 			}

@@ -6,30 +6,31 @@
 			<h4>{{'signup.panelHeaderLabel'|loc}}</h4>
 		</div>
 
-		<div class="panel-body tooltip-danger">
-			<form class="center tooltip-danger boing-on-valid" name="signupForm" novalidate>
+		<div class="panel-body">
+			<form class="center boing-on-valid" name="signupForm" novalidate>
 				<!-- User -->
 				<input
-					class="jsw-input margin-vertical-10 zoom"
+					class="jsw-input"
 					type="text"
 					placeholder="{{'signup.userLabel'|loc}}" 
 					name="username"
-					icon="fa fa-user fa-fw"
+					icon-l="fa fa-user fa-fw"
 					ng-model="user.username"
 					ng-minlength=3
 					ng-pattern="/^\s*\w*\s*$/"
-					ng-pattern-error-message="{{ 'validationErrors.only1word' | loc }}"
+					jsw-override-messages="overrideMessages"
 					jsw-unique-user="isUserUnique"
 					jsw-messages="'validationErrors' | loc" 
+					jsw-message-template="<div class='message-animation'></div>"
 					required>
 
 				<!-- Email -->
 				<input 
-					class="jsw-input margin-vertical-10 tooltip-danger"
+					class="jsw-input"
 					type="email" 
 					placeholder="{{'signup.email'|loc}}"
 					name="email"
-					icon="fa fa-envelope fa-fw"
+					icon-l="fa fa-envelope fa-fw"
 					ng-model="user.email"
 					jsw-messages="'validationErrors' | loc" 
 					jsw-email
@@ -37,18 +38,19 @@
 
 				<!-- Password -->
 				<input 
-					class="jsw-input margin-vertical-10"
+					class="jsw-input"
 					type="password" 
-					icon="fa fa-lock fa-fw"
+					icon-l="fa fa-lock fa-fw"
 					placeholder="{{'signup.passwordLabel'|loc}}"
 					ng-model="user.password"
 					required>
 
 				<!-- Retpye Password -->
 				<input
-					class="jsw-input margin-vertical-10 tooltip-danger"
+					class="jsw-input"
 					type="password"
-					icon="fa fa-check-square-o fa-fw"
+					name="retype"
+					icon-l="fa fa-check-square-o fa-fw"
 					placeholder="{{'signup.confirmPassword'|loc}}"
 					jsw-missmatch="user.password"
 					jsw-messages="'validationErrors' | loc" 
@@ -68,7 +70,6 @@
 		
 					<!-- Submit button -->
 					<button
-						
 						type="submit" 
 						class="btn margin-vertical-10 pull-right" 
 						ng-click="create(signupForm)" 

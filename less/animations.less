@@ -71,7 +71,7 @@
 //--------------------------------------------------------------
 // Validation messages
 //--------------------------------------------------------------
-// ng-messages.ng-active {
+// .jsw-messages {
 // 	background:maroon;
 // 	color:white;
 // 	padding:5px;
@@ -80,7 +80,7 @@
 // 	position:relative;
 // }
 
-// ng-messages.ng-active:after {
+// .jsw-messages {
 // 	position:absolute;
 // 	top:-10px;
 // 	content:"";
@@ -91,12 +91,25 @@
 // }
 
 
-.zoom.ng-active {
-	animation: zoomIn 0.5s;
+[ng-message] {
+    transition: 0.2s ease-in-out all;
+    padding-left: 50px;
 }
 
-.zoom.ng-inactive {
-	animation: zoomOut 0.5s;
+[ng-message].ng-enter.ng-enter-active {
+    margin-top: 0;
+}
+
+[ng-message].ng-enter {
+    margin-top: -20px;
+}
+
+[ng-message].ng-leave {
+    margin-top: 0;
+}
+
+[ng-message].ng-leave-active {
+	margin-top: -20px;
 }
 
 //--------------------------------------------------------------
