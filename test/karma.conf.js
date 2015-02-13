@@ -1,53 +1,48 @@
+'use strict';
+
+var project = require('../project.conf.js');
+
 module.exports = function(config){
+  var preprocessors = {};
+  preprocessors[ project.path.test + '**/*.html'] = 'ng-html2js';
+  preprocessors[ project.path.lib + '**/*.js' ] = 'coverage';
+
   config.set({
 
-    basePath : '../',
+    basePath : project.path.base,
 
-    exclude: [
-      'test/server/**',
-      'test/**/*e2e-spec.js',
-      'test/**/*pageobject.js',
-      '**/*.conf.js'
-    ],
+    exclude : project.test.unit.exclude,
 
-    files : [
-      'client/bower_components/angular/angular.js',
-      'client/bower_components/angular-mocks/angular-mocks.js',
-      'client/bower_components/angular-resource/angular-resource.js',
-      'client/bower_components/js-lib/lib/**/*.js',
-      'client/views/**/*.js',
-      'client/auth/**/*.js',
-      'client/models/**/*.js',
-      'client/directives/**/*.js',
-      'test/**/*.js'
-    ],
+    files : project.test.unit.files,
+ 
+    preprocessors: preprocessors,
 
     autoWatch : true,
 
     frameworks: ['jasmine'],
 
-    browsers : [
-      'Chrome',
-//      'Firefox'
-    ],
+    browsers : ['Chrome'],
 
     plugins : [
-      'karma-chrome-launcher',
-      'karma-firefox-launcher',
-      'karma-jasmine',
-      'karma-junit-reporter',
-      'karma-beep-reporter'
-    ],
-
-    reporters: [
-      'progress',
-//      'beep',
-//      'junit'
-    ],
+            'karma-chrome-launcher',
+            'karma-firefox-launcher',
+            'karma-jasmine',
+            'karma-junit-reporter',
+            'karma-beep-reporter',
+            'karma-coverage',
+            'karma-ng-html2js-preprocessor'
+            ],
 
     junitReporter : {
       outputFile: 'test_out/unit.xml',
       suite: 'unit'
+    },
+    coverageReporter: {
+      // specify a common output directory
+      dir: project.path.coverage,
+      reporters: [
+        { type: 'lcov', subdir: 'report-lcov' },
+      ]
     }
 
   });

@@ -8,7 +8,12 @@ var path = {
 	base: basePath,
 	client: basePath + '/client/',
 	server: basePath + '/server/',
-	test: basePath + '/test/',
+	test: {
+		base: basePath + '/test/',
+		client: basePath + '/test/client/',
+		server: basePath + '/test/server/',
+		e2e: basePath + '/test/client/',
+	},
 	bower: basePath + '/' + bower.directory + '/',
 	docs: basePath + '/docs/',
 	coverage: basePath + '/coverage/'
@@ -44,12 +49,18 @@ module.exports = {
 				path.client + 'auth/**/*.js',
 				path.client + 'models/**/*.js',
 				path.client + 'directives/**/*.js',
-				path.test + '/**/*.js',
-			]
+				path.client + '*.js',
+				path.test.client + '/**/*.js'
+			],
+			exclude : [
+				path.test.client + '**/*.conf.js',
+				path.test.client + '**/*e2e-spec.js',
+				path.test.client + '**/*pageobject.js'
+		    ],
 		},
 		e2e: {
 			files: [
-				path.test + '**/*e2e-spec.js'
+				path.test.e2e + '**/*e2e-spec.js'
 			]
 		}
 	}
