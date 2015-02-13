@@ -8,7 +8,7 @@ var runSequence = require( 'run-sequence' );
 var server = require( './server.js' );
 var karma = require('karma').server;
 var protractorInst = require('gulp-protractor');
-var gutil = require('gulp-util');
+var fork = require('child_process').fork;
 
 var getBrowserFromCLI = function() {   		//CLI = Command Line Interface
 	var cliOption = process.argv.slice(3)[0]; 
@@ -69,10 +69,16 @@ gulp.task('test:e2e', function(done){
 			server.stop( null, 'test:e2e' );
 			done();
 		});
-	}, 'test:e2e' );
-	server.instance.on('error', function(){
-		console.log('---------------------------------------------------')
+	}, 'test:e2e' )
+	.on('error', function( error ){
+		if ( error.code != 'EADDRINUSE' ){
+			process.emit('error', error );
+		}
 	});
+});
+
+gulp.task( 'test:server', function(){
+	fork( 'jasmine-node', ['--captureExceptions', '--forceexit', 'test/server' ] );
 });
 
 gulp.task( 'test', function( done ){

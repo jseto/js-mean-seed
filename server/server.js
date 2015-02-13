@@ -79,13 +79,26 @@ app.use(loopback.urlNotFound());
 app.use(loopback.errorHandler());
 
 app.start = function(port) {
-  return app.listen(port,function() {
-  	if (process.send){
-    	process.send({ message: 'started'});
-    }
-    app.emit('message');
-    console.log('Web server listening at: %s', app.get('url'));
-  });
+  	return app.listen(port,function() {
+		if (process.send){
+			process.send({ message: 'started'});
+		} 
+		else {
+	    	app.emit('started');
+	    }
+	    console.log('Web server listening at: %s', app.get('url'));
+  	})
+  	.on('error', function( error ){
+		if (process.send){
+			process.send({ 
+				message: 'error',
+				error: error
+			});
+		}
+		else{
+			app.emit('error', error );
+		}
+  	});
 };
 
 // start the server if `$ node server.js`

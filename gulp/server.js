@@ -12,29 +12,29 @@ var gutil = require('gulp-util');
 var serverApp = module.exports = {
 	start: function(done, taskName, port ) {
 		var args = port? [ String( port ) ] : [ String( project.port ) ];
-		var instance = serverApp.instance = fork( path.server + 'server.js', args, {
-			silent: true
-		});
+		var instance = serverApp.instance = fork( path.server + 'server.js', args );
 		instance.on('message', function(data){
-			if ( data.message === 'started' && done ) {
-				done();
+			if ( data.message === 'started' ) {
+				instance.emit('started');
+				console.log( utils.printTaskName( taskName ), 'Server started');
 			}
-		});
-		instance.stdout.on('data', function( msg ){
-			if ( taskName ) {
-				console.log( utils.printTaskName( taskName ), String( msg ).slice(0,-1) );
+			if ( data.message === 'error' ) {
+				var error = new Error(data.error.syscall + ' ' + data.error.errno);
+				for ( var key in data.error ){
+					error[key] = data.error[ key ];
+				}
+				instance.emit('error', error );
 			}
+			if (done) done();
 		});
-		instance.stderr.on('data', function( msg ){
-			console.error( utils.printTaskNameError( 'serverApp' ), String( msg ) );
-		});
+		return instance;
 	},
 
 	stop: function(done, taskName) {
 		if ( serverApp.instance ) {
 			serverApp.instance.on('exit', function(){
 				if ( taskName ) {
-					console.log( utils.printTaskName( taskName ), 'Shutting down server');
+					console.log( utils.printTaskName( taskName ), 'Server shutdown');
 				}
 				if (done) done();
 			});
