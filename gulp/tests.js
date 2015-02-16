@@ -8,7 +8,8 @@ var runSequence = require( 'run-sequence' );
 var server = require( './server.js' );
 var karma = require('karma').server;
 var protractorInst = require('gulp-protractor');
-var fork = require('child_process').fork;
+var jasmineNode = require('jasmine-node').run;
+var utils = require('./utils.js');
 
 var getBrowserFromCLI = function() {   		//CLI = Command Line Interface
 	var cliOption = process.argv.slice(3)[0]; 
@@ -40,7 +41,7 @@ gulp.task('test:unit', function (done) {
 
 gulp.task('watch:test:unit', function (done) {
 	karma.start({
-		configFile: path.test + 'karma.conf.js',
+		configFile: path.test.base + 'karma.conf.js',
 	}, done);
 });
 
@@ -77,12 +78,42 @@ gulp.task('test:e2e', function(done){
 	});
 });
 
-gulp.task( 'test:server', function(){
-	fork( 'jasmine-node', ['--captureExceptions', '--forceexit', 'test/server' ] );
+var testServer = function(){
+	jasmineNode({
+		specFolders : project.test.server.folders,
+		showColors: true,
+		captureExceptions: true
+	});
+};
+
+gulp.task( 'test:server', testServer );
+
+gulp.task( 'watch:test:server', function(){
+	//TODO: not working on jasmine-node 2.0.0beta4
+	// jasmineNode({
+	// 	specFolders : project.test.server.folders,
+	// 	watchFolders: ['common/models'],
+	// 	showColors: true,
+	// 	autoTest: true,
+	// });
+
+	var serverTestFiles = function(){
+		var folders = [];
+		for( var i in project.test.server.folders ){
+			folders.push( project.test.server.folders[i] + '+(*.js|*.json)');
+		}
+
+		return folders.concat( project.watch.serverFiles );
+	};
+
+	gulp.watch( serverTestFiles(), function( data ) {
+		console.log( utils.printChangedFiles( data ) );
+		testServer();
+	});
 });
 
 gulp.task( 'test', function( done ){
-	runSequence( 'test:unit', 'test:e2e', done );
+	runSequence( 'test:unit', 'test:e2e', 'test:server', done );
 });
 
 // Downloads the selenium webdriver
@@ -102,10 +133,10 @@ gulp.task('protractor-qa', function() {
 	var protractorQA = require('gulp-protractor-qa');
 	protractorQA.init({
 		testSrc : [
-			path.test + '**/*e2e-spec.js',
-			path.test + '**/*pageobject.js'
+			path.test.e2e + '**/*e2e-spec.js',
+			path.test.e2e + '**/*pageobject.js'
 		],
-		viewSrc : path.client + 'index.html'
+		viewSrc : path.client + '**/*.html'
 	});
 });
 

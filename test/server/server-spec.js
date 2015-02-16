@@ -1,11 +1,10 @@
 'use strict';
 
-console.log('Server tests running...');
-
 var request = require('request');
 var server = require('../../server/server.js');
+var project = require('../../project.conf.js');
 
-var port = 3300;
+var port = project.test.server.port;
 
 //jasmine.getEnv().defaultTimeoutInterval = 500;
 
@@ -71,7 +70,9 @@ describe('Basic server responses', function() {
 
 describe('Custom RESTApi endpoint "isRegistered"', function(){
 	var serverApp;
-
+	var systime = (new Date() ).getTime();
+	var brandNewUser = 'foo' + systime;
+ 
 	beforeEach(function(){
 		serverApp = server.start( port );
 	});
@@ -81,7 +82,7 @@ describe('Custom RESTApi endpoint "isRegistered"', function(){
 	});
 
 	it('should return 404 not found for non registered user', function(done) {
-		request.get('http://localhost:'+port+'/api/Users/isRegistered?username=foo', function(error, response){
+		request.get('http://localhost:'+port+'/api/Users/isRegistered?username=' + brandNewUser, function(error, response){
 			expect( error ).toBeFalsy();
 			expect( response.statusCode ).toEqual(404);
 			done();
@@ -91,13 +92,13 @@ describe('Custom RESTApi endpoint "isRegistered"', function(){
 	it('should return 200 found for registered user', function(done) {
 		request.post('http://localhost:'+port+'/api/users', {
 			form: {
-				username:'foo',
+				username:brandNewUser,
 				password:'secret',
-				email:'foo@example.com'
+				email: brandNewUser + 'foo@example.com'
 			}
 		}, function(error, response){
 			expect( response.statusCode ).toEqual( 200 );
-			request.get('http://localhost:'+port+'/api/users/isRegistered?username=foo', function(error, response){
+			request.get('http://localhost:'+port+'/api/users/isRegistered?username=' + brandNewUser, function(error, response){
 				expect( error ).toBeFalsy();
 				expect( response.statusCode ).toEqual(200);
 				done();
@@ -108,9 +109,9 @@ describe('Custom RESTApi endpoint "isRegistered"', function(){
 	it('should return 404 not found for non registered user with database populates', function(done) {
 		request.post('http://localhost:'+port+'/api/users', {
 			form: {
-				username:'bar',
+				username:'bar' + brandNewUser,
 				password:'secret',
-				email:'bar@example.com'
+				email: brandNewUser + 'bar@example.com'
 			}
 		}, function(error, response){
 			expect( response.statusCode ).toEqual( 200 );

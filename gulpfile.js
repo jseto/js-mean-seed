@@ -18,7 +18,7 @@ gulp.task('pristine', ['clean'], function( done ){
 		path.bower + '**',
 		'node_modules/**'
 	], function(){
-		var git = spawn('git', ['clean', '-d', '-fx']);
+		var git = spawn('git', ['clean', '-d', '-fx', '-e', '*.local.json']);
 		var stdout='';
 		var stderr='';
 

@@ -8,6 +8,7 @@ var path = {
 	base: basePath,
 	client: basePath + '/client/',
 	server: basePath + '/server/',
+	common: basePath + '/common/',
 	test: {
 		base: basePath + '/test/',
 		client: basePath + '/test/client/',
@@ -33,7 +34,7 @@ module.exports = {
 		],
 		serverFiles: [
 			path.server + '**/+(*.js|*.json|*.ejs|*.jade)',
-			path.base + '/common/**/+(*.js|*.json)'			
+			path.common + '**/+(*.js|*.json)'			
 		],
 		docFiles: [
 			path.client + '**/*.js'
@@ -61,6 +62,12 @@ module.exports = {
 		e2e: {
 			files: [
 				path.test.e2e + '**/*e2e-spec.js'
+			]
+		},
+		server: {
+			port: 3300,  //should be unique
+			folders: [
+				path.test.server
 			]
 		}
 	}

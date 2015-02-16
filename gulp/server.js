@@ -12,11 +12,13 @@ var gutil = require('gulp-util');
 var serverApp = module.exports = {
 	start: function(done, taskName, port ) {
 		var args = port? [ String( port ) ] : [ String( project.port ) ];
-		var instance = serverApp.instance = fork( path.server + 'server.js', args );
+		var instance = serverApp.instance = fork( path.server + 'server.js', args, { silent: true } );
 		instance.on('message', function(data){
 			if ( data.message === 'started' ) {
 				instance.emit('started');
-				console.log( utils.printTaskName( taskName ), 'Server started');
+				if (taskName){
+					console.log( utils.printTaskName( taskName ), 'Server started');
+				}
 			}
 			if ( data.message === 'error' ) {
 				var error = new Error(data.error.syscall + ' ' + data.error.errno);
@@ -26,6 +28,14 @@ var serverApp = module.exports = {
 				instance.emit('error', error );
 			}
 			if (done) done();
+		});
+		instance.stdout.on('data', function( msg ){
+			if ( taskName ){
+				console.log( utils.printTaskName( taskName ), String( msg ).slice(0,-1) );
+			} 
+		});
+		instance.stderr.on('data', function( msg ){
+			console.log( utils.printTaskNameError( taskName ), String( msg ) );
 		});
 		return instance;
 	},
@@ -63,22 +73,18 @@ gulp.task('server:start', function( done ){
 	}, 'server:start');
 });
 
-gulp.task('mytest', function(){
-	serverApp.restart( null, 'mytest');
-});
-
 var watchServer = function( done, port ){
-	var pl = require('path');
-	serverApp.start( done , 'watch:server', port );
+	serverApp.start( done , null, port );
 	gulp.watch( project.watch.serverFiles, function( data ){
-		console.log( utils.printTaskName( 'watch:server' ), 
-			gutil.colors.cyan( 'File', data.type ), 
-			gutil.colors.magenta( pl.relative( path.base, data.path ) ) );
+		console.log( utils.printChangedFiles( data ) );
 		serverApp.restart( done , 'watch:server', port);
 	});
 };
 
-gulp.task( 'watch:server', watchServer );
+gulp.task( 'watch:server', function(){
+	watchServer();
+});
+
 gulp.task( 'watch:server:proxy', function(){
 	watchServer( browserSync.reload, project.proxy.port );
 });
