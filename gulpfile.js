@@ -42,6 +42,8 @@ gulp.task('pristine', ['clean'], function( done ){
 	});
 });
 
-gulp.task('show:config', function(){
+gulp.task( 'show:config', function(){
 	console.log( JSON.stringify( project, null, 2 ) );
 });
+
+gulp.task( 'postinstall', ['webdriver-update', 'build:all'] );

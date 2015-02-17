@@ -16,6 +16,10 @@ module.exports = {
 	printChangedFiles: function( change ) {
 		return this.printTaskName( 'watch:server' ) + ' ' +
 			gutil.colors.cyan( 'File', change.type ) +  ' ' +
-			gutil.colors.magenta( pl.relative( project.path.base, change.path ) );
+			gutil.colors.magenta( this.relPath( change.path ) );
+	},
+
+	relPath: function( path ){
+		return pl.relative( project.path.base, path );
 	}
 };

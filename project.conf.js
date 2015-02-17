@@ -27,6 +27,8 @@ module.exports = {
 		port: 3030
 	},
 	path: path,
+	appLess: path.base + '/less/app.less',
+	appCss: path.client,
 	watch: {
 		servedFiles: [
 			path.client + '**/+(*.js|*.html|*.css)',
@@ -38,6 +40,9 @@ module.exports = {
 		],
 		docFiles: [
 			path.client + '**/*.js'
+		],
+		lessFiles: [
+			path.base + '/less/**/*.less'
 		]
 	},
 	test:{
