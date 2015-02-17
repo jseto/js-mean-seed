@@ -47,3 +47,15 @@ gulp.task( 'show:config', function(){
 });
 
 gulp.task( 'postinstall', ['webdriver-update', 'build:all'] );
+
+gulp.task( 'develop', ['watch:client', 'watch:test:unit', 'watch:less', 'watch:ng-models'] );
+
+gulp.task( 'develop:server', ['watch:server', 'watch:test:server'] );
+
+gulp.task( 'develop:all', [
+	'watch:client-server',
+	'watch:test:unit',
+	'watch:test:server',
+	'watch:less',
+	'watch:ng-models'
+]);

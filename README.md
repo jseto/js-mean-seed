@@ -39,6 +39,14 @@ git clone --depth=1 https://github.com/jseto/js-mean-seed.git <your-project-name
 
 The `depth=1` tells git to only pull down one commit worth of historical data.
 
+### Install gulp
+
+[Gulp][gulp] is used the build system. Install gulp globally to have access to the command line
+
+```
+npm install -g gulp
+```
+
 ### Install StrongLoop 
 
 StrongLoop provides a set of tools to make [Loopback][loopback] things easier. It particularly installs the `slc loopback` tool which helps in setting up new models and expose them in the REST API.
@@ -172,10 +180,14 @@ After invoking Arc, again a local web page will be opened. Select `Composer` and
 Once you have defined your model, you have to let AngularJS to know about the new model. To do that, invoke 
 
 ```
-npm run build-ng-models
+gulp build:ng-models
 ```
 
-if you are using the client development tool, build-ng-models will be invoked automatically.
+if you are using the client development tool, build-ng-models will be invoked automatically. If you want to keep an eye on changes in models, invoke
+
+```
+gulp watch:ng-models
+```
 
 ### Use the models from AngularJS
 
@@ -191,7 +203,7 @@ All of them are written in [Jasmine][jasmine]
 The easiest way to run the unit tests is to use the supplied npm script:
 
 ```
-npm test
+gulp test
 ```
 
 ###Client Unit tests
@@ -206,7 +218,7 @@ configuration file to run them.
 to run this test alone just type
 
 ```
-npm run test:client
+gulp test:client
 ```
 
 This script will start the Karma test runner to execute the unit tests.
@@ -214,7 +226,7 @@ This script will start the Karma test runner to execute the unit tests.
 If you want to watch the source and test files for changes and then re-run the tests whenever any of them change, run 
 
 ```
-npm run watch:test:client
+gulp watch:test:client
 ```
 
 ### End to end testing
@@ -233,7 +245,7 @@ can interact with it. If you run the provided nmp tasks you do not need to worry
 You can run the end-to-end tests alone using the supplied npm script:
 
 ```
-npm run test:e2e
+gulp test:e2e
 ```
 
 This script will execute the end-to-end tests against the application being hosted on the
@@ -248,7 +260,7 @@ Server tests are run with the [jasmine-node][jasmine-node] test runner.
 to run this test alone just type
 
 ```
-npm run test:server
+gulp test:server
 ```
 
 This script will start the jasmine-node test runner to execute the unit tests.
@@ -256,23 +268,8 @@ This script will start the jasmine-node test runner to execute the unit tests.
 If you want to watch the source and test files for changes and then re-run the tests whenever any of them change, run 
 
 ```
-npm run watch:test:server
+gulp watch:test:server
 ```
-
-## Loading Angular Asynchronously
-
-The js-mean-seed project supports loading the framework and application scripts asynchronously.  The
-special `index-async.html` is designed to support this style of loading.  For it to work you must
-inject a piece of Angular JavaScript into the HTML page.  The project has a predefined script to help
-do this.
-
-```
-npm run update-index-async
-```
-
-This will copy the contents of the `angular-loader.js` library file into the `index-async.html` page.
-You can run this every time you update the version of Angular that you are using.
-
 
 ## Developing
 
@@ -280,7 +277,7 @@ We provide several tools to help in the app development phase. Basically are wat
 Although you can change the behaviour of the server, the proposed configuration covers all the need you can have and we will focus on client side development. Anyway, if you want a server side development, just invoke the npm task
 
 ```
-npm run start:dev:server
+gulp develop:server
 ```
 
 this task will star the test server watcher, the server test watcher and will keep an eye to the files located in the `server` folder. If a file change is detected the server will be restarted.
@@ -288,23 +285,25 @@ this task will star the test server watcher, the server test watcher and will ke
 When developing client side, which is the main effort you have to do in this environment, we provide a handy npm task
 
 ```
-npm run start:dev:client
+gulp develop:client
 ```
 
-this task will start the server, the client unit test watcher and the less watcher.
+or just 
+
+```
+gulp
+```
+
+this task will start the server, the client unit test watcher, the less watcher and the ng-models watcher.
 
 To start both server and client development tools run the following task
 
 ```
-npm run start:dev:all
+gulp develop:all
 ```
 
 The provided server uses [Instant][instant] to watch for the files it serves. Instant automatically injects a script-tag right before the closing body tag of any HTML page (including dynamic ones) in order to load the client code.
 Whenever a served page changes, Instant instruct to the browser to reload the page. This is a clever reloader solution. If `{ watch: false }` is passed as option or `$NODE_ENV` is set to `production` Instant will behave just like `connect.static()` with no additional overhead.
-
-### Running the App in Production
-
-Set the `$NODE_ENV` environment variable with the value `production`
 
 ## Continuous Integration
 
@@ -351,3 +350,4 @@ __js-mean-seed__ is distributed under the [MIT license](http://opensource.org/li
 [jslib]: http://github.com/jseto/jsLib
 [jasmine-node]: http://github.com/mhevery/jasmine-node
 [instant]: http://github.com/fgnass/instant
+[gulp]: http://gulpjs.com/

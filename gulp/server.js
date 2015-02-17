@@ -82,23 +82,20 @@ var watchServer = function( done, port ){
 };
 
 gulp.task( 'watch:server', function(){
-	watchServer();
-});
-
-gulp.task( 'watch:server:proxy', function(){
 	watchServer( browserSync.reload, project.proxy.port );
 });
 
-gulp.task('watch:browser', ['watch:server:proxy'], function() {
+var browserSyncProxy = function(){
 	browserSync({
 		proxy: project.proxy.host + ':' + project.proxy.port,
 		open: false,
 		port: project.port,
 		files: project.watch.servedFiles
 	});
+};
+
+gulp.task('watch:client-server', ['watch:server'], browserSyncProxy );
+
+gulp.task( 'watch:client', function(){
+	serverApp.start( browserSyncProxy, 'watch:client', project.proxy.port );
 });
-
-gulp.task('develop', ['watch:browser', 'watch:test:unit']);
-gulp.task('develop:quiet', ['watch:browser', 'watch:test:unit:quiet']);
-
-gulp.task('develop:docs', ['watch:browser', 'watch:docs']);
