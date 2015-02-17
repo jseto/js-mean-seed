@@ -8,3 +8,4 @@ tmp
 /npm-debug.log
 .strong-pm
 *.local.json
+/coverage/

@@ -28,9 +28,7 @@ app.set('views', path.join(__dirname, 'views'));
 
 var clientPath = path.resolve(__dirname, '../client');
 
-var instant = require('instant');
-app.use( instant( clientPath));
-
+app.use( loopback.static( clientPath));
 
 // boot scripts mount components like REST API
 boot(app, __dirname);
@@ -81,14 +79,30 @@ app.use(loopback.urlNotFound());
 app.use(loopback.errorHandler());
 
 app.start = function(port) {
-  // start the web server
-  return app.listen(port,function() {
-    app.emit('started');
-    console.log('Web server listening at: %s', app.get('url'));
-  });
+  	return app.listen(port,function() {
+		if (process.send){
+			process.send({ message: 'started'});
+		} 
+		else {
+	    	app.emit('started');
+	    }
+	    console.log('Web server listening at: %s', app.get('url'));
+  	})
+  	.on('error', function( error ){
+		if (process.send){
+			process.send({ 
+				message: 'error',
+				error: error
+			});
+		}
+		else{
+			app.emit('error', error );
+		}
+  	});
 };
 
 // start the server if `$ node server.js`
 if (require.main === module) {
-  app.start(3000);
+	var port = process.argv[2] || 3000;
+	app.start( port );
 }
