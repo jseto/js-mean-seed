@@ -8,7 +8,7 @@ var path = {
 	base: basePath,
 	client: basePath + '/client/',
 	server: basePath + '/server/',
-	common: basePath + '/common/',
+//	common: basePath + '/common/',
 	test: {
 		base: basePath + '/test/',
 		client: basePath + '/test/client/',
@@ -43,6 +43,9 @@ module.exports = {
 		],
 		lessFiles: [
 			path.base + '/less/**/*.less'
+		],
+		modelFiles: [
+			path.base + '/common/models/**/+(*.js|*.json)'
 		]
 	},
 	test:{

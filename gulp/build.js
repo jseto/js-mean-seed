@@ -8,6 +8,8 @@ var del = require('del');
 var less = require('gulp-less');
 var utils = require('./utils.js');
 
+gulp.task('build:all', ['build:less', 'build:ng-models'] );
+
 gulp.task('clean', [ 'clean:docs', 'clean:coverage' ]);
 
 gulp.task('clean:docs', function( done ){
@@ -25,7 +27,7 @@ var processLess = function(){
 //		browsers: ["last 2 versions"] 
 	});
 
-	gulp.src( project.appLess )
+	var result = gulp.src( project.appLess )
 		.pipe( less({
 			plugins: [ autoprefix ],
 			verbose: true	
@@ -38,13 +40,33 @@ var processLess = function(){
 		p.basename(project.appLess, '.less') + 
 		'.css' 
 	);
+	return result;
 };
 
-gulp.task( 'less', processLess );
+gulp.task( 'build:less', processLess );
 
 gulp.task( 'watch:less', function(){
 	gulp.watch( project.watch.lessFiles, function( data ){
 		console.log( utils.printChangedFiles(data) );
 		processLess('watch:less');
+	});
+});
+
+var loopbackAngular = function(){
+	var lbNg = require('gulp-loopback-sdk-angular');
+	var rename = require('gulp-rename');
+
+    return gulp.src( path.server + 'server.js' )
+	    .pipe( lbNg() )
+	    .pipe( rename( 'lb-services.js' ) )
+	    .pipe( gulp.dest( path.client + 'models' ) );
+};
+
+gulp.task( 'build:ng-models', loopbackAngular );
+
+gulp.task( 'watch:ng-models', function(){
+	gulp.watch( project.watch.modelFiles, function( data ){
+		console.log( utils.printChangedFiles(data) );
+		loopbackAngular();
 	});
 });

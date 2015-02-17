@@ -63,12 +63,11 @@ gulp.task('test:e2e', function(done){
 			args: args
 		}))
 		.on('error', function(e) { 
-			server.stop( null, 'test:e2e' );
+			server.stop( done, 'test:e2e' );
 			throw e; 
 		})
 		.on('end', function(){
-			server.stop( null, 'test:e2e' );
-			done();
+			server.stop( done, 'test:e2e' );
 		});
 	}, 'test:e2e' )
 	.on('error', function( error ){
@@ -78,11 +77,14 @@ gulp.task('test:e2e', function(done){
 	});
 });
 
-var testServer = function(){
+var testServer = function( done ){
+	if (!done)done=function(){};
+
 	jasmineNode({
 		specFolders : project.test.server.folders,
 		showColors: true,
-		captureExceptions: true
+		captureExceptions: true,
+		onComplete: done
 	});
 };
 
