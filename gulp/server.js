@@ -7,7 +7,6 @@ var path = project.path;
 
 var browserSync = require( 'browser-sync' );
 var fork = require('child_process').fork;
-var gutil = require('gulp-util');
 
 var serverApp = module.exports = {
 	start: function(done, taskName, port ) {
@@ -90,7 +89,7 @@ var browserSyncProxy = function(){
 		proxy: project.proxy.host + ':' + project.proxy.port,
 		open: false,
 		port: project.port,
-		files: project.watch.servedFiles
+		files: project.watch.servedFiles,
 	});
 };
 

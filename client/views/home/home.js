@@ -3,7 +3,7 @@
 angular.module( 'myApp.home', [
 ])
 
-.config( function ( $stateProvider ) {
+.config( function( $stateProvider ) {
 	$stateProvider.state( 'home', {
 		url: '/home',
 		controller: 'HomeCtrl',
