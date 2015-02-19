@@ -3,10 +3,6 @@
 var project = require('../project.conf.js');
 
 module.exports = function(config){
-  var preprocessors = {};
-  preprocessors[ project.path.test + '**/*.html'] = 'ng-html2js';
-  preprocessors[ project.path.lib + '**/*.js' ] = 'coverage';
-
   config.set({
 
     basePath : project.path.base,
@@ -15,7 +11,7 @@ module.exports = function(config){
 
     files : project.test.unit.files,
  
-    preprocessors: preprocessors,
+    preprocessors: project.test.unit.preprocessors,
 
     autoWatch : true,
 
@@ -28,7 +24,6 @@ module.exports = function(config){
             'karma-firefox-launcher',
             'karma-jasmine',
             'karma-junit-reporter',
-            'karma-beep-reporter',
             'karma-coverage',
             'karma-ng-html2js-preprocessor'
             ],

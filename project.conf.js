@@ -20,6 +20,11 @@ var path = {
 	coverage: basePath + '/coverage/'
 };
 
+var karmaPreprocessors = {};
+var coverageFiles = path.base + '/{client,client/!(models|bower_components)/**}/*.js';
+karmaPreprocessors[ path.test.base + '**/*.html' ] = 'ng-html2js';
+karmaPreprocessors[ coverageFiles ] = 'coverage';
+
 module.exports = {
 	port: 3000,
 	proxy: {
@@ -66,6 +71,7 @@ module.exports = {
 				path.test.client + '**/*e2e-spec.js',
 				path.test.client + '**/*pageobject.js'
 		    ],
+		    preprocessors: karmaPreprocessors
 		},
 		e2e: {
 			files: [

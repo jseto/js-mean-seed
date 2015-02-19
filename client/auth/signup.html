@@ -33,6 +33,7 @@
 					icon-l="fa fa-envelope fa-fw"
 					ng-model="user.email"
 					jsw-messages="'validationErrors' | loc" 
+					jsw-message-template="<div class='jsw-message jsw-tooltip'></div>"
 					jsw-email
 					required>
 
@@ -54,6 +55,7 @@
 					placeholder="{{'signup.confirmPassword'|loc}}"
 					jsw-missmatch="user.password"
 					jsw-messages="'validationErrors' | loc" 
+					jsw-message-template="<div class='jsw-message jsw-tooltip'></div>"
 					ng-model="other.retypePassword"
 					required>
 
