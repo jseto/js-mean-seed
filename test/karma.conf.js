@@ -28,7 +28,6 @@ module.exports = function(config){
             'karma-firefox-launcher',
             'karma-jasmine',
             'karma-junit-reporter',
-            'karma-beep-reporter',
             'karma-coverage',
             'karma-ng-html2js-preprocessor'
             ],
