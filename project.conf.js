@@ -21,9 +21,8 @@ var path = {
 };
 
 var karmaPreprocessors = {};
-var coverageFiles = path.base + '/{client,client/!(models|bower_components)/**}/*.js';
 karmaPreprocessors[ path.test.base + '**/*.html' ] = 'ng-html2js';
-karmaPreprocessors[ coverageFiles ] = 'coverage';
+karmaPreprocessors[ path.base + '/{client,client/!(models|bower_components)/**}/*.js' ] = 'coverage';
 
 module.exports = {
 	port: 3000,
