@@ -21,6 +21,8 @@ try {
 // ---------------------------------------------
 // -- Add your pre-processing middleware here --
 // ---------------------------------------------
+var helmet = require('helmet');
+app.use(helmet()); //deals with security issues
 
 // configure view handler
 app.set('view engine', 'ejs');
