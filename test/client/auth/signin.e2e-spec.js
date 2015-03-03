@@ -1,7 +1,7 @@
 'use strict';
 
 var signinPage = require('./signin-pageobject.js');
-var dashboardPage = require('../user/dashboard-pageobject.js');
+var dashboardPage = require('../views/user/dashboard-pageobject.js');
 var headerPage = require('../views/header/header-pageobject.js');
 var homePage = require('../views/home/home-pageobject.js');
 

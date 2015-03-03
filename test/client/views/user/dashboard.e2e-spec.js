@@ -1,7 +1,7 @@
 'use strict';
 
 var dashboardPage = require('./dashboard-pageobject.js');
-var signinPage = require('../auth/signin-pageobject.js');
+var signinPage = require('../../auth/signin-pageobject.js');
 
 describe('Dashboard page', function(){
 
