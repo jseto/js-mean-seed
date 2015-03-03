@@ -10,8 +10,8 @@ before_script:
   - sleep 1 # give server time to start
 
 script:
-  - node_modules/.bin/gulp test:unit --Firefox
-  - node_modules/.bin/gulp test:e2e --firefox
+  - node_modules/.bin/gulp test:unit --browser firefox
+  - node_modules/.bin/gulp test:e2e --browser firefox
   - node_modules/.bin/gulp test:server
 
 addons:
