@@ -4,7 +4,9 @@
 		"contact": "Contact",
 		"login": "Login",
 		"signup": "Sign up",
-		"signupsuccess": "Thank you for registering"
+		"signin": "Sign in",
+		"signupsuccess": "Thank you for registering",
+		"dashboard": "User dashboard"
 	},
 	"validationErrors": {
 		"jswUniqueUser": "User already exists",

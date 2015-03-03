@@ -1,18 +1,27 @@
 'use strict';
 
-angular.module( 'myApp.signin', [
+angular.module( 'myApp.signinPanel', [
 ])
 
-.directive('signin', function () {
+.config( function ( $stateProvider ) {
+	$stateProvider.state( 'signin', {
+		url: '/signin',
+		controller: 'SigninPanelCtrl',
+		templateUrl: 'auth/signin.html',
+		data:{ pageTitle: 'signin' }
+	});
+})
+
+.directive('signinPanel', function () {
     return {
         restrict: 'AC', //This menas that it will be used as an attribute and NOT as an element. I don't like creating custom HTML elements
         replace: false,
-        templateUrl: 'auth/signin.html',
-        controller: 'SigninCtrl'
+        templateUrl: 'auth/signin-panel.html',
+        controller: 'SigninPanelCtrl'
     };
 })
 
-.controller( 'SigninCtrl', function( $scope, $state, User, promiseTracker ) {
+.controller( 'SigninPanelCtrl', function( $scope, $state, auth, promiseTracker ) {
 	$scope.user = {};
 	$scope.loginIn = promiseTracker({activationDelay:250});
 	$scope.loginFailed = false;
@@ -29,14 +38,15 @@ angular.module( 'myApp.signin', [
 	};
 
 	$scope.requestLogin = function() {
-		var logedUser = User.login( $scope.user, 
+		var logedUser = auth.login( $scope.rememberMe, $scope.user, 
 			function success(){
 				$state.go( 'dashboard' );
 			},
 			function error(){
 		 		$scope.user.password = '';
 				$scope.loginFailed = true;
-			});
+			}
+		);
 		$scope.loginIn.addPromise( logedUser.$promise );
 	};
 });

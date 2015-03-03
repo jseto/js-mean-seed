@@ -47,6 +47,7 @@ karmaPreprocessors[ path.base + '/{client,client/!(models|bower_components)/**}/
 
 module.exports = {
 	port: 3000,
+	testPort: 3003,
 	proxy: {
 		host: 'http://localhost',
 		port: 3030
@@ -61,7 +62,6 @@ module.exports = {
 		],
 		serverFiles: [
 			path.server + '**/+(*.js|*.json|*.ejs|*.jade)',
-			path.common + '**/+(*.js|*.json)'			
 		],
 		docFiles: [
 			path.client + '**/*.js'
@@ -78,6 +78,7 @@ module.exports = {
 			files : [
 				path.bower + 'angular/angular.js',
 				path.bower + 'angular-mocks/angular-mocks.js',
+				path.bower + 'angular-resource/angular-resource.js',
 				path.bower + 'js-lib/lib/**/*.js',
 				path.client + 'views/**/*.js',
 				path.client + 'auth/**/*.js',

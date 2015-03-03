@@ -1,0 +1,80 @@
+<!-- Login panel -->
+<div id="login" style="padding:30px">
+	<!-- Form -->
+	<form novalidate name="loginForm" ng-click="formClicked( $event )">
+		
+		<!-- User name or email -->
+		<input 
+			type="text" 
+			class="jsw-input apply-min-size" 
+			placeholder="{{'login.userLabel' | loc}}" 
+			icon-l="fa fa-user fa-fw"
+			ng-model="user.credential" 
+			required>
+
+		<!-- Password -->
+		<input 
+			type="password" 
+			class="jsw-input" 
+			placeholder="{{'login.passwordLabel' | loc }}" 
+			icon-l="fa fa-lock fa-fw"
+			ng-model="user.password" 
+			required>
+
+		<!-- Remember me -->
+		<input 
+			type="checkbox" 
+			style="margin-right: 7px; margin-vertical-10" 
+			ng-model="rememberMe">{{'login.rememberMe' | loc}}
+		
+		<!-- Login button -->
+		<button
+			type="submit" 
+			class="btn btn-block margin-vertical-10" 
+			ng-click="requestLogin()" 
+			ng-class="{ 'btn-primary': loginForm.$invalid, 'btn-success': loginForm.$valid }"
+			data-ng-disabled="loginForm.$invalid"
+			>
+			{{'login.login' | loc}}
+			<i class="fa fa-sign-in"
+				data-ng-hide="loginIn.active()">
+			</i>
+			<i class="fa fa-spinner fa-spin"
+				data-ng-show="loginIn.active()">
+			</i>
+		</button>
+	
+	</form>
+
+	<div class="zoom alert alert-danger margin-vertical-10 "
+		ng-show="loginFailed">
+		<p>{{'login.loginFailed' | loc}}</p>
+	</div>
+
+	<!-- OAuth -->
+	<div align="center">or</div>
+
+	<button href="#" class="btn btn-social btn-twitter btn-sm btn-block margin-vertical-10">
+		<i class="fa fa-twitter"></i>
+		{{'login.loginWith' | loc}} Twiter
+	</button>
+	<button href="#" class="btn btn-social btn-facebook btn-sm btn-block margin-vertical-10">
+		<span class="fa fa-facebook"> </span>
+		{{'login.loginWith' | loc}} Facebook
+	</button>
+	<button href="#" class="btn btn-social btn-google-plus btn-sm btn-block margin-vertical-10">
+		<span class="fa fa-google-plus"> </span>
+		{{'login.loginWith' | loc}} Google
+	</button>
+
+	<!-- Register -->
+	<div align="center">
+		{{'login.notMemberYet' | loc}}
+		<a id="goSignup" href="signup"><strong>{{'login.doSignUp' | loc}}</strong></a>
+	</div>
+
+	<!-- Forgot password -->
+	<div align="center">
+		<a href="#"><small>{{'login.forgotPassword' | loc}}</small></a>
+	</div>
+</div>

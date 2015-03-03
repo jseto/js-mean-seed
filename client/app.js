@@ -9,16 +9,18 @@ angular.module('myApp', [
 	'myApp.footer',
 	'myApp.contact',
 	'myApp.signup',
-	'myApp.signin',
+	'myApp.signinPanel',
 	'myApp.dashboard',
 	'myApp.responsiveBody',
+	'myApp.auth',
 	'ui.bootstrap',
 	'jsLib.locale',
 	'jsLib.widgets',
 	'ajoslin.promise-tracker',
 	'lbServices',
 	'ngAnimate',
-	'ngMessages'
+	'ngMessages',
+	'permission'
 ])
 
 .config( function( $urlRouterProvider, $locationProvider, $httpProvider, LocaleProvider ) {
@@ -33,12 +35,16 @@ angular.module('myApp', [
 	LocaleProvider.setLocalePath('locale/');
 })
 
-.run( function run ( $rootScope, $state, $stateParams ) {
+.run( function run ( $rootScope, $state, $stateParams, Permission, auth ) {
     $rootScope.$state = $state;
     $rootScope.$stateParams = $stateParams;
+
+	Permission.defineRole('loggedIn', function () {
+		return auth.currentUser().$promise;
+	});
 })
 
-.controller( 'AppCtrl', [ '$scope', 'locFilter', function ( $scope, locFilter ) {
+.controller( 'AppCtrl', function ( $scope, $state, locFilter ) {
 	//*** Sets page title 
 	$scope.$on('$stateChangeSuccess', function( event, toState ){
 		//** Appends ' - MyApp' to page title 
@@ -46,7 +52,12 @@ angular.module('myApp', [
 			$scope.pageTitle = locFilter( 'pageTitle.' + toState.data.pageTitle ) + ' - MyApp';
 		}
 	});
-}])
+
+	//*** Redirects on logout
+	$scope.$on('loggedOut', function(){
+		$state.go('home');
+	});
+})
 
 ;
 

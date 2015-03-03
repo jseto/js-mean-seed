@@ -7696,6 +7696,9 @@ fieldset[disabled] .btn-yahoo.active {
 .list-group-item-center {
   text-align: center;
 }
+.apply-min-size {
+  min-width: 200px;
+}
 input.ng-invalid.ng-dirty {
   border-color: #ebccd1;
   backgound-color: #f2dede;

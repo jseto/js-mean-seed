@@ -23,8 +23,10 @@
 	<div class="col-sm-9">
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				<h4 data-ng-hide="showLoading">{{ model.user }}: {{ model.name }} {{model.surname }}</h4>
-				<h4 data-loading-widget="showLoading"></h4>
+				<h4 data-ng-hide="loadingUser.active()">{{ user.username }}: {{ user.name }} {{user.surname }}</h4>
+				<h4 ng-show="loadingUser.active()">
+					<i class="fa fa-spinner fa-spin"></i>
+				</h4>
 			</div>
 			<div class="panel-body" data-ui-view="detail">
 				<p>

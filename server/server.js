@@ -9,6 +9,15 @@ var loopbackPassport = require('loopback-component-passport');
 var PassportConfigurator = loopbackPassport.PassportConfigurator;
 var passportConfigurator = new PassportConfigurator(app);
 
+var checkCLIargs = function(){
+	if (require.main === module) {
+		app.port = process.argv[2] || 3000;
+		app.testing = process.argv[3] && process.argv[3]==='--testing';
+	}
+};
+
+checkCLIargs();
+
 // attempt to build the providers/passport config
 var passportConfig = {};
 try {
@@ -25,8 +34,8 @@ var helmet = require('helmet');
 app.use(helmet()); //deals with security issues
 
 // configure view handler
-app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views'));
+// app.set('view engine', 'ejs');
+// app.set('views', path.join(__dirname, 'views'));
 
 var clientPath = path.resolve(__dirname, '../client');
 
@@ -89,7 +98,7 @@ app.start = function(port) {
 	    	app.emit('started');
 	    }
 	    console.log('Web server listening at: %s', app.get('url'));
-  	})
+ 	})
   	.on('error', function( error ){
 		if (process.send){
 			process.send({ 
@@ -105,6 +114,5 @@ app.start = function(port) {
 
 // start the server if `$ node server.js`
 if (require.main === module) {
-	var port = process.argv[2] || 3000;
-	app.start( port );
+	app.start( app.port );
 }

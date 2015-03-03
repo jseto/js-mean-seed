@@ -1,5 +1,6 @@
 <!-- Header - Static navbar -->
 <nav id="header" class="navbar navbar-default navbar-static-top" role="navigation">
+	<div class="container">
 		<div class="navbar-header">
 			<button 
 				type="button" 
@@ -36,23 +37,32 @@
 				</li>
 
 				<!-- Singn-in sign-up Menu Item -->
-				<li id="loginTab" class="ngClass: activeTab('login')" dropdown ng-hide="loggedIn">
+				<li id="loginTab" class="ngClass: activeTab('signin')" dropdown ng-hide="loggedIn">
 					<a href="#" class="dropdown-toggle" dropdown-toggle data-toggle="dropdown">
 						<i class="fa fa-sign-in"></i>
 						{{'header.login' | loc}}<b class="caret"></b>
 					</a>
-					<div data-signin class="dropdown-menu" role="menu" style="padding:5px;">
+					<div signin-panel class="dropdown-menu" role="menu" style="padding:5px;">
 						<!-- Here, the login view will be inserted -->
 				 	</div>
 				</li>
 
+				<!-- User -->
+				<li id="userTab" class="ngClass: activeTab('dashboard')" ng-show="loggedIn">
+					<a href="dashboard">
+						<i class="fa fa-user"> </i>
+						{{username}}
+					</a>
+				</li>
+
 				<!-- Signout -->
-				<li class="ngClass: activeTab('signout')" data-ng-show="loggedIn">
-					<a href="#" data-ng-click="$broadcast('signout')">
-						<span class="glyphicon glyphicon-log-out"> </span>
+				<li id="logoutTab" class="ngClass: activeTab('signout')" ng-show="loggedIn">
+					<a href="#" ng-click="signOut()">
+						<i class="fa fa-sign-out"> </i>
 						{{'header.logout' | loc}}
 					</a>
 				</li>
 			</ul>
 		</div><!--/.nav-collapse -->
+	</div>
 </nav>

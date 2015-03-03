@@ -1,6 +1,7 @@
 'use strict';
 
 angular.module( 'myApp.header', [
+	'myApp.auth'
 ])
 
 .directive('header', function () {
@@ -12,7 +13,7 @@ angular.module( 'myApp.header', [
 	};
 })
 
-.controller( 'HeaderCtrl', function HeaderControler( $scope ) {
+.controller( 'HeaderCtrl', function HeaderControler( $scope, auth ) {
 	/*** setup for activeTab to change active button*/
 	var activePage = '';
 	$scope.$on('$stateChangeSuccess', function( event, toState ){
@@ -26,5 +27,21 @@ angular.module( 'myApp.header', [
 			return '';
 		}
 	};
+
+	$scope.signOut = function(){
+		auth.logout();
+	};
+
+	$scope.username = auth.getUserName();
+
+	$scope.$on('loggedIn', function( mgs, user ){
+		$scope.username = user.username;
+		$scope.loggedIn = true;
+	});
+
+	$scope.$on('loggedOut', function(){
+		$scope.username = null;
+		$scope.loggedIn = false;
+	});
 });
 

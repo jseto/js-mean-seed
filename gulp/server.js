@@ -9,14 +9,18 @@ var browserSync = require( 'browser-sync' );
 var fork = require('child_process').fork;
 
 var serverApp = module.exports = {
-	start: function(done, taskName, port ) {
-		var args = port? [ String( port ) ] : [ String( project.port ) ];
+	start: function( options, done ) {
+		var args = [];
+		args.push( options.port? String( options.port ) : String( project.port ) );
+		if ( options.testing ){
+			args.push( '--testing' );
+		}
 		var instance = serverApp.instance = fork( path.server + 'server.js', args, { silent: true } );
 		instance.on('message', function(data){
 			if ( data.message === 'started' ) {
 				instance.emit('started');
-				if (taskName){
-					console.log( utils.printTaskName( taskName ), 'Server started');
+				if (options.taskName){
+					console.log( utils.printTaskName( options.taskName ), 'Server started');
 				}
 			}
 			if ( data.message === 'error' ) {
@@ -29,12 +33,12 @@ var serverApp = module.exports = {
 			if (done) done();
 		});
 		instance.stdout.on('data', function( msg ){
-			if ( taskName ){
-				console.log( utils.printTaskName( taskName ), String( msg ).slice(0,-1) );
+			if ( options.taskName ){
+				console.log( utils.printTaskName( options.taskName ), String( msg ).slice(0,-1) );
 			} 
 		});
 		instance.stderr.on('data', function( msg ){
-			console.log( utils.printTaskNameError( taskName ), String( msg ) );
+			console.log( utils.printTaskNameError( options.taskName ), String( msg ) );
 		});
 		return instance;
 	},
@@ -54,34 +58,40 @@ var serverApp = module.exports = {
 		}
 	},
 
-	restart: function( done, taskName, port ){
+	restart: function( options, done ){
 		serverApp.stop(function(){
-			serverApp.start( function(){
-				if ( taskName ) {
-					console.log( utils.printTaskName( taskName ), 'Server restarted');
+			serverApp.start( options, function(){
+				if ( options.taskName ) {
+					console.log( utils.printTaskName( options.taskName ), 'Server restarted');
 				}
 				if (done) done();
-			}, null, port);
+			});
 		});
 	}
 };
 
 gulp.task('server:start', function( done ){
-	serverApp.start( function(){
+	serverApp.start( {
+		taskName: 'server:start' 
+	}, function(){
 		done();
-	}, 'server:start');
+	});
 });
 
-var watchServer = function( done, port ){
-	serverApp.start( done , null, port );
+var watchServer = function( options, done  ){
+	serverApp.start( options, done );
 	gulp.watch( project.watch.serverFiles, function( data ){
 		console.log( utils.printChangedFiles( data ) );
-		serverApp.restart( done , 'watch:server', port);
+		options.taskName = 'watch:server';
+		serverApp.restart( options, done );
 	});
 };
 
 gulp.task( 'watch:server', function(){
-	watchServer( browserSync.reload, project.proxy.port );
+	watchServer({
+		testing: true,
+		port: project.proxy.port
+	}, browserSync.reload );
 });
 
 var browserSyncProxy = function(){
@@ -96,5 +106,9 @@ var browserSyncProxy = function(){
 gulp.task('watch:client-server', ['watch:server'], browserSyncProxy );
 
 gulp.task( 'watch:client', function(){
-	serverApp.start( browserSyncProxy, 'watch:client', project.proxy.port );
+	serverApp.start({
+		testing: true,
+		taskName: 'watch:client',
+		port: project.proxy.port
+	}, browserSyncProxy );
 });

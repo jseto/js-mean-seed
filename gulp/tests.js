@@ -50,9 +50,12 @@ gulp.task('watch:test:unit', function (done) {
 });
 
 gulp.task('test:e2e', function(done){
-	server.start( function(){
+	server.start({
+		testing: true,
+		taskName: 'test:e2e',
+		port: project.testPort 
+	}, function(){
 		var args = process.argv.slice(3);
-
 		// var browser = getBrowserFromCLI();
 		// if ( browser ){
 		// 	args.push('--browser');
@@ -74,7 +77,7 @@ gulp.task('test:e2e', function(done){
 		.on('end', function(){
 			server.stop( done, 'test:e2e' );
 		});
-	}, 'test:e2e' )
+	})
 	.on('error', function( error ){
 		if ( error.code != 'EADDRINUSE' ){
 			process.emit('error', error );
@@ -110,7 +113,7 @@ gulp.task( 'watch:test:server', function(){
 			folders.push( project.test.server.folders[i] + '+(*.js|*.json)');
 		}
 
-		return folders.concat( project.watch.serverFiles );
+		return folders.concat( project.watch.serverFiles ).concat( project.watch.modelFiles );
 	};
 
 	gulp.watch( serverTestFiles(), function( data ) {

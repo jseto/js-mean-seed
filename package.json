@@ -20,7 +20,7 @@
     "gulp-util": "^3.0.2",
     "jasmine-core": "^2.1.3",
     "jasmine-node": "git://github.com/mhevery/jasmine-node.git#Jasmine2.0",
-    "jasmine-reporters": "git://github.com/larrymyers/jasmine-reporters.git",
+    "jasmine-reporters": "git://github.com/jseto/jasmine-reporters.git#show-stack",
     "karma": "^0.12.31",
     "karma-chrome-launcher": "^0.1.7",
     "karma-coverage": "^0.2.7",

@@ -4,12 +4,9 @@
       "loopback/common/models",
       "loopback/server/models",
       "../common/models",
-      "./models"
+      "./models",
+      "./node_modules/loopback-component-passport/lib/models"
     ]
-  },
-  "User": {
-    "dataSource": "db",
-    "public": false
   },
   "user": {
     "dataSource": "db",
@@ -21,9 +18,9 @@
   "Email": {
     "dataSource": "emailer"
   },
-  "AccessToken": {
+  "accessToken": {
     "dataSource": "db",
-    "public": false
+    "public": true
   },
   "userCredential": {
     "dataSource": "db",

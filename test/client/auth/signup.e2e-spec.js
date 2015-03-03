@@ -5,9 +5,8 @@ var signupSuccessPage = require('./signup-success-pageobject.js');
 
 describe('Signup page', function(){
 
-	signupPage.navigate();
-	
 	it('should navigate to signup page', function () {
+		signupPage.navigate();
 		
 		expect(	// proper page title
 			browser.getTitle() 
