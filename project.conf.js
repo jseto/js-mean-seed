@@ -1,5 +1,7 @@
 'use strict';
 
+var walk = require('walk');
+
 var fs = require('fs');
 var bower = JSON.parse( fs.readFileSync( './.bowerrc', 'utf8' ) );
 
@@ -18,6 +20,25 @@ var path = {
 	bower: basePath + '/' + bower.directory + '/',
 	docs: basePath + '/docs/',
 	coverage: basePath + '/coverage/'
+};
+
+var buildSuites = function(){
+	var suites = {};
+	var options = {};
+	options.listeners = {};
+
+	options.listeners.directories = function(root, dirArray, next ){
+		dirArray.forEach( function( value ){
+			var pre = root.substr( root.indexOf(path.test.client)+ path.test.client.length );
+			pre += pre? ':' : '';
+			suites[ pre + value.name ] = root + '/' + value.name + '/**/*e2e-spec.js';
+		});
+		next();
+	};
+
+	walk.walkSync( path.test.client.slice(0,-1), options );
+
+	return suites;
 };
 
 var karmaPreprocessors = {};
@@ -75,7 +96,8 @@ module.exports = {
 		e2e: {
 			files: [
 				path.test.e2e + '**/*e2e-spec.js'
-			]
+			],
+			suites: buildSuites()
 		},
 		server: {
 			port: 3300,  //should be unique

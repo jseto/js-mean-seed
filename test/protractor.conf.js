@@ -8,6 +8,8 @@ exports.config = {
 
   specs: project.test.e2e.files,
 
+  suites: project.test.e2e.suites,
+
   capabilities: {
     'browserName': 'chrome'
 //    'browserName': 'firefox'

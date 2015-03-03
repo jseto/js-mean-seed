@@ -12,9 +12,13 @@ var jasmineNode = require('jasmine-node').run;
 var utils = require('./utils.js');
 
 var getBrowserFromCLI = function() {   		//CLI = Command Line Interface
-	var cliOption = process.argv.slice(3)[0]; 
-	if ( cliOption ){
-		return cliOption.slice( cliOption.lastIndexOf('-')+1 );
+	for( var i = 3; i < process.argv.length; i++ ) {
+		if ( /-+browser=\w*/.test( process.argv[i] ) ) {
+			return process.argv[i].substr( process.argv[i].indexOf('=') + 1 );
+		}
+		if ( /-+browser/.test( process.argv[i] ) ) {
+			return process.argv[ i + 1 ];
+		}
 	}
 	return null;
 };
@@ -47,19 +51,20 @@ gulp.task('watch:test:unit', function (done) {
 
 gulp.task('test:e2e', function(done){
 	server.start( function(){
-		var args = [];
+		var args = process.argv.slice(3);
 
-		var browser = getBrowserFromCLI();
-		if ( browser ){
-			args.push('--browser');
-			args.push( browser.toLowerCase() );
-		}
+		// var browser = getBrowserFromCLI();
+		// if ( browser ){
+		// 	args.push('--browser');
+		// 	args.push( browser.toLowerCase() );
+		// }
 
 		gulp.src( 
 			project.test.e2e.files 
 		)
 		.pipe( protractorInst.protractor({
 			configFile: path.test.base + 'protractor.conf.js',
+			specs: '../test/client/auth/signup.e2e-spec.js',
 			args: args
 		}))
 		.on('error', function(e) { 
