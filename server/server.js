@@ -21,10 +21,15 @@ checkCLIargs();
 // attempt to build the providers/passport config
 var passportConfig = {};
 try {
-	passportConfig = require('../server/providers.json');
-} catch (err) {
-	console.trace(err);
-	process.exit(1); // fatal
+	passportConfig = require('./providers.local.json');
+}
+catch ( err ){
+	try {
+		passportConfig = require('./providers.json');
+	} catch (err) {
+		console.trace(err);
+		process.exit(1); // fatal
+	}
 }
 
 // ---------------------------------------------
@@ -51,7 +56,7 @@ app.use(loopback.token({
 
 app.use(loopback.cookieParser(app.get('cookieSecret')));
 app.use(loopback.session({
-	secret: 'kitty',
+	secret: 'cookieSecret',
 	saveUninitialized: true,
 	resave: true
 }));
@@ -70,7 +75,21 @@ for (var s in passportConfig) {
 	passportConfigurator.configureProvider(s, c);
 }
 
-//var ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn;
+var ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn;
+app.get('/auth/account', ensureLoggedIn('/singin'), function(req, res) {
+  console.log('Logged in', req.user);
+  res.redirect('/dashboard');
+});
+
+app.get('/auth/current', function(req, res) {
+  if (!req.isAuthenticated || !req.isAuthenticated()) {
+    return res.status(200).json({});
+  }
+  //poor man's copy
+  var ret = JSON.parse(JSON.stringify(req.user));
+  delete ret.password;
+  res.status(200).json(ret);
+});
 
 app.all('/*', function(req, res) {
 	if ( req.path.indexOf('.') < 0 ) {

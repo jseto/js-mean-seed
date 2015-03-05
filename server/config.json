@@ -25,5 +25,6 @@
     "errorHandler": {
       "disableStackTrace": false
     }
-  }
+  },
+  "cookieSecret": "F1FEE670-3C72-11E4-916C-0800200C9A66"
 }

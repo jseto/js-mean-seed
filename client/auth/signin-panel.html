@@ -54,15 +54,15 @@
 	<!-- OAuth -->
 	<div align="center">or</div>
 
-	<button href="#" class="btn btn-social btn-twitter btn-sm btn-block margin-vertical-10">
+	<button href="#" ng-click="requestLogin('twitter')" class="btn btn-social btn-twitter btn-sm btn-block margin-vertical-10">
 		<i class="fa fa-twitter"></i>
 		{{'login.loginWith' | loc}} Twiter
 	</button>
-	<button href="#" class="btn btn-social btn-facebook btn-sm btn-block margin-vertical-10">
+	<button href="#" ng-click="requestLogin('facebook')" class="btn btn-social btn-facebook btn-sm btn-block margin-vertical-10">
 		<span class="fa fa-facebook"> </span>
 		{{'login.loginWith' | loc}} Facebook
 	</button>
-	<button href="#" class="btn btn-social btn-google-plus btn-sm btn-block margin-vertical-10">
+	<button href="#" ng-click="requestLogin('google')" class="btn btn-social btn-google-plus btn-sm btn-block margin-vertical-10">
 		<span class="fa fa-google-plus"> </span>
 		{{'login.loginWith' | loc}} Google
 	</button>

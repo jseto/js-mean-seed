@@ -1,51 +1,58 @@
 'use strict';
 
 angular.module( 'myApp.auth', [
-	'lbServices'
+	'lbServices', 
+	'ngCookies'
 ])
-.factory( 'auth', function( $rootScope, $q, User ){
+.factory( 'auth', function( $rootScope, $q, $cookies, User, LoopBackAuth ){
 	var _user = null;
 	var _username = '';
 
 	return {
 		login: function( rememberMe, userCredentials, success, error ){
-
 			this.logout();
-
-			if ( userCredentials.credential ) {
-				if ( userCredentials.credential.indexOf('@') > 0 ){
-					userCredentials.email = userCredentials.credential;
-				} 
-				else {
-					userCredentials.username = userCredentials.credential;	
-				}
-			}
 			
 			var defer = $q.defer();
 
 			_user = {};
 			_user.$promise = defer.promise;
 			_user.$resolved = false;
+			if ( typeof userCredentials === 'string' ){
+				//social login
+				window.location = '/auth/' + userCredentials;
+				defer.resolve({});
+				_user.$resolved = true;
 
-			User.login({
-					rememberMe: rememberMe || false
-				}, 
-				userCredentials, 
-				function _success( data ){
-					angular.extend( _user, data.user );
-					defer.resolve( data.user );
-					_user.$resolved = true;
-					_username = _user.username;
-					$rootScope.$broadcast('loggedIn', _user );
-					if ( success ) success( data );
-				}, 
-				function _error( data ){
-					defer.reject( data );
-					_user.$resolved = true;
-					if ( error ) error( data );
+			}
+			else {
+				if ( userCredentials.credential ) {
+					if ( userCredentials.credential.indexOf('@') > 0 ){
+						userCredentials.email = userCredentials.credential;
+					} 
+					else {
+						userCredentials.username = userCredentials.credential;	
+					}
 				}
-			);
 
+				User.login({
+						rememberMe: rememberMe || false
+					}, 
+					userCredentials, 
+					function _success( data ){
+						angular.extend( _user, data.user );
+						defer.resolve( data.user );
+						_user.$resolved = true;
+						_username = _user.username;
+						$rootScope.$broadcast('loggedIn', _user );
+						if ( success ) success( data );
+					}, 
+					function _error( data ){
+						defer.reject( data );
+						_user.$resolved = true;
+						if ( error ) error( data );
+					}
+				);
+			}
 			return _user;
 		},
 
@@ -70,6 +77,16 @@ angular.module( 'myApp.auth', [
 				_user = {};
 				_user.$promise = defer.promise;
 				_user.$resolved = false;
+
+//				var cookies = $cookies.getAll();   //only available on Angular v.1.4.0
+				var cookies = $cookies;
+				if ( cookies.access_token ){
+					LoopBackAuth.currentUserId = cookies.userId.substr( 2, cookies.userId.indexOf('.')-2 );
+					LoopBackAuth.accessTokenId = cookies.access_token.substr( 2, 64 );
+					delete $cookies.userId;
+					delete $cookies.access_token;
+					LoopBackAuth.save();
+				}
 
 				User.getCurrent( 
 					function success( data ){

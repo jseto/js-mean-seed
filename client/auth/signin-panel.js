@@ -37,8 +37,8 @@ angular.module( 'myApp.signinPanel', [
     	event.stopPropagation();
 	};
 
-	$scope.requestLogin = function() {
-		var logedUser = auth.login( $scope.rememberMe, $scope.user, 
+	$scope.requestLogin = function( social ) {
+		var logedUser = auth.login( $scope.rememberMe, social || $scope.user, 
 			function success(){
 				$state.go( 'dashboard' );
 			},

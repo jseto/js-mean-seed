@@ -79,6 +79,7 @@ module.exports = {
 				path.bower + 'angular/angular.js',
 				path.bower + 'angular-mocks/angular-mocks.js',
 				path.bower + 'angular-resource/angular-resource.js',
+				path.bower + 'angular-cookies/angular-cookies.js',
 				path.bower + 'js-lib/lib/**/*.js',
 				path.client + 'views/**/*.js',
 				path.client + 'auth/**/*.js',
