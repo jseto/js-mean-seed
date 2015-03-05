@@ -10,6 +10,13 @@ angular.module( 'myApp.signinPanel', [
 		templateUrl: 'auth/signin.html',
 		data:{ pageTitle: 'signin' }
 	});
+	
+	$stateProvider.state( 'signinfailed', {
+		url: '/signin-failed',
+		controller: 'SigninPanelCtrl',
+		templateUrl: 'auth/signin-failed.html',
+		data:{ pageTitle: 'signinFailed' }
+	});
 })
 
 .directive('signinPanel', function () {

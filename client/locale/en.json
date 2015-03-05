@@ -24,8 +24,8 @@
 	"header": {
 		"home": "Home",
 		"contact": "Contact",
-		"login": "Login/Register",
-		"logout": "Logout"
+		"login": "Sing-in/Register",
+		"logout": "Sign-out"
 	},
 	"copyRightNotice": "MyApp 2014",
 	"login": {
@@ -35,8 +35,9 @@
 		"login": "Sign in ",
 		"loginWith": "Sign in with ",
 		"notMemberYet": "Not a member? ",
-		"doSignUp": "Sing up!",
-		"loginFailed":"Sign in failed. Your user name or password are incorrect",
+		"doSignUp": "Sign up!",
+		"loginFailed":"Sign in failed.",
+		"loginFailedNotice":"Sign in failed. Your user name or password are incorrect",
 		"forgotPassword": "Forgot your password?"
 	},
 	"signup": {

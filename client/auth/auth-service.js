@@ -20,9 +20,8 @@ angular.module( 'myApp.auth', [
 			if ( typeof userCredentials === 'string' ){
 				//social login
 				window.location = '/auth/' + userCredentials;
-				defer.resolve({});
+				defer.resolve(true);
 				_user.$resolved = true;
-
 			}
 			else {
 				if ( userCredentials.credential ) {
@@ -62,6 +61,7 @@ angular.module( 'myApp.auth', [
 				_user = null;
 				_username = '';
 				$rootScope.$broadcast('loggedOut' );
+//				window.location = '/auth/logout';
     		}
 		},
 

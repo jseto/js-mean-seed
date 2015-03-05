@@ -63,6 +63,10 @@ app.use(loopback.session({
 
 passportConfigurator.init();
 
+// We need flash messages to see passport errors
+var flash = require('express-flash');
+app.use(flash());
+
 passportConfigurator.setupModels({
 	userModel: app.models.user,
 	userIdentityModel: app.models.userIdentity,
@@ -75,11 +79,10 @@ for (var s in passportConfig) {
 	passportConfigurator.configureProvider(s, c);
 }
 
-var ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn;
-app.get('/auth/account', ensureLoggedIn('/singin'), function(req, res) {
-  console.log('Logged in', req.user);
-  res.redirect('/dashboard');
-});
+// var ensureLoggedIn = require('connect-ensure-login').ensureLoggedIn;
+// app.get('/auth/account', ensureLoggedIn('/singin'), function(req, res) {
+//   res.redirect('/dashboard');
+// });
 
 app.get('/auth/current', function(req, res) {
   if (!req.isAuthenticated || !req.isAuthenticated()) {
@@ -89,6 +92,12 @@ app.get('/auth/current', function(req, res) {
   var ret = JSON.parse(JSON.stringify(req.user));
   delete ret.password;
   res.status(200).json(ret);
+});
+
+app.get('/auth/logout', function(req, res) {
+	console.log('social logout')
+  req.logout();
+  res.redirect('/signin');
 });
 
 app.all('/*', function(req, res) {

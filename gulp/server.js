@@ -100,6 +100,7 @@ var browserSyncProxy = function(){
 		open: false,
 		port: project.port,
 		files: project.watch.servedFiles,
+		notify: false
 	});
 };
 
