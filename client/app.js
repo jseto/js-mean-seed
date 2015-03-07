@@ -9,7 +9,7 @@ angular.module('myApp', [
 	'myApp.footer',
 	'myApp.contact',
 	'myApp.signup',
-	'myApp.signinPanel',
+	'myApp.loginPanel',
 	'myApp.dashboard',
 	'myApp.responsiveBody',
 	'myApp.auth',

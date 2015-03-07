@@ -4,7 +4,7 @@
 		"contact": "Contact",
 		"login": "Login",
 		"signup": "Sign up",
-		"signin": "Sign in",
+		"login": "Sign in",
 		"signupsuccess": "Thank you for registering",
 		"dashboard": "User dashboard"
 	},

@@ -2,14 +2,14 @@
 
 var headerPage = require('../views/header/header-pageobject.js');
 
-var SigninPageObject = function() {
+var LoginPageObject = function() {
 	var self = this;
 	this.navigate = function(){
 		return browser.get( this.url );
 	};
 
 	this.title = 'Sign in - MyApp';
-	this.url = '/signin';
+	this.url = '/login';
 
 	this.valid = /\bng-valid(\s|$)/;
 	this.invalid = /\bng-invalid(\s|$)/;
@@ -46,4 +46,4 @@ var SigninPageObject = function() {
 	};
 };
 
-module.exports = new SigninPageObject(); 
+module.exports = new LoginPageObject(); 

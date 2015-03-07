@@ -1,34 +1,34 @@
 'use strict';
 
-angular.module( 'myApp.signinPanel', [
+angular.module( 'myApp.loginPanel', [
 ])
 
 .config( function ( $stateProvider ) {
-	$stateProvider.state( 'signin', {
-		url: '/signin',
-		controller: 'SigninPanelCtrl',
-		templateUrl: 'auth/signin.html',
-		data:{ pageTitle: 'signin' }
+	$stateProvider.state( 'login', {
+		url: '/login',
+		controller: 'LoginPanelCtrl',
+		templateUrl: 'auth/login.html',
+		data:{ pageTitle: 'login' }
 	});
 	
-	$stateProvider.state( 'signinfailed', {
-		url: '/signin-failed',
-		controller: 'SigninPanelCtrl',
-		templateUrl: 'auth/signin-failed.html',
-		data:{ pageTitle: 'signinFailed' }
+	$stateProvider.state( 'loginfailed', {
+		url: '/login-failed',
+		controller: 'LoginPanelCtrl',
+		templateUrl: 'auth/login-failed.html',
+		data:{ pageTitle: 'loginFailed' }
 	});
 })
 
-.directive('signinPanel', function () {
+.directive('loginPanel', function () {
     return {
         restrict: 'AC', 
         replace: false,
-        templateUrl: 'auth/signin-panel.html',
-        controller: 'SigninPanelCtrl'
+        templateUrl: 'auth/login-panel.html',
+        controller: 'LoginPanelCtrl'
     };
 })
 
-.controller( 'SigninPanelCtrl', function( $scope, $state, auth, promiseTracker ) {
+.controller( 'LoginPanelCtrl', function( $scope, $state, auth, promiseTracker ) {
 	$scope.user = {};
 	$scope.loginIn = promiseTracker({activationDelay:250});
 	$scope.loginFailed = false;

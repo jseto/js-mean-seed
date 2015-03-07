@@ -1,68 +1,68 @@
 'use strict';
 
-var signinPage = require('./signin-pageobject.js');
+var loginPage = require('./login-pageobject.js');
 var dashboardPage = require('../views/user/dashboard-pageobject.js');
 var headerPage = require('../views/header/header-pageobject.js');
 var homePage = require('../views/home/home-pageobject.js');
 
-describe('Signin page', function(){
+describe('Login page', function(){
 
-	it('should navigate to signin page', function () {
-		signinPage.navigate();
+	it('should navigate to login page', function () {
+	 loginPage.navigate();
 		
 		expect(	// proper page title
 			browser.getTitle() 
-		).toBe( signinPage.title );
+		).toBe( loginPage.title );
 		
 		expect(	// proper page state
 			browser.getLocationAbsUrl() 
-		).toBe( signinPage.url );
+		).toBe( loginPage.url );
 	});
 
 	describe('form validation', function(){
 		it('shoud be invalid when empty',function() {
 			expect(	//	form is invalid
-				signinPage.form.getAttribute( 'class' )
-			).toMatch( signinPage.invalid );
+			 loginPage.form.getAttribute( 'class' )
+			).toMatch( loginPage.invalid );
 			
 			expect( 
-				signinPage.submitButton.getAttribute( 'class' )
-			).toMatch( signinPage.disabled );
+			 loginPage.submitButton.getAttribute( 'class' )
+			).toMatch( loginPage.disabled );
 		});
 
 		it('shoud be invalid when only username',function() {
-			signinPage.credential.sendKeys( 'not a valid user' );
+		 loginPage.credential.sendKeys( 'not a valid user' );
 			expect(	
-				signinPage.form.getAttribute( 'class' )
-			).toMatch( signinPage.invalid );
+			 loginPage.form.getAttribute( 'class' )
+			).toMatch( loginPage.invalid );
 		});
 
 		it('shoud be valid when username and password',function() {
-			signinPage.password.sendKeys( 'not a valid user' );
+		 loginPage.password.sendKeys( 'not a valid user' );
 			expect(	
-				signinPage.form.getAttribute( 'class' )
-			).toMatch( signinPage.valid );
+			 loginPage.form.getAttribute( 'class' )
+			).toMatch( loginPage.valid );
 		});
 	});
 
 	describe('login process', function(){
 		it('shoud not show login failed alert yet', function(){
-			expect( signinPage.loginFailedMessage.isDisplayed() ).toBe(false);
+			expect( loginPage.loginFailedMessage.isDisplayed() ).toBe(false);
 		});
 
 		it('should fail when invalid user', function() {
-			signinPage.submitButton.click();
-			expect( signinPage.loginFailedMessage.isDisplayed() ).toBe(true);
+		 loginPage.submitButton.click();
+			expect( loginPage.loginFailedMessage.isDisplayed() ).toBe(true);
 		});
 
 		it('should login successfully a valid user', function(){
-			signinPage.credential.clear().then( function(){
-				signinPage.credential.sendKeys('foo');
+		 loginPage.credential.clear().then( function(){
+			 loginPage.credential.sendKeys('foo');
 			});
-			signinPage.password.clear().then( function(){
-				signinPage.password.sendKeys('opensesame');
+		 loginPage.password.clear().then( function(){
+			 loginPage.password.sendKeys('opensesame');
 			});
-			signinPage.submitButton.click();
+		 loginPage.submitButton.click();
 
 			expect( browser.getLocationAbsUrl() ).toBe( dashboardPage.url );			
 		});
@@ -94,7 +94,7 @@ describe('Signin page', function(){
 			
 			it('should not allow to access to dashboard', function() {
 				dashboardPage.navigate();
-				expect( browser.getLocationAbsUrl() ).toBe( signinPage.url );
+				expect( browser.getLocationAbsUrl() ).toBe( loginPage.url );
 			});
 		});
 		

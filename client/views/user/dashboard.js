@@ -15,7 +15,7 @@ angular.module( 'myApp.dashboard', [
 				only: [
 					'loggedIn'
 				],
-				redirectTo: 'signin'
+				redirectTo: 'login'
 			}
 		}
 	});
