@@ -21,7 +21,7 @@ angular.module( 'myApp.signinPanel', [
 
 .directive('signinPanel', function () {
     return {
-        restrict: 'AC', //This menas that it will be used as an attribute and NOT as an element. I don't like creating custom HTML elements
+        restrict: 'AC', 
         replace: false,
         templateUrl: 'auth/signin-panel.html',
         controller: 'SigninPanelCtrl'

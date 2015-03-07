@@ -1,20 +1,47 @@
 'use strict';
 
 describe('Auth service', function() {
-	var auth, http, User, LoopBackAuth, $rootScope, response, loggedUser;
+	var auth, http, User, LoopBackAuth, $rootScope, response, loggedUser, $window, $cookies;
+	var access_token = 's:GO025w7FL6CFn4OuUGYlPwdcvcxk5yfgfghr4d6EmYJRclfkgKQk1nDYLpnnoD83';
+	var userId = 's:2.kk8Ik0tsf54645retgjKsds16KBZ0BaIerG3na9fwyA';
 
 	beforeEach( function() {
-		// module('ngResource');  not needed because lbServices
 		module('lbServices');
 		module('myApp.auth');
+		module('ngCookies');
 	});
 
-	beforeEach( inject( function( _$rootScope_, _$httpBackend_, _auth_, _User_, _LoopBackAuth_ ){
+	beforeEach(function() { //mocks $window
+//		$cookies = jasmine.createSpyObj( '$cookies', ['get', 'put', 'remove'] );
+
+		$window = { 
+			location : {
+				assign: jasmine.createSpy( '$window.location', ['assign'] ).and.callFake( function( data ){
+					if ( data == '/auth/google' ) {
+						$cookies.access_token = access_token;
+						$cookies.userId = userId;
+					}
+					else {
+						delete $cookies.access_token;
+						delete $cookies.userId;
+					}
+				})
+			},
+		};
+
+
+		module(function($provide) { 
+        	$provide.value('$window', $window);
+        });
+	});
+
+	beforeEach( inject( function( _$rootScope_, _$httpBackend_, _auth_, _User_, _LoopBackAuth_, _$cookies_ ){
 		http = _$httpBackend_;
 		auth = _auth_;
 		User = _User_;
 		LoopBackAuth = _LoopBackAuth_;
 		$rootScope = _$rootScope_;
+		$cookies = _$cookies_;
 	}));
 
 	beforeEach(function(){
@@ -119,19 +146,28 @@ describe('Auth service', function() {
 	});
 
 	describe('login user', function() {
+		var callback;
+
+		beforeEach(function() {
+			callback = jasmine.createSpyObj('callback',['success', 'fail']); 	
+		});
 
 		it('should NOT login unregistered user', function() {
-			auth.login( false, {username:'foobar', password:''} );
+			auth.login( false, {username:'foobar', password:''}, callback.success, callback.fail );
 			http.flush();
 			expect( auth.isLoggedIn() ).toBe(false);
 			expect( auth.currentUser().email ).toBeFalsy();
 			expect( $rootScope.$broadcast ).not.toHaveBeenCalledWith('loggedIn');
+			expect( callback.success ).not.toHaveBeenCalled();
+			expect( callback.fail ).toHaveBeenCalled();
 		});
 
 		it('should login registered user', function() {
-			auth.login( false, { username:'foo', password:'opensesame' } );
+			auth.login( false, { username:'foo', password:'opensesame' }, callback.success, callback.fail );
 			http.flush();
 			expect( auth.isLoggedIn() ).toBe(true);
+			expect( callback.success ).toHaveBeenCalled();
+			expect( callback.fail ).not.toHaveBeenCalled();
 		});
 
 		it('currentUser should report logged in user', function(){
@@ -203,15 +239,22 @@ describe('Auth service', function() {
 		});
 
 		it('sould remember when rememberMe', function(){
-			//not really testing rememberMe because not closing session
 			auth.login( true, {username:'foo', password:'opensesame'} );
 			http.flush();
 
 			checkStorage( localStorage );
 
+			auth.clean();	//simulate close session
+
+			var user = auth.currentUser();
+			http.flush();
+
 			expect( LoopBackAuth.currentUserData ).toBeTruthy();			
 			expect( LoopBackAuth.rememberMe ).toBeTruthy();
-			expect( auth.currentUser().email ).toBe('foo@example.com');
+			expect( user.email ).toBe('foo@example.com');
+			expect( 
+				$rootScope.$broadcast 
+			).toHaveBeenCalledWith('loggedIn', jasmine.objectContaining( response('foo').user ) );
 		});
 
 		it('sould NOT remember after logout rememberMe', function(){
@@ -255,7 +298,35 @@ describe('Auth service', function() {
 		});
 	});
 
-	
+	describe('social login', function() {
 
+		describe('when loging in', function() {
+			it('should navigate to proper social login page', function(){
+				auth.login( false, 'google' );
+				http.flush();
+				expect( $window.location.assign ).toHaveBeenCalledWith('/auth/google');
+			});
+
+			it('should remove cookies when currentUser is called', function(){
+				auth.login( false, 'google' );
+				http.flush();
+				expect( $cookies.access_token ).toBeUndefined();
+				expect( $cookies.userId ).toBeUndefined();
+			});
+
+			it('should report a user', function(){
+				var user = auth.login( false, 'google' );
+				http.flush();
+				expect( user.username ).toBe('bar');
+				expect( user.email ).toBe('bar@example.com');
+			});
+
+			// describe('when social login fails', function() {
+			// 	it('should not create cookies', function(){
+
+			// 	});
+			// });
+		});
+	});
 });
 
