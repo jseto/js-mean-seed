@@ -20,8 +20,15 @@ angular.module( 'myApp.auth', [
 
 		User.getCurrent( 
 			function success( data ){
-				angular.extend( _user, data.user );
-				defer.resolve( data.user );
+				var dataUser;
+				if ( data.user ){
+					dataUser = data.user;
+				}
+				else {
+					dataUser = data;
+				}
+				angular.extend( _user, dataUser );
+				defer.resolve( dataUser );
 				_user.$resolved = true;
 				_username = _user.username;
 				$rootScope.$broadcast('loggedIn', _user );
