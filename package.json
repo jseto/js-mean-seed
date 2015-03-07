@@ -8,11 +8,9 @@
     "node": "~0.10"
   },
   "devDependencies": {
-    "bower": "^1.3.1",
     "browser-sync": "^2.0.1",
     "codeclimate-test-reporter": "^0.0.4",
     "del": "^1.1.1",
-    "gulp": "^3.8.11",
     "gulp-less": "^3.0.0",
     "gulp-loopback-sdk-angular": "^0.1.3",
     "gulp-protractor": "^0.0.12",
@@ -30,9 +28,7 @@
     "karma-ng-html2js-preprocessor": "^0.1.2",
     "less-plugin-autoprefix": "^1.3.0",
     "request": "^2.51.0",
-    "require-dir": "^0.1.0",
-    "run-sequence": "^1.0.2",
-    "walk": "^2.3.9"
+    "run-sequence": "^1.0.2"
   },
   "dependencies": {
     "compression": "^1.0.3",
@@ -55,7 +51,11 @@
     "serve-favicon": "^2.0.1"
   },
   "optionalDependencies": {
-    "loopback-explorer": "^1.1.0"
+    "bower": "^1.3.1",
+    "gulp": "^3.8.11",
+    "loopback-explorer": "^1.1.0",
+    "require-dir": "^0.1.0",
+    "walk": "^2.3.9"
   },
   "scripts": {
     "postinstall": "bower install && gulp postinstall",
