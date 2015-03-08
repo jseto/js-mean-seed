@@ -73,9 +73,12 @@ passportConfigurator.setupModels({
 	userCredentialModel: app.models.userCredential
 });
 
+var profileToUser = require('./profile-to-user.js');
+
 for (var s in passportConfig) {
 	var c = passportConfig[s];
 	c.session = c.session !== false;
+	c.profileToUser = profileToUser;
 	passportConfigurator.configureProvider(s, c);
 }
 
