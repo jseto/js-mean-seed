@@ -3,9 +3,6 @@
 //Create a Loopback user from social profile
 
 function profileToUser(provider, profile) {
-	console.log('---------------------------------------------------------');
-	console.log( JSON.stringify(profile,null,2) );
-
 	var email = profile.emails && profile.emails[0] && profile.emails[0].value;
 	if (!email) {
 		// Fake an e-mail
@@ -21,7 +18,7 @@ function profileToUser(provider, profile) {
 		displayName: profile.displayName,
 		gender: profile.gender || profile._json.gender,
 		picture: ( profile.photos && profile.photos[0].value ) || profile._json.picture,
-		locale: profile._json.locale.substr( 0, 2 ) || profile._json.lang,
+		locale: (profile._json.locale && profile._json.locale.substr( 0, 2 ) ) || profile._json.lang,
 	};
 	var socialLink = profile._json.link || (provider === 'twitter' && profile.username );
 	if (socialLink){
