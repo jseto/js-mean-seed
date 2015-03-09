@@ -32,10 +32,9 @@ angular.module( 'myApp.header', [
 		auth.logout();
 	};
 
-	$scope.username = auth.getUserName();
-
+//	$scope.username = auth.getUserName();
 	$scope.$on('loggedIn', function( mgs, user ){
-		$scope.username = user.username;
+		$scope.username = user.displayName || user.username;
 		$scope.loggedIn = true;
 	});
 

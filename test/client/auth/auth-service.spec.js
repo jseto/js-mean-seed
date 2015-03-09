@@ -4,7 +4,7 @@ describe('Auth service', function() {
 	var auth, http, User, LoopBackAuth, $rootScope, $window, $cookies;
 	var access_token = 's:GO025w7FL6CFn4OuUGYlPwdcvcxk5yfgfghr4d6EmYJRclfkgKQk1nDYLpnnoD83';
 	var userId = 's:3.kk8Ik0tsf54645retgjKsds16KBZ0BaIerG3na9fwyA';
-	var responsePOST, responseGET, loggedUser;
+//	var responsePOST, responseGET, loggedUser;
 
 	beforeEach( function() {
 		module('lbServices');
@@ -50,56 +50,56 @@ describe('Auth service', function() {
 	});
 
 	beforeEach(function(){
-		responseGET = function( who ){
-			loggedUser = 1 + (who === 'bar') + 2*(who === 'social');
-			return {
-				'username': who,
-				'email': who + '@example.com',
-				'emailVerified':true,
-				'id': loggedUser
-			};
-		};
+		// responseGET = function( who ){
+		// 	loggedUser = 1 + (who === 'bar') + 2*(who === 'social');
+		// 	return {
+		// 		'username': who,
+		// 		'email': who + '@example.com',
+		// 		'emailVerified':true,
+		// 		'id': loggedUser
+		// 	};
+		// };
 
-		responsePOST = function( who ) {
-			var user = responseGET( who );
-			return {
-				'id': who + 'lvCSX1juCWzSGZpWGIXlJuJjr1S5Si0rw4333IaR3tPYGiByd1QQj34kRgaSG',
-				'ttl':1209600,
-				'created':'2015-02-23T17:53:44.598Z',
-				'userId': user.id,
-				'user': user
-			};
-		};
+		// responsePOST = function( who ) {
+		// 	var user = responseGET( who );
+		// 	return {
+		// 		'id': who + 'lvCSX1juCWzSGZpWGIXlJuJjr1S5Si0rw4333IaR3tPYGiByd1QQj34kRgaSG',
+		// 		'ttl':1209600,
+		// 		'created':'2015-02-23T17:53:44.598Z',
+		// 		'userId': user.id,
+		// 		'user': user
+		// 	};
+		// };
 
 		http.when('POST','/api/users/login?include=user&rememberMe=false', {
 			username: 'foo', 
 			password: 'opensesame'
-		}).respond( responsePOST('foo') );
+		}).respond( jasmine.response.responsePOST('foo') );
 		http.when('POST','/api/users/login?include=user&rememberMe=false', {
 			username: 'bar', 
 			password: 'opensesame'
-		}).respond( responsePOST('bar') );
+		}).respond( jasmine.response.responsePOST('bar') );
 		http.when('POST','/api/users/login?include=user&rememberMe=false', {
 			email: 'foo@example.com', 
 			password: 'opensesame'
-		}).respond( responsePOST('foo') );
+		}).respond( jasmine.response.responsePOST('foo') );
 		http.when('POST','/api/users/login?include=user&rememberMe=false', {
 			credential: 'foo',
 			username: 'foo', 
 			password: 'opensesame'
-		}).respond( responsePOST('foo') );
+		}).respond( jasmine.response.responsePOST('foo') );
 		http.when('POST','/api/users/login?include=user&rememberMe=false', {
 			credential: 'foo@example.com',
 			email: 'foo@example.com', 
 			password: 'opensesame'
-		}).respond( responsePOST('foo') );
+		}).respond( jasmine.response.responsePOST('foo') );
 		http.when('POST','/api/users/login?include=user&rememberMe=true', {
 			username: 'foo',
 			password: 'opensesame'
-		}).respond( responsePOST('foo') );
+		}).respond( jasmine.response.responsePOST('foo') );
 
 		http.when('POST','/api/users/logout').respond( {}, function(){
-			loggedUser = '';
+			//loggedUser = '';
 		});
 
 		http.when('POST','/api/users/login?include=user&rememberMe=false', {
@@ -111,9 +111,9 @@ describe('Auth service', function() {
 			password: ''
 		}).respond(401);
 
-		http.when('GET', '/api/users/1').respond(responseGET('foo'));
-		http.when('GET', '/api/users/2').respond(responseGET('bar'));
-		http.when('GET', '/api/users/3').respond(responseGET('social'));
+		http.when('GET', '/api/users/1').respond(jasmine.response.responseGET('foo'));
+		http.when('GET', '/api/users/2').respond(jasmine.response.responseGET('bar'));
+		http.when('GET', '/api/users/3').respond(jasmine.response.responseGET('social'));
 	});
 
 	afterEach(function() {
@@ -194,7 +194,7 @@ describe('Auth service', function() {
 			http.flush();
 			expect( 
 				$rootScope.$broadcast 
-			).toHaveBeenCalledWith('loggedIn', jasmine.objectContaining( responsePOST('foo').user ) );
+			).toHaveBeenCalledWith('loggedIn', jasmine.objectContaining( jasmine.response.responsePOST('foo').user ) );
 			
 			auth.logout();
 			http.flush();
@@ -206,7 +206,7 @@ describe('Auth service', function() {
 			http.flush();
 			expect( 
 				$rootScope.$broadcast 
-			).toHaveBeenCalledWith('loggedIn', jasmine.objectContaining( responsePOST('foo').user ) );
+			).toHaveBeenCalledWith('loggedIn', jasmine.objectContaining( jasmine.response.responsePOST('foo').user ) );
 			$rootScope.$broadcast.calls.reset();
 
 			auth.login( false, { username:'bar', password:'opensesame' } );
@@ -214,7 +214,7 @@ describe('Auth service', function() {
 			expect( $rootScope.$broadcast ).toHaveBeenCalledWith('loggedOut');
 			expect( 
 				$rootScope.$broadcast 
-			).toHaveBeenCalledWith('loggedIn', jasmine.objectContaining( responsePOST('bar').user ) );
+			).toHaveBeenCalledWith('loggedIn', jasmine.objectContaining( jasmine.response.responsePOST('bar').user ) );
 		});
 
 	});
@@ -261,7 +261,7 @@ describe('Auth service', function() {
 			expect( user.email ).toBe('foo@example.com');
 			expect( 
 				$rootScope.$broadcast 
-			).toHaveBeenCalledWith('loggedIn', jasmine.objectContaining( responseGET('foo') ) );
+			).toHaveBeenCalledWith('loggedIn', jasmine.objectContaining( jasmine.response.responseGET('foo') ) );
 		});
 
 		it('sould NOT remember after logout rememberMe', function(){

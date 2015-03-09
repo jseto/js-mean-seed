@@ -23,13 +23,15 @@
 	<div class="col-sm-9">
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				<h4 data-ng-hide="loadingUser.active()">{{ user.username }}: {{ user.name }} {{user.surname }}</h4>
+				<h4 data-ng-hide="loadingUser.active()">{{ user.displayName }}</h4>
 				<h4 ng-show="loadingUser.active()">
 					<i class="fa fa-spinner fa-spin"></i>
 				</h4>
 			</div>
 			<div class="panel-body" data-ui-view="detail">
+				<img src="{{user.picture}}">
 				<p>
+										{{user}}
 					Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
 					tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
 					quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
