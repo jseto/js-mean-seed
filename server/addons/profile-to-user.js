@@ -61,7 +61,6 @@ function profileToUser(provider, profile) {
 			userObj = profileProvider( profile );
 			break;
 	}
-	console.log(userObj);
 	return userObj;
 }
 
