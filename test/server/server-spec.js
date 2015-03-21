@@ -1,6 +1,8 @@
 'use strict';
 
 var request = require('request');
+var fs = require('fs');
+
 var server = require('../../server/server.js');
 var project = require('../../project.conf.js');
 
@@ -125,4 +127,28 @@ describe('Custom RESTApi endpoint "isRegistered"', function(){
 	});
 });
 
+describe('Login', function(){
+	var serverApp;
 
+	beforeEach(function(){
+		serverApp = server.start( port, true );
+	});
+
+	afterEach( function(){
+		serverApp.close();
+	});
+
+	it('should log in registered user', function(done){
+		request.post('http://localhost:'+ port + '/api/users/login?include=user&rememberMe=false',{
+			form: {
+					credential: 'foo',
+					password: 'opensesame',
+					username: 'foo'
+			}
+		}, function( error, response ){
+				expect( error ).toBeFalsy();
+				expect( response.statusCode ).toEqual(200);
+				done();
+		});
+	});
+});

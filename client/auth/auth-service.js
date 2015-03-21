@@ -90,8 +90,8 @@ angular.module( 'myApp.auth', [
 			if ( _user ) {
 				User.logout();
 				this.clean();
+				$window.location.assign( '/auth/logout' );
 				$rootScope.$broadcast('loggedOut' );
-//				window.location = '/auth/logout';
     		}
 		},
 

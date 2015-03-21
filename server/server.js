@@ -73,7 +73,14 @@ passportConfigurator.setupModels({
 	userCredentialModel: app.models.userCredential
 });
 
-var profileToUser = require('./profile-to-user.js');
+var profileToUser;
+
+try {
+	profileToUser = require('./addons/profile-to-user.js');
+}
+catch( error ){
+	console.log('using default profile to user mapping');
+}
 
 for (var s in passportConfig) {
 	var c = passportConfig[s];
@@ -98,9 +105,8 @@ app.get('/auth/current', function(req, res) {
 });
 
 app.get('/auth/logout', function(req, res) {
-	console.log('social logout')
   req.logout();
-  res.redirect('/signin');
+//  res.redirect('/login');
 });
 
 app.all('/*', function(req, res) {
@@ -120,7 +126,11 @@ app.use(loopback.urlNotFound());
 // The ultimate error handler.
 app.use(loopback.errorHandler());
 
-app.start = function(port) {
+
+//var createTestUsers = require( './addons/testUsers.js');
+
+app.start = function(port, testing) {
+	app.testing = testing;
   	return app.listen(port,function() {
 		if (process.send){
 			process.send({ message: 'started'});
@@ -128,7 +138,10 @@ app.start = function(port) {
 		else {
 	    	app.emit('started');
 	    }
-	    console.log('Web server listening at: %s', app.get('url'));
+	    console.log('Web server listening at: %s', app.get('url'), app.testing? 'in test mode':'');
+	    if ( app.testing ){
+	    	createTestUsers( app );
+	    }
  	})
   	.on('error', function( error ){
 		if (process.send){
@@ -145,5 +158,5 @@ app.start = function(port) {
 
 // start the server if `$ node server.js`
 if (require.main === module) {
-	app.start( app.port );
+	app.start( app.port, app.testing );
 }

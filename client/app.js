@@ -55,7 +55,7 @@ angular.module('myApp', [
 
 	//*** Redirects on logout
 	$scope.$on('loggedOut', function(){
-		$state.go('home');
+		$state.go('login');
 	});
 })
 
