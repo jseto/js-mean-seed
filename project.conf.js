@@ -17,6 +17,7 @@ var path = {
 		server: basePath + '/test/server/',
 		e2e: basePath + '/test/client/',
 	},
+	fileStore: basePath + '/file-store/',
 	bower: basePath + '/' + bower.directory + '/',
 	docs: basePath + '/docs/',
 	coverage: basePath + '/coverage/'

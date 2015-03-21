@@ -53,6 +53,10 @@
 		"signupSuccessNotice": "Your registration has been accepted. The system has sent you a confirmation email. Please, review your email to complete the registration process",
 		"termsLink": "terms of service",
 		"terms": "By registering I accept the following"
+	},
+	"dashboard": {
+		"uploadPicture": "Upload a picture",
+		"dragDropPicture": "You can also drag and drop a picture"
 	}
 }
 
