@@ -127,7 +127,7 @@ app.use(loopback.urlNotFound());
 app.use(loopback.errorHandler());
 
 
-//var createTestUsers = require( './addons/testUsers.js');
+var createTestUsers = require( './addons/testUsers.js');
 
 app.start = function(port, testing) {
 	app.testing = testing;
