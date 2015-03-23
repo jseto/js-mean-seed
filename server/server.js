@@ -105,8 +105,9 @@ app.get('/auth/current', function(req, res) {
 });
 
 app.get('/auth/logout', function(req, res) {
-  req.logout();
+  	req.logout();
 //  res.redirect('/login');
+	res.status(200).json({});
 });
 
 app.all('/*', function(req, res) {

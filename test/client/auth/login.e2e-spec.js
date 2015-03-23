@@ -84,7 +84,7 @@ describe('Login page', function(){
 
 			expect( headerPage.loginTab.isDisplayed() ).toBe( true );
 			expect( headerPage.logoutTab.isDisplayed() ).toBe( false );
-			expect( browser.getLocationAbsUrl() ).toBe( homePage.url );
+			expect( browser.getLocationAbsUrl() ).toBe( loginPage.url );
 		});
 	});
 

@@ -58,6 +58,8 @@ describe('HeaderCtrl', function(){
 		
 			http.when('POST','/api/users/logout').respond( {}, function(){
 			});
+
+			http.when('GET', '/auth/logout').respond(200);
 		});
 
 		afterEach(function() {

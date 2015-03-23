@@ -4,7 +4,7 @@ angular.module( 'myApp.auth', [
 	'lbServices', 
 	'ngCookies'
 ])
-.factory( 'auth', function( $rootScope, $q, $cookies, $window, User, LoopBackAuth ){
+.factory( 'auth', function( $rootScope, $q, $cookies, $window, User, LoopBackAuth, $http ){
 	var _user = null;
 	var _username = '';
 
@@ -90,13 +90,14 @@ angular.module( 'myApp.auth', [
 			if ( _user ) {
 				User.logout();
 				this.clean();
-				$window.location.assign( '/auth/logout' );
+//				$window.location.assign( '/auth/logout' );
+				$http.get('/auth/logout')
 				$rootScope.$broadcast('loggedOut' );
     		}
 		},
 
 		isLoggedIn: function() {
-			this.currentUser();
+//			this.currentUser();
 			return _username !== '';
 		},
 
