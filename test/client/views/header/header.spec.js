@@ -72,14 +72,24 @@ describe('HeaderCtrl', function(){
 		});
 
 		it('should show logged in member in user tab', function(){
-			auth.login( false, { username:'social', password:'opensesame' } );
+			auth.login({
+				credentials: {
+					username:'social', 
+					password:'opensesame'
+				}
+			});
 			http.flush();
 			expect( scope.username ).toBe('social');
 			expect( scope.loggedIn ).toBe( true );
 		});
 
 		it('should construct displayName if empty for logged in member in user tab', function(){
-			auth.login( false, { username:'foo', password:'opensesame' } );
+			auth.login({
+				credentials: {
+					username:'foo', 
+					password:'opensesame'
+				}
+			});
 			http.flush();
 			expect( scope.username ).toBe('foo');
 		});

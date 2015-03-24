@@ -41,47 +41,30 @@ angular.module( 'myApp.auth', [
 	};
 
 	return {
-		login: function( rememberMe, userCredentials, success, error ){
+		login: function( options, success, error ){
 			this.logout();
+
+			if ( options.credentials && options.credentials.identity ){
+				if ( options.credentials.identity.indexOf('@') > 0 ){
+					options.credentials.email = options.credentials.identity;
+				} 
+				else {
+					options.credentials.username = options.credentials.identity;	
+				}
+			}
 			
 			var defer = $q.defer();
 
 			_user = {};
 			_user.$promise = defer.promise;
 			_user.$resolved = false;
-			if ( typeof userCredentials === 'string' ){
+			if ( options.provider ){
 				//social login
-				$window.location.assign( '/auth/' + userCredentials );
+				$window.location.assign( '/auth/' + options.provider );
 				getCurrentUser(_user, defer);
 			}
 			else {
-				if ( userCredentials.credential ) {
-					if ( userCredentials.credential.indexOf('@') > 0 ){
-						userCredentials.email = userCredentials.credential;
-					} 
-					else {
-						userCredentials.username = userCredentials.credential;	
-					}
-				}
-
-				User.login({
-						rememberMe: rememberMe || false
-					}, 
-					userCredentials, 
-					function _success( data ){
-						angular.extend( _user, data.user );
-						defer.resolve( data.user );
-						_user.$resolved = true;
-						_username = _user.username;
-						$rootScope.$broadcast('loggedIn', _user );
-						if ( success ) success( data );
-					}, 
-					function _error( data ){
-						defer.reject( data );
-						_user.$resolved = true;
-						if ( error ) error( data );
-					}
-				);
+				noPassportLogin( options.credentials, options.rememberMe, success, error, defer );
 			}
 			return _user;
 		},
@@ -122,4 +105,25 @@ angular.module( 'myApp.auth', [
 			_username = '';
 		}
 	};
+
+	function noPassportLogin( userCredentials, rememberMe, success, error, defer ){
+		User.login({
+				rememberMe: rememberMe || false
+			}, 
+			userCredentials, 
+			function _success( data ){
+				angular.extend( _user, data.user );
+				defer.resolve( data.user );
+				_user.$resolved = true;
+				_username = _user.username;
+				$rootScope.$broadcast('loggedIn', _user );
+				if ( success ) success( data );
+			}, 
+			function _error( data ){
+				defer.reject( data );
+				_user.$resolved = true;
+				if ( error ) error( data );
+			}
+		);
+	}
 });

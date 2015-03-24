@@ -63,12 +63,12 @@ describe('Auth service', function() {
 			password: 'opensesame'
 		}).respond( jasmine.response.responsePOST('foo') );
 		http.when('POST','/api/users/login?include=user&rememberMe=false', {
-			credential: 'foo',
+			identity: 'foo',
 			username: 'foo', 
 			password: 'opensesame'
 		}).respond( jasmine.response.responsePOST('foo') );
 		http.when('POST','/api/users/login?include=user&rememberMe=false', {
-			credential: 'foo@example.com',
+			identity: 'foo@example.com',
 			email: 'foo@example.com', 
 			password: 'opensesame'
 		}).respond( jasmine.response.responsePOST('foo') );
@@ -83,6 +83,20 @@ describe('Auth service', function() {
 
 		http.when('POST','/api/users/login?include=user&rememberMe=false', {
 			username: 'foobar', 
+			password: ''
+		}).respond(401);
+		http.when('POST','/api/users/login?include=user&rememberMe=false', {
+			email: 'foobar@example.com', 
+			password: ''
+		}).respond(401);
+		http.when('POST','/api/users/login?include=user&rememberMe=false', {
+			identity: 'foobar',
+			username: 'foobar', 
+			password: ''
+		}).respond(401);
+		http.when('POST','/api/users/login?include=user&rememberMe=false', {
+			identity: 'foobar@example.com',
+			email: 'foobar@example.com', 
 			password: ''
 		}).respond(401);
 		http.when('POST','/api/users/login?include=user&rememberMe=true', {
@@ -101,7 +115,6 @@ describe('Auth service', function() {
 		if (auth.isLoggedIn()){
 			auth.logout();
 			http.flush();			
-//			http.flush();
 		}
 		http.verifyNoOutstandingExpectation();
 		http.verifyNoOutstandingRequest();
@@ -113,7 +126,12 @@ describe('Auth service', function() {
 	});
 
 	it('does not call db if user already in the auth service', function() {
-		auth.login(false, { username:'foo', password:'opensesame' });
+		auth.login({
+			credentials: {
+				username:'foo', 
+				password:'opensesame' 
+			}
+		});
 		http.flush();
 		expect( auth.currentUser().email ).toBe('foo@example.com');
 		//No flush. We want to be sure no request has been done when calling auth.currentUser
@@ -142,7 +160,12 @@ describe('Auth service', function() {
 		});
 
 		it('should NOT login unregistered user', function() {
-			auth.login( false, {username:'foobar', password:''}, callback.success, callback.fail );
+			auth.login({
+				credentials: {
+					username: 'foobar', 
+					password:''
+				}
+			}, callback.success, callback.fail );
 			http.flush();
 			expect( auth.isLoggedIn() ).toBe(false);
 			expect( auth.currentUser().email ).toBeFalsy();
@@ -152,7 +175,12 @@ describe('Auth service', function() {
 		});
 
 		it('should login registered user', function() {
-			auth.login( false, { username:'foo', password:'opensesame' }, callback.success, callback.fail );
+			auth.login({
+				credentials: {
+					username:'foo', 
+					password:'opensesame' 
+				}
+			}, callback.success, callback.fail );
 			http.flush();
 			expect( auth.isLoggedIn() ).toBe(true);
 			expect( callback.success ).toHaveBeenCalled();
@@ -160,19 +188,34 @@ describe('Auth service', function() {
 		});
 
 		it('currentUser should report logged in user', function(){
-			auth.login( false, { username:'foo', password:'opensesame' } );
+			auth.login({
+				credentials: {
+					username:'foo', 
+					password:'opensesame' 
+				}
+			});
 			http.flush();
 			expect( auth.currentUser().email ).toBe('foo@example.com');
 		});
 
 		it('getUserName should report username', function() {
-			auth.login( false, { username:'foo', password:'opensesame' } );
+			auth.login({
+				credentials: {
+					username:'foo', 
+					password:'opensesame' 
+				}
+			});
 			http.flush();
 			expect( auth.getUserName() ).toBe('foo');
 		});
 
 		it('should broadcast messages', function(){
-			auth.login( false, { username:'foo', password:'opensesame' } );
+			auth.login({
+				credentials: {
+					username:'foo', 
+					password:'opensesame' 
+				}
+			});
 			http.flush();
 			expect( 
 				$rootScope.$broadcast 
@@ -184,14 +227,24 @@ describe('Auth service', function() {
 		});
 
 		it('should logout previous logged user', function() {
-			auth.login( false, { username:'foo', password:'opensesame' } );
+			auth.login({
+				credentials: {
+					username:'foo', 
+					password:'opensesame' 
+				}
+			});
 			http.flush();
 			expect( 
 				$rootScope.$broadcast 
 			).toHaveBeenCalledWith('loggedIn', jasmine.objectContaining( jasmine.response.responsePOST('foo').user ) );
 			$rootScope.$broadcast.calls.reset();
 
-			auth.login( false, { username:'bar', password:'opensesame' } );
+			auth.login({
+				credentials: {
+					username:'bar', 
+					password:'opensesame' 
+				}
+			});
 			http.flush();
 			expect( $rootScope.$broadcast ).toHaveBeenCalledWith('loggedOut');
 			expect( 
@@ -212,7 +265,12 @@ describe('Auth service', function() {
 		};
 
 		it('sould not remember when not rememberMe', function(){
-			auth.login( false, {username:'foo', password:'opensesame'} );
+			auth.login({
+				credentials: {
+					username:'foo', 
+					password:'opensesame' 
+				}
+			});
 			http.flush();
 
 			checkNoStorage( localStorage );
@@ -228,7 +286,13 @@ describe('Auth service', function() {
 		});
 
 		it('sould remember when rememberMe', function(){
-			auth.login( true, {username:'foo', password:'opensesame'} );
+			auth.login({
+				credentials: {
+					username:'foo', 
+					password:'opensesame' 
+				},
+				rememberMe: true
+			});
 			http.flush();
 
 			checkStorage( localStorage );
@@ -257,31 +321,57 @@ describe('Auth service', function() {
 
 	describe('accepts several user identities', function(){
 		it('should log in with username', function(){
-			auth.login( false, {username:'foo', password:'opensesame'} );
+			auth.login({
+				credentials: {
+					identity:'foo', 
+					password:'opensesame' 
+				}
+			});
 			http.flush();
 			expect( auth.isLoggedIn() ).toBeTruthy();			
 		});
 
 		it('should log in with email', function(){
-			auth.login( false, {email:'foo@example.com', password:'opensesame'} );
+			auth.login({
+				credentials: {
+					identity:'foo@example.com', 
+					password:'opensesame' 
+				}
+			});
 			http.flush();
 			expect( auth.isLoggedIn() ).toBeTruthy();			
 		});
 
-		it('should log in with credential as username', function(){
-			auth.login( false, {credential:'foo', password:'opensesame'} );
+		it('should NOT log in bad user with username', function(){
+			auth.login({
+				credentials: {
+					identity:'foobar', 
+					password:'' 
+				}
+			});
 			http.flush();
-			expect( auth.isLoggedIn() ).toBeTruthy();			
+			expect( auth.isLoggedIn() ).toBeFalsy();			
 		});
 
-		it('should log in with credential as email', function(){
-			auth.login( false, {credential:'foo@example.com', password:'opensesame'} );
+		it('should NOT log in bad user with email', function(){
+			auth.login({
+				credentials: {
+					identity:'foobar@example.com', 
+					password:'' 
+				}
+			});
 			http.flush();
-			expect( auth.isLoggedIn() ).toBeTruthy();			
+			expect( auth.isLoggedIn() ).toBeFalsy();			
 		});
 
-		it('should log only with credential if credential field not empty', function() {
-			auth.login( false, {credential:'foo', username:'not valid', password:'opensesame'});
+		it('should log with credential if credential field not empty', function() {
+			auth.login({
+				credentials: {
+					identity:'foo', 
+					username: 'not-valid',
+					password:'opensesame' 
+				}
+			});
 			http.flush();
 			expect( auth.isLoggedIn() ).toBeTruthy();					
 		});
@@ -291,20 +381,26 @@ describe('Auth service', function() {
 
 		describe('when loging in', function() {
 			it('should navigate to proper social login page', function(){
-				auth.login( false, 'google' );
+				auth.login({
+					provider: 'google'
+				});
 				http.flush();
 				expect( $window.location.assign ).toHaveBeenCalledWith('/auth/google');
 			});
 
 			it('should remove cookies when currentUser is called', function(){
-				auth.login( false, 'google' );
+				auth.login({
+					provider: 'google'
+				});
 				http.flush();
 				expect( $cookies.access_token ).toBeUndefined();
 				expect( $cookies.userId ).toBeUndefined();
 			});
 
 			it('should report a user', function(){
-				var user = auth.login( false, 'google' );
+				var user = auth.login({
+					provider: 'google'
+				});
 				http.flush();
 				expect( user.username ).toBe('social');
 				expect( user.email ).toBe('social@example.com');
