@@ -17,7 +17,7 @@ var LoginPageObject = function() {
 
 	var container = element( by.css('div[ui-view]') );
 
-	this.credential = container.element( by.model('user.credential') );
+	this.credential = container.element( by.model('user.identity') );
 	this.password = container.element( by.model('user.password') );
 	this.submitButton = container.element( by.css('form[name="loginForm"]') ).element( by.css( 'button[type="submit"]' ) );
 	this.form = container.element( by.css('form[name="loginForm"]') );

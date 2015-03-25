@@ -54,17 +54,23 @@ angular.module( 'myApp.auth', [
 			}
 			
 			var defer = $q.defer();
-
 			_user = {};
 			_user.$promise = defer.promise;
 			_user.$resolved = false;
+
 			if ( options.provider ){
 				//social login
-				$window.location.assign( '/auth/' + options.provider );
+				if ( options.provider === 'local' ){
+					//post
+				}
+				else {
+					//get
+					$window.location.assign( '/auth/' + options.provider );
+				}
 				getCurrentUser(_user, defer);
 			}
 			else {
-				noPassportLogin( options.credentials, options.rememberMe, success, error, defer );
+				loginWithoutPassport( options.credentials, options.rememberMe, success, error, defer );
 			}
 			return _user;
 		},
@@ -106,7 +112,7 @@ angular.module( 'myApp.auth', [
 		}
 	};
 
-	function noPassportLogin( userCredentials, rememberMe, success, error, defer ){
+	function loginWithoutPassport( userCredentials, rememberMe, success, error, defer ){
 		User.login({
 				rememberMe: rememberMe || false
 			}, 

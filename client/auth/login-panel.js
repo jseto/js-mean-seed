@@ -45,7 +45,11 @@ angular.module( 'myApp.loginPanel', [
 	};
 
 	$scope.requestLogin = function( social ) {
-		var logedUser = auth.login( $scope.rememberMe, social || $scope.user, 
+		var logedUser = auth.login({
+				rememberMe: $scope.rememberMe,
+				provider: social,
+				credentials: $scope.user
+			}, 
 			function success(){
 				$state.go( 'dashboard' );
 			},

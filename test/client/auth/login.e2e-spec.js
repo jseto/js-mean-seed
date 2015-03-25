@@ -51,18 +51,18 @@ describe('Login page', function(){
 		});
 
 		it('should fail when invalid user', function() {
-		 loginPage.submitButton.click();
+		 	loginPage.submitButton.click();
 			expect( loginPage.loginFailedMessage.isDisplayed() ).toBe(true);
 		});
 
 		it('should login successfully a valid user', function(){
-		 loginPage.credential.clear().then( function(){
-			 loginPage.credential.sendKeys('foo');
+		 	loginPage.credential.clear().then( function(){
+				loginPage.credential.sendKeys('foo');
 			});
-		 loginPage.password.clear().then( function(){
-			 loginPage.password.sendKeys('opensesame');
+		 	loginPage.password.clear().then( function(){
+				loginPage.password.sendKeys('opensesame');
 			});
-		 loginPage.submitButton.click();
+		 	loginPage.submitButton.click();
 
 			expect( browser.getLocationAbsUrl() ).toBe( dashboardPage.url );			
 		});
