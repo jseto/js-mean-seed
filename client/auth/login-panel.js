@@ -10,7 +10,7 @@ angular.module( 'myApp.loginPanel', [
 		templateUrl: 'auth/login.html',
 		data:{ pageTitle: 'login' }
 	});
-	
+
 	$stateProvider.state( 'loginfailed', {
 		url: '/login-failed',
 		controller: 'LoginPanelCtrl',
@@ -21,7 +21,7 @@ angular.module( 'myApp.loginPanel', [
 
 .directive('loginPanel', function () {
     return {
-        restrict: 'AC', 
+        restrict: 'AC',
         replace: false,
         templateUrl: 'auth/login-panel.html',
         controller: 'LoginPanelCtrl'
@@ -47,9 +47,9 @@ angular.module( 'myApp.loginPanel', [
 	$scope.requestLogin = function( social ) {
 		var logedUser = auth.login({
 				rememberMe: $scope.rememberMe,
-				provider: social,
+				provider: social || 'local',
 				credentials: $scope.user
-			}, 
+			},
 			function success(){
 				$state.go( 'dashboard' );
 			},
@@ -61,4 +61,3 @@ angular.module( 'myApp.loginPanel', [
 		$scope.loginIn.addPromise( logedUser.$promise );
 	};
 });
-

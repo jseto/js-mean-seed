@@ -61,10 +61,21 @@ angular.module( 'myApp.auth', [
 			if ( options.provider ){
 				//social login
 				if ( options.provider === 'local' ){
-					//post
+					// $http({
+					// 	method: 'POST',
+					// 	url: '/auth/local',
+					// 	data: options.credentials,
+					//     headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+    	// 				transformRequest: function(obj) {
+					// 		var str = [];
+					// 		for(var p in obj)
+					// 		str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+					// 		return str.join("&");
+					// 	}
+					// });
+					$http.post( '/auth/local?' + urlEncode( options.credentials ) );
 				}
 				else {
-					//get
 					$window.location.assign( '/auth/' + options.provider );
 				}
 				getCurrentUser(_user, defer);
@@ -132,4 +143,12 @@ angular.module( 'myApp.auth', [
 			}
 		);
 	}
+
+	function urlEncode(obj) {
+		var str = [];
+		for(var p in obj)
+		str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+		return str.join("&");
+	}
+
 });
