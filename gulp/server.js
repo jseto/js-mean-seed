@@ -35,7 +35,7 @@ var serverApp = module.exports = {
 		instance.stdout.on('data', function( msg ){
 			if ( options.taskName ){
 				console.log( utils.printTaskName( options.taskName ), String( msg ).slice(0,-1) );
-			} 
+			}
 		});
 		instance.stderr.on('data', function( msg ){
 			console.log( utils.printTaskNameError( options.taskName ), String( msg ) );
@@ -72,7 +72,7 @@ var serverApp = module.exports = {
 
 gulp.task('server:start', function( done ){
 	serverApp.start( {
-		taskName: 'server:start' 
+		taskName: 'server:start'
 	}, function(){
 		done();
 	});
