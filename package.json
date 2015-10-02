@@ -5,7 +5,7 @@
   "repository": "https://github.com/jseto/js-mean-seed.git",
   "license": "MIT",
   "engines": {
-    "node": "~0.10"
+    "node": "~4.1.0"
   },
   "devDependencies": {
     "bower": "^1.5.x",
