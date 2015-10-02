@@ -1,7 +1,9 @@
+'use strict';
+
 module.exports = function mountLoopBackExplorer(server) {
-  var explorer;
+  var explorer_;
   try {
-    explorer = require('loopback-explorer');
+    explorer = require('loopback-component-explorer');
   } catch(err) {
     // Print the message only when the app was started via `server.listen()`.
     // Do not print any message when the project is used as a component.

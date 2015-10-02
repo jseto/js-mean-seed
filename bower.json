@@ -27,6 +27,7 @@
     "jseto <jseto@jasvisio.com>"
   ],
   "resolutions": {
-    "angular": "~1.5.x"
+    "angular": "~1.5.x",
+    "angular-messages": "~1.5.x"
   }
 }
