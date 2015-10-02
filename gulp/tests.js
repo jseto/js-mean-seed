@@ -56,12 +56,7 @@ gulp.task('test:e2e', function(done){
 		port: project.testPort
 	}, function(){
 		var args = process.argv.slice(3);
-		// var browser = getBrowserFromCLI();
-		// if ( browser ){
-		// 	args.push('--browser');
-		// 	args.push( browser.toLowerCase() );
-		// }
-		console.log(args);
+
 		gulp.src(
 			project.test.e2e.files
 		)
