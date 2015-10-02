@@ -7,13 +7,13 @@ describe('Signup page', function(){
 
 	it('should navigate to signup page', function () {
 		signupPage.navigate();
-		
+
 		expect(	// proper page title
-			browser.getTitle() 
+			browser.getTitle()
 		).toBe( signupPage.title );
-		
+
 		expect(	// proper page state
-			browser.getLocationAbsUrl() 
+			browser.getLocationAbsUrl()
 		).toBe( signupPage.url );
 	});
 
@@ -22,14 +22,14 @@ describe('Signup page', function(){
 			expect(	//	form is invalid
 				signupPage.form.getAttribute( 'class' )
 			).toMatch( signupPage.invalid );
-			
-			expect( 
+
+			expect(
 				signupPage.submitButton.getAttribute( 'class' )
 			).toMatch( signupPage.disabled );
 		});
 
 		it('should reject a short user name', function(){
-			signupPage.username.sendKeys('Jo');	
+			signupPage.username.sendKeys('Jo');
 			expect(  // user name is valid
 				signupPage.username.getAttribute( 'class' )
 			).not.toMatch( signupPage.valid );
@@ -38,8 +38,8 @@ describe('Signup page', function(){
 		it('should accept a proper user name',function(){
 			signupPage.username.sendKeys('e');
 
-			expect(	
-				signupPage.username.getAttribute('value') 
+			expect(
+				signupPage.username.getAttribute('value')
 			).toBe( 'Joe' );
 
 			expect(  // user name is valid
@@ -67,7 +67,7 @@ describe('Signup page', function(){
 			).toMatch( signupPage.invalid );
 		});
 	});
-	
+
 	describe('(email field)', function() {
 
 		it('should accept a proper email',function(){
@@ -127,14 +127,14 @@ describe('Signup page', function(){
 				signupPage.agreedTerms.click();
 			}
 		});
-		
+
 		expect(	//	form is valid
 			signupPage.form.getAttribute( 'class' )
 		).toMatch( signupPage.valid );
 
-		expect( 
+		expect(
 			signupPage.submitButton.getAttribute( 'class' )
-		).toMatch( signupPage.enabled );
+		).not.toMatch( signupPage.disabled );
 
 		expect(
 			signupPage.alertMessage.isDisplayed()
@@ -152,7 +152,7 @@ describe('Signup page', function(){
 		signupPage.submitButton.click();
 
 		expect(	// success page state
-			browser.getLocationAbsUrl() 
+			browser.getLocationAbsUrl()
 		).toBe( signupSuccessPage.url );
 	});
 });

@@ -135,7 +135,7 @@ app.start = function(port, testing) {
   	return app.listen(port,function() {
 		if (process.send){
 			process.send({ message: 'started'});
-		} 
+		}
 		else {
 	    	app.emit('started');
 	    }
@@ -146,7 +146,7 @@ app.start = function(port, testing) {
  	})
   	.on('error', function( error ){
 		if (process.send){
-			process.send({ 
+			process.send({
 				message: 'error',
 				error: error
 			});

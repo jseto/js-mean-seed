@@ -9,35 +9,35 @@ describe('Header Navigation', function(){
 
 	it('Should navigate to Home page', function () {
 		browser.get('/');
-		
+
 		expect(
-			browser.getTitle() 
+			browser.getTitle()
 		).toBe( homePage.title );
-		
+
 		expect(
-			browser.getLocationAbsUrl() 
+			browser.getLocationAbsUrl()
 		).toBe( homePage.url );
 
 		homePage.navigate();
-		
+
 		expect(
-			browser.getLocationAbsUrl() 
+			browser.getLocationAbsUrl()
 		).toBe( homePage.url );
-		
+
 		expect(
-			headerPage.homeTab.getAttribute('class') 
+			headerPage.homeTab.getAttribute('class')
 		).toMatch( headerPage.tabActive );
 
 		expect(
-			headerPage.contactTab.getAttribute('class') 
+			headerPage.contactTab.getAttribute('class')
 		).not.toMatch( headerPage.tabActive );
 
 		expect(
-			headerPage.loginTab.getAttribute('class') 
+			headerPage.loginTab.getAttribute('class')
 		).not.toMatch( headerPage.tabActive );
-		
-		expect( 
-			headerPage.loginPanel.isDisplayed() 
+
+		expect(
+			headerPage.loginPanel.isDisplayed()
 		).not.toBeTruthy();
 	});
 
@@ -45,63 +45,63 @@ describe('Header Navigation', function(){
 		headerPage.click( headerPage.contactTab );
 
 		expect(
-			browser.getTitle() 
+			browser.getTitle()
 		).toBe( contactPage.title );
-		
+
 		expect(
-			browser.getLocationAbsUrl() 
+			browser.getLocationAbsUrl()
 		).toBe( contactPage.url );
-		
+
 		expect(
-			headerPage.homeTab.getAttribute('class') 
+			headerPage.homeTab.getAttribute('class')
 		).not.toMatch( headerPage.tabActive );
-		
+
 		expect(
-			headerPage.contactTab.getAttribute('class') 
+			headerPage.contactTab.getAttribute('class')
 		).toMatch( headerPage.tabActive );
-		
+
 		expect(
-			headerPage.loginTab.getAttribute('class') 
+			headerPage.loginTab.getAttribute('class')
 		).not.toMatch( headerPage.tabActive );
-		
-		expect( 
-			headerPage.loginPanel.isDisplayed() 
+
+		expect(
+			headerPage.loginPanel.isDisplayed()
 		).not.toBeTruthy();
 	});
 
 	it('Should show Signup panel', function() {
 		headerPage.click( headerPage.loginTab );
-		
-		expect( 
-			headerPage.loginPanel.isDisplayed() 
+		browser.sleep(100);
+		expect(
+			headerPage.loginPanel.isDisplayed()
 		).toBeTruthy();
 	});
 
 	it('Should navigate to home clicking the logo', function(){
 		headerPage.logoTab.click();
-		
+
 		expect(
-			browser.getTitle() 
+			browser.getTitle()
 		).toBe( homePage.title );
-		
+
 		expect(
-			browser.getLocationAbsUrl() 
+			browser.getLocationAbsUrl()
 		).toBe( homePage.url );
-		
+
 		expect(
-			headerPage.homeTab.getAttribute('class') 
+			headerPage.homeTab.getAttribute('class')
 		).toMatch( headerPage.tabActive );
-		
+
 		expect(
-			headerPage.contactTab.getAttribute('class') 
-		).not.toMatch( headerPage.tabActive );
-		
-		expect(
-			headerPage.loginTab.getAttribute('class') 
+			headerPage.contactTab.getAttribute('class')
 		).not.toMatch( headerPage.tabActive );
 
-		expect( 
-			headerPage.loginPanel.isDisplayed() 
+		expect(
+			headerPage.loginTab.getAttribute('class')
+		).not.toMatch( headerPage.tabActive );
+
+		expect(
+			headerPage.loginPanel.isDisplayed()
 		).not.toBeTruthy();
 	});
 });

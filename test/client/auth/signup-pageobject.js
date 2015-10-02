@@ -24,4 +24,4 @@ var SignupPageObject = function() {
 	this.alertMessage = container.element( by.binding( 'alertMessage' ) );
 };
 
-module.exports = new SignupPageObject(); 
+module.exports = new SignupPageObject();

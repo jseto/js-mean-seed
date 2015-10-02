@@ -38,7 +38,7 @@ gulp.task('pristine', ['clean'], function( done ){
 		git.on('close', function(code) {
 			gutil.log('Done with exit code', code);
 			done();
-		});        
+		});
 	});
 });
 

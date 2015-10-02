@@ -10,7 +10,7 @@ var utils = require('./utils.js');
 
 gulp.task('build:all', ['build:less', 'build:ng-models'] );
 
-gulp.task('clean', [ 'clean:docs', 'clean:coverage' ]);
+gulp.task('clean', [ 'clean:docs', 'clean:coverage', 'clean:node_modules', 'clean:bower_components' ]);
 
 gulp.task('clean:docs', function( done ){
 	del( [ path.docs + '**'], done );
@@ -20,25 +20,33 @@ gulp.task('clean:coverage', function(done){
 	del( [ path.coverage + '**'], done );
 });
 
+gulp.task('clean:node_modules', function(done) {
+	del( ['node_modules/**'], done);
+});
+
+gulp.task('clean:bower_components', function(done) {
+	del( [ path.bower + '**' ], done);
+});
+
 var processLess = function(){
 	var p = require('path');
 	var LessPluginAutoPrefix = require('less-plugin-autoprefix');
-	var autoprefix = new LessPluginAutoPrefix( { 
-//		browsers: ["last 2 versions"] 
+	var autoprefix = new LessPluginAutoPrefix( {
+//		browsers: ["last 2 versions"]
 	});
 
 	var result = gulp.src( project.appLess )
 		.pipe( less({
 			plugins: [ autoprefix ],
-			verbose: true	
+			verbose: true
 		}))
 		.pipe( gulp.dest( project.appCss ) );
 
-	console.log( 
-		utils.printTaskName( 'less' ), 
+	console.log(
+		utils.printTaskName( 'less' ),
 		'Created', utils.relPath( project.appCss ) + '/' +
-		p.basename(project.appLess, '.less') + 
-		'.css' 
+		p.basename(project.appLess, '.less') +
+		'.css'
 	);
 	return result;
 };
