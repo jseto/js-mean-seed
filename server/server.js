@@ -98,7 +98,7 @@ app.get('/auth/current', function(req, res) {
 });
 
 app.get('/auth/logout', function(req, res) {
-	console.log('social logout')
+	console.log('social logout');
   req.logout();
   res.redirect('/signin');
 });
